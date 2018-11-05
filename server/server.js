@@ -2,34 +2,35 @@ require('./config/config.js');
 
 const express = require('express');
 const {ObjectID} = require('mongodb');
-const {mongoose} = require('./db/mongoose.js');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 
+const {mongoose} = require('./db/mongoose.js');
+const users = require('./routes/api/users');
+const posts = require('./routes/api/posts');
+const profile = require('./routes/api/profile');
+const {User} = require('./models/User.js');
+
 const app = express();
+
 let port = process.env.PORT;
 
 app.use(bodyParser());
 
+// Routes
+app.use('/api/users', users);
+app.use('/api/posts', posts);
+app.use('/api/profile', profile);
 
-const model1 = mongoose.model('model1', {
-    text: {
-        type: String,
-        required: true,
-        minlength: 1,
-        trim: true
-    },
-    completed: {
-        type: Boolean,
-        default: false
-    }
+
+app.get('/', (req, res) => {
+    res.send('<h1> Hello there </h1>');
 });
 
-const txt = new model1({
-    text: 'Some text',
-    completed: true
+
+
+
+
+app.listen(port, () => {
+    console.log(`App running on port ${port}`);
 });
-
-txt.save().then(() => console.log('Added successfully')).catch(e => console.log(e));
-
-
