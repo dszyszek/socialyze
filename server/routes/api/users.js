@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const _ = require('lodash');
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
 
 const {User} = require('../../models/User');
 
@@ -17,16 +19,29 @@ router.post('/register', (req, res) => {
             return res.status(400).json({email: 'Email already exists'});
         }
         const userData = _.pick(req.body, ['email', 'name', 'password', 'avatar']);
+        const avatar = gravatar.url('userData.email', {s: '200', r: 'pg', d: 'mm'})
+
         const newUser = new User({
             email: userData.email,
             name: userData.name,
             password: userData.password,
-            avatar: userData.avatar
+            avatar
         });
 
-        newUser.save().then(usr => (
-            res.send(usr)
-        )).catch(e => console.log(e));
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if (err) throw err;
+
+                newUser.password = hash;
+
+                newUser.save().then(usr => (
+                    res.send(usr)
+                )).catch(e => console.log(e));
+
+            });
+        });
+
+
         
     }).catch(e => console.log(e));
 });
