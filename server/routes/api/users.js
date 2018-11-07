@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const {User} = require('../../models/User');
+const {authenticate} = require('../../middleware/authenticate');
 
 console.log(User.findOne);
 const router = express.Router();
@@ -42,9 +44,10 @@ router.post('/register', (req, res) => {
         });
 
 
-        
     }).catch(e => console.log(e));
 });
+
+
 
 router.post('/login', (req, res) => {
     const userData = _.pick(req.body, ['email', 'password']);
@@ -54,7 +57,20 @@ router.post('/login', (req, res) => {
 
         bcrypt.compare(userData.password, usr.password).then(isMatch => {
             if (isMatch) {
-                res.json({msg: 'Success- token will be there'});
+
+                const payload = {
+                    id: usr.id,
+                    name: usr.name,
+                    avatar: usr.avatar
+                }
+                jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 3600}, (err, token) => {
+                    res.json({
+                        success: true,
+                        token: token
+                    });
+                });
+
+                //res.json({msg: 'Success- token will be there'});
             } else {
                 res.status(404).json({password: 'Password incorrect'});
             }
@@ -62,6 +78,13 @@ router.post('/login', (req, res) => {
 
     })
 });
+
+router.get('/me',authenticate, (req, res) => {
+    res.json({
+        usr: req.user
+    });
+});
+
 
 module.exports = router;
 
