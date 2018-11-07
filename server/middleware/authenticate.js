@@ -1,15 +1,22 @@
 const {User} = require('../models/User');
 
 
-const authenticate = (req) => {
+const authenticate = (req, res, next) => {
 
     let token = req.header('x-auth');
 
     User.findByToken(token).then(usr => {
 
-        console.log(usr, 'usr in findByToken');
+        //console.log(usr, 'usr in findByToken');
+        if (!usr) {
+            res.status(404).json({msg: 'No such user'});
+        }
 
-    }).catch(e => console.log(e));
+        req.user = usr;
+        req.token = token;
+        next();
+
+    }).catch(e => res.status(404).json({msg: 'No such user'}));
 
 
     return Promise.resolve();
