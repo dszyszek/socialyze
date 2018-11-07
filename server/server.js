@@ -23,11 +23,6 @@ app.use('/api/posts', posts);
 app.use('/api/profile', profile);
 
 
-app.get('/', (req, res) => {
-    res.send('<h1> Hello there </h1>');
-});
-
-
 
 
 
