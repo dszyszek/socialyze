@@ -1,6 +1,7 @@
 const {Schema} = require('mongoose');
 const validator = require('validator');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new Schema({
     name: {
@@ -32,6 +33,32 @@ const userSchema = new Schema({
         default: Date.now
     }
 });
+
+userSchema.statics.findByToken = function (token) {
+    let User = this;
+    let decoded;
+
+    //console.log(User, 'user');
+
+    try{
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+        //console.log(decoded.id, 'decoded');
+
+       return User.findOne({_id: decoded.id}).then(usr => {
+            console.log(usr, 'usr in findOne');
+            if (!usr) {
+                return Promise.reject();
+            }
+            return {
+                id: decoded.id,
+                token
+            };
+        }).catch(err => console.log(err));
+
+    } catch(e) {
+        console.log(e);
+    }
+};
 
 
 const User = mongoose.model('User', userSchema);
