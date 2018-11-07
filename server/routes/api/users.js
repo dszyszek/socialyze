@@ -46,6 +46,23 @@ router.post('/register', (req, res) => {
     }).catch(e => console.log(e));
 });
 
+router.post('/login', (req, res) => {
+    const userData = _.pick(req.body, ['email', 'password']);
+
+    User.findOne({email: userData.email}).then(usr => {
+        if (!usr) return res.status(404).json({email: 'User not found'});
+
+        bcrypt.compare(userData.password, usr.password).then(isMatch => {
+            if (isMatch) {
+                res.json({msg: 'Success- token will be there'});
+            } else {
+                res.status(404).json({password: 'Password incorrect'});
+            }
+        });
+
+    })
+});
+
 module.exports = router;
 
 
