@@ -61,6 +61,7 @@ router.post('/login', (req, res) => {
                 const payload = {
                     id: usr.id,
                     name: usr.name,
+                    email: usr.email,
                     avatar: usr.avatar
                 }
                 jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: 3600}, (err, token) => {
@@ -80,9 +81,14 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/me',authenticate, (req, res) => {
-    res.json({
-        usr: req.user
+    let userData;
+    
+    jwt.verify(req.user.token, process.env.JWT_SECRET, (err, usr) => {
+        if (err) return console.log(err);
+        userData = usr;
     });
+
+    res.json(userData);
 });
 
 
