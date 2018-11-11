@@ -1,5 +1,4 @@
 const {Schema} = require('mongoose');
-const validator = require('validator');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
@@ -7,18 +6,13 @@ const userSchema = new Schema({
     name: {
         type: String,
         required: true,
-        trim: true,
-        minlength: 1,
+        trim: true
     },
     email: {
         type: String,
         required: true,
         trim: true,
-        unique: true,
-        validate: {
-            validator: validator.isEmail,
-            message: '{VALUE} is not valid email'
-        }
+        unique: true
     },
     password: {
         type: String,

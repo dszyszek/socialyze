@@ -11,6 +11,7 @@ const posts = require('./routes/api/posts');
 const profile = require('./routes/api/profile');
 const {User} = require('./models/User.js');
 
+
 const app = express();
 
 let port = process.env.PORT;

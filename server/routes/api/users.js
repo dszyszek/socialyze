@@ -7,8 +7,9 @@ const jwt = require('jsonwebtoken');
 
 const {User} = require('../../models/User');
 const {authenticate} = require('../../middleware/authenticate');
+const validateInput = require('../../validation/validateInput');
 
-console.log(User.findOne);
+//console.log(User.findOne);
 const router = express.Router();
 
 router.get('/test', (req, res) => {
@@ -16,6 +17,11 @@ router.get('/test', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
+
+     const {errors, isValid} = validateInput(req.body, ['email', 'name', 'password']);
+     if (!isValid) return res.status(400).json(errors);
+
+
     User.findOne({email: req.body.email}).then(usr => {
         if (usr) {
             return res.status(400).json({email: 'Email already exists'});
@@ -38,7 +44,7 @@ router.post('/register', (req, res) => {
 
                 newUser.save().then(usr => (
                     res.send(usr)
-                )).catch(e => console.log(e));
+                )).catch(e => res.status(400).json({error: e.errors.name.message}));
 
             });
         });
@@ -50,6 +56,10 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
+
+    const {errors, isValid} = validateInput(req.body, ['email', 'password']);
+    if (!isValid) return res.status(400).json(errors);
+
     const userData = _.pick(req.body, ['email', 'password']);
 
     User.findOne({email: userData.email}).then(usr => {
