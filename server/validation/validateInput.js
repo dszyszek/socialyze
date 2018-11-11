@@ -20,9 +20,14 @@ const validateInput = function (data, range) {
         errors.password = 'Password must be at least 8 characters long!'
     }
 
+    if (range.includes('confirmPassword') && !validator.equals(data.password, data.confirmPassword)) {
+        errors.confirmPassword = 'Passwords must match!'
+    }
+
 
     for (let x of range) {
-        if (!data[x]) errors[x] = `${x} is required!`;
+        if (!data[x] && x !== 'confirmPassword') errors[x] = `${x} is required!`;
+        if (!data[x] && x === 'confirmPassword') errors[x] = `Confirm password is required!`;
        }
 
     return {
