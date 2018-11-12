@@ -1,4 +1,5 @@
-const mongoose, {Schema} = require('mongoose');
+const mongoose = require('mongoose');
+const {Schema} = require('mongoose');
 
 const ProfileSchema = new Schema({
     user: {
@@ -117,4 +118,4 @@ const ProfileSchema = new Schema({
 
 const Profile = mongoose.model('profile', ProfileSchema);
 
-module.exports = Profile;
+module.exports = {Profile};

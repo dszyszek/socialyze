@@ -18,7 +18,7 @@ router.get('/test', (req, res) => {
 
 router.post('/register', (req, res) => {
 
-     const {errors, isValid} = validateInput(req.body, ['email', 'name', 'password']);
+     const {errors, isValid} = validateInput(req.body, ['email', 'name', 'password', 'confirmPassword']);
      if (!isValid) return res.status(400).json(errors);
 
 
