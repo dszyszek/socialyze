@@ -24,8 +24,10 @@ router.get('/me', authenticate, (req, res) => {
 });
 
 router.post('/me', authenticate, (req, res) => {
-    const profileFields = {};
-    const profileSocial = {};
+    const profileFields = {
+        social: {}
+    };
+
     const schemaTypes = ['handle', 'company', 'website', 'location', 'status', 'bio', 'githubusername'];
     const socialmediaTypes = ['youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
 
@@ -36,7 +38,7 @@ router.post('/me', authenticate, (req, res) => {
             profileFields[x] = req.body[x];
         }
         if (socialmediaTypes.includes(x)) {
-            profileSocial[x] = req.body[x];
+            profileFields.social[x] = req.body[x];
         }
     }
 
@@ -51,7 +53,7 @@ router.post('/me', authenticate, (req, res) => {
         if (prf) {
             Profile.findOneAndUpdate({user: req.user.id}, {$set: profileFields}, {new: true}).then(usr => {
                 res.json(usr);
-            }).catch(e => res.status(400).json(e))
+            }).catch(e => res.status(400).json(e));
         }   else {
             Profile.findOne({handle: profileFields.handle}).then(profile => {
                 if (profile) {
@@ -66,5 +68,6 @@ router.post('/me', authenticate, (req, res) => {
 
     res.json(profileFields);
 });
+
 
 module.exports = router;
