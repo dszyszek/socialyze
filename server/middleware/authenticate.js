@@ -16,7 +16,7 @@ const authenticate = (req, res, next) => {
         req.token = token;
         next();
 
-    }).catch(e => res.status(404).json({msg: 'No such user'}));
+    }).catch(e => res.status(400).json({error: 'No token provided'}));
 
 
     return Promise.resolve();

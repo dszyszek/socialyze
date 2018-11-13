@@ -23,5 +23,48 @@ router.get('/me', authenticate, (req, res) => {
     }).catch(e => console.log(e));
 });
 
+router.post('/me', authenticate, (req, res) => {
+    const profileFields = {};
+    const profileSocial = {};
+    const schemaTypes = ['handle', 'company', 'website', 'location', 'status', 'bio', 'githubusername'];
+    const socialmediaTypes = ['youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
+
+    profileFields.user = req.user.id;
+
+    for (let x in req.body) {
+        if (schemaTypes.includes(x)) {
+            profileFields[x] = req.body[x];
+        }
+        if (socialmediaTypes.includes(x)) {
+            profileSocial[x] = req.body[x];
+        }
+    }
+
+    if (typeof req.body.skills !== 'undefined') {
+        profileFields.skills = req.body.skills.split(',');
+    }
+
+
+    Profile.findOne({user: req.user.id}).then(prf => {
+        const errors = {};
+        
+        if (prf) {
+            Profile.findOneAndUpdate({user: req.user.id}, {$set: profileFields}, {new: true}).then(usr => {
+                res.json(usr);
+            }).catch(e => res.status(400).json(e))
+        }   else {
+            Profile.findOne({handle: profileFields.handle}).then(profile => {
+                if (profile) {
+                    errors.handle = 'Handle already exists';
+                    res.status(400).json(errors);
+                }  
+            }).catch(e => res.status(400).json(e));
+
+            new Profile(profileFields).save().then(prf => res.json(prf)).catch(e => res.status(400).json(e));
+        }
+    })
+
+    res.json(profileFields);
+});
 
 module.exports = router;
