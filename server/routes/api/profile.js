@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const {Profile} = require('../../models/Profile');
 const {User} = require('../../models/User');
 const {authenticate} = require('../../middleware/authenticate');
+const validateInput = require('../../validation/validateInput');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.get('/test', (req, res) => {
 router.get('/me', authenticate, (req, res) => {
     const errors = {};
 
-    Profile.findOne({user: req.user.id}).then(usr => {
+    Profile.findOne({user: req.user.id}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']}).then(usr => {
         if (!usr){
             errors.noprofile = 'No such user';
             res.status(404).json(errors);
@@ -24,12 +25,14 @@ router.get('/me', authenticate, (req, res) => {
 });
 
 router.post('/me', authenticate, (req, res) => {
+    const schemaTypes = ['handle', 'company', 'website', 'location', 'status', 'bio', 'githubusername'];
+    const socialmediaTypes = ['youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
     const profileFields = {
         social: {}
     };
 
-    const schemaTypes = ['handle', 'company', 'website', 'location', 'status', 'bio', 'githubusername'];
-    const socialmediaTypes = ['youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
+    const {errors, isValid} = validateInput(req.body, ['handle', 'status', 'skills', 'website', ...socialmediaTypes]);
+    if (!isValid) return res.status(400).json(errors);
 
     profileFields.user = req.user.id;
 

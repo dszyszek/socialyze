@@ -9,6 +9,7 @@ const validateInput = function (data, range) {
         typeof data[x] === 'undefined' ? (data[x] =  '') : data[x];
        }
 
+    // Login and register validation
 
     if (range.includes('name') && !validator.isLength(data.name, {min: 3, max: 30})) {
         errors.name = 'Name must be between 3 and 30 characters long!';
@@ -24,10 +25,27 @@ const validateInput = function (data, range) {
         errors.confirmPassword = 'Passwords must match!';
     }
 
+    // Profile validation
+    const notRequired = ['website', 'youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
+
+    if (range.includes('handle') && !validator.isLength(data.handle, {min: 2, max: 40})) {
+        errors.handle = 'Handle must be between 2 and 40 characters long!';
+    }
 
     for (let x of range) {
-        if (!data[x] && x !== 'confirmPassword') errors[x] = `${x} is required!`;
-        if (!data[x] && x === 'confirmPassword') errors[x] = `Confirm password is required!`;
+
+        if (!notRequired.includes(x)) {
+            if (!data[x] && x !== 'confirmPassword') errors[x] = `${x} is required!`;
+            if (!data[x] && x === 'confirmPassword') errors[x] = `Confirm password is required!`;
+        } else {
+            if (!validator.isEmpty(data[x])) {
+                //console.log('asljdkasjdkjasd');
+                if (!validator.isURL(data[x])) {
+                    errors[x] = 'Not a valid URL';
+                  }
+            }
+        }
+
        }
 
     return {
