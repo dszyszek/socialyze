@@ -2,12 +2,13 @@ const validator = require('validator');
 const _ = require('lodash');
 
 
-const validateInput = function (data, range) {
+const validateInput = (data, range) => {
     let errors = {};
 
     for (let x of range) {
         typeof data[x] === 'undefined' ? (data[x] =  '') : data[x];
        }
+
 
     // Login and register validation
 
@@ -25,12 +26,16 @@ const validateInput = function (data, range) {
         errors.confirmPassword = 'Passwords must match!';
     }
 
+
+
     // Profile validation
     const notRequired = ['website', 'youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
 
     if (range.includes('handle') && !validator.isLength(data.handle, {min: 2, max: 40})) {
         errors.handle = 'Handle must be between 2 and 40 characters long!';
     }
+
+
 
     for (let x of range) {
 

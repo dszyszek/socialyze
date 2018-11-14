@@ -24,6 +24,41 @@ router.get('/me', authenticate, (req, res) => {
     }).catch(e => console.log(e));
 });
 
+
+    router.get('/handle/:handle', authenticate, (req, res) => {
+        const errors = {};
+    
+        Profile.findOne({handle: req.params.handle}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']})
+        .then(usr => {
+            if (!usr) {
+                errors.noprofile = 'There is no such profile!';
+                res.status(404).json(errors);
+            }
+    
+            res.json(usr);
+        }).catch(e => res.status(400).json(e));
+    
+    
+    });
+
+    router.get('/user/:id', authenticate, (req, res) => {
+        const errors = {};
+
+        Profile.findOne({user: req.params.id}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']})
+        .then(usr => {
+            if (!usr) {
+                errors.noprofile = 'There is no such profile!';
+                res.status(404).json(errors);
+            }
+    
+            res.json(usr);
+        }).catch(e => res.status(400).json(e));
+    
+    
+    });
+
+
+
 router.post('/me', authenticate, (req, res) => {
     const schemaTypes = ['handle', 'company', 'website', 'location', 'status', 'bio', 'githubusername'];
     const socialmediaTypes = ['youtube', 'twitter', 'instagram', 'linkedin', 'facebook'];
