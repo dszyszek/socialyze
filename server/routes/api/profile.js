@@ -25,7 +25,7 @@ router.get('/me', authenticate, (req, res) => {
 });
 
 
-    router.get('/handle/:handle', authenticate, (req, res) => {
+router.get('/handle/:handle', authenticate, (req, res) => {
         const errors = {};
     
         Profile.findOne({handle: req.params.handle}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']})
@@ -37,11 +37,10 @@ router.get('/me', authenticate, (req, res) => {
     
             res.json(usr);
         }).catch(e => res.status(400).json(e));
-    
-    
-    });
+});
 
-    router.get('/user/:id', authenticate, (req, res) => {
+
+router.get('/user/:id', authenticate, (req, res) => {
         const errors = {};
 
         Profile.findOne({user: req.params.id}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']})
@@ -53,9 +52,22 @@ router.get('/me', authenticate, (req, res) => {
     
             res.json(usr);
         }).catch(e => res.status(400).json(e));
-    
-    
-    });
+});
+
+
+router.get('/all', authenticate, (req, res) => {
+    const errors = {};
+
+    Profile.find({}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']})
+    .then( usrs => {
+        if (usrs.length === 0){
+            errors.noprofile = 'No profiles to show';
+            res.status(404).json(errors);
+        }
+
+        res.json(usrs);
+    }).catch(e => res.status(400).json({error: 'Something went wrong'}));
+});
 
 
 
