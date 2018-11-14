@@ -121,6 +121,10 @@ router.post('/me', authenticate, (req, res) => {
 
 router.post('/experience', authenticate,  (req, res) => {
 
+    const {isValid, errors} = validateInput(req.body, ['title', 'company', 'from']);
+
+    if (!isValid) return res.status(400).json(errors);
+
     Profile.findOne({user: req.user.id}).then(usr => {
 
         const experience = {
@@ -137,7 +141,7 @@ router.post('/experience', authenticate,  (req, res) => {
         usr.experience.unshift(experience);
 
         usr.save().then(usr => res.json(usr))
-        .catch(e => res.status(400).json({error: 'Could not add experience'}));
+        .catch(e => res.status(400).json(e));
     })
 
 });

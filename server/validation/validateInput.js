@@ -41,7 +41,7 @@ const validateInput = (data, range) => {
 
         if (!notRequired.includes(x)) {
             if (!data[x] && x !== 'confirmPassword') errors[x] = `${x} is required!`;
-            if (!data[x] && x === 'confirmPassword') errors[x] = `Confirm password is required!`;
+            else if (!data[x]) errors[x] = `Confirm password is required!`;
         } else {
             if (!validator.isEmpty(data[x])) {
                 //console.log('asljdkasjdkjasd');
