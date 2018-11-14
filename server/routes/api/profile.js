@@ -119,5 +119,28 @@ router.post('/me', authenticate, (req, res) => {
     res.json(profileFields);
 });
 
+router.post('/experience', authenticate,  (req, res) => {
+
+    Profile.findOne({user: req.user.id}).then(usr => {
+
+        const experience = {
+            title: req.body.title,
+            company: req.body.company,
+            location: req.body.location,
+            from: req.body.from,
+            to: req.body.to,
+            current: req.body.current,
+            description: req.body.description
+            
+        };
+        
+        usr.experience.unshift(experience);
+
+        usr.save().then(usr => res.json(usr))
+        .catch(e => res.status(400).json({error: 'Could not add experience'}));
+    })
+
+});
+
 
 module.exports = router;
