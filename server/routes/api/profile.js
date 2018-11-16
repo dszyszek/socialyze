@@ -146,5 +146,55 @@ router.post('/experience', authenticate,  (req, res) => {
 
 });
 
+router.post('/education', authenticate,  (req, res) => {
+
+    const {isValid, errors} = validateInput(req.body, ['school', 'degree', 'fieldofstudy', 'from']);
+
+    if (!isValid) return res.status(400).json(errors);
+
+    Profile.findOne({user: req.user.id}).then(usr => {
+
+        const education = {
+            school: req.body.school,
+            degree: req.body.degree,
+            fieldofstudy: req.body.fieldofstudy,
+            from: req.body.from,
+            to: req.body.to,
+            current: req.body.current,
+            description: req.body.description
+            
+        };
+        
+        usr.education.unshift(education);
+
+        usr.save().then(usr => res.json(usr))
+        .catch(e => res.status(400).json(e));
+    })
+
+});
+
+router.delete('/experience/:exp_id', authenticate, (req, res) => {
+    const errors = {};
+
+    Profile.findOne({user: req.user.id}).then(usr => {
+        
+        const toRemove = usr.experience.map(x => x['_id']);
+        console.log(toRemove);
+
+        const newExperiencesArr = usr.experience.filter(x => x['_id'] != req.params.exp_id);
+        
+        usr.experience = newExperiencesArr;
+
+        usr.save().then(usr => res.json(usr)).catch(e => {
+            errors.requestproblem = 'Cannot make requested action';
+            res.status(400).json(errors);
+        })
+        
+
+    }).catch(e => {
+        errors.noprofile = 'No such profile!';
+        res.status(400).json(errors);
+    })
+});
 
 module.exports = router;
