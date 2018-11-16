@@ -8,6 +8,8 @@ const validateInput = require('../../validation/validateInput');
 
 const router = express.Router();
 
+// GET routes
+
 router.get('/test', (req, res) => {
     return res.json({msg: 'Profile works'});
 });
@@ -69,6 +71,8 @@ router.get('/all', authenticate, (req, res) => {
     }).catch(e => res.status(400).json({error: 'Something went wrong'}));
 });
 
+
+// POST routes
 
 
 router.post('/me', authenticate, (req, res) => {
@@ -173,17 +177,37 @@ router.post('/education', authenticate,  (req, res) => {
 
 });
 
+// DELETE routes
+
 router.delete('/experience/:exp_id', authenticate, (req, res) => {
     const errors = {};
 
     Profile.findOne({user: req.user.id}).then(usr => {
         
-        const toRemove = usr.experience.map(x => x['_id']);
-        console.log(toRemove);
-
         const newExperiencesArr = usr.experience.filter(x => x['_id'] != req.params.exp_id);
         
         usr.experience = newExperiencesArr;
+
+        usr.save().then(usr => res.json(usr)).catch(e => {
+            errors.requestproblem = 'Cannot make requested action';
+            res.status(400).json(errors);
+        })
+        
+
+    }).catch(e => {
+        errors.noprofile = 'No such profile!';
+        res.status(400).json(errors);
+    })
+});
+
+router.delete('/education/:edu_id', authenticate, (req, res) => {
+    const errors = {};
+
+    Profile.findOne({user: req.user.id}).then(usr => {
+        
+        const newEducationArr = usr.education.filter(x => x['_id'] != req.params.edu_id);
+        
+        usr.education = newEducationArr;
 
         usr.save().then(usr => res.json(usr)).catch(e => {
             errors.requestproblem = 'Cannot make requested action';
