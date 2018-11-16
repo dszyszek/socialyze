@@ -212,7 +212,7 @@ router.delete('/education/:edu_id', authenticate, (req, res) => {
         usr.save().then(usr => res.json(usr)).catch(e => {
             errors.requestproblem = 'Cannot make requested action';
             res.status(400).json(errors);
-        })
+        });
         
 
     }).catch(e => {
@@ -220,5 +220,20 @@ router.delete('/education/:edu_id', authenticate, (req, res) => {
         res.status(400).json(errors);
     })
 });
+
+
+    // delete profile and user
+    
+router.delete('/', authenticate, (req, res) => {
+    Profile.findOneAndRemove({'user': req.user.id}).then(() => {
+
+        User.findOneAndRemove({_id: req.user.id}).then(() => 
+
+        res.json({success: 'Profile and user deleted correctly'}));
+    }).catch(e => {
+        res.status(400).json({error: 'Couldn\'t make that'});
+    });
+});
+
 
 module.exports = router;
