@@ -27,9 +27,10 @@ router.get('/', authenticate, (req, res) => {
 router.get('/:id', authenticate, (req, res) => {
     Post.find({_id: req.params.id})
     .then( docs => {
+        if (docs.length === 0) return res.json('No posts to show');
         res.json(docs);
     })
-    .catch(e => res.status(400).json({error: 'Cannot fetch posts!'}));
+    .catch(e => res.status(400).json({error: 'No post with such ID!'}));
 });
 
 
@@ -51,6 +52,27 @@ router.post('/', authenticate, (req, res) => {
 
     post.save().then(docs => res.json(docs))
     .catch(e => res.status(400).json({error: 'Cannot do that'}));
+});
+
+
+// DELETE routes
+
+router.delete('/:id', authenticate, (req, res) => {
+    Post.findById(req.params.id)
+    .then(post => {
+        if (post.user.toString() === req.user.id) {
+            
+                Post.findByIdAndRemove(req.params.id)
+                .then(docs => res.json({success: 'Successfully deleted that post!'}))
+                .catch(e => res.status(400).json({error: 'Cannot make that!'}));
+
+        } else {
+            res.status(400).json({warning: 'You cannot delete someones else post!'});
+        }
+    })
+    .catch(e => res.status(400).json({error: 'Cannot delete that post!'}));
+
+
 });
 
 
