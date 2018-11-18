@@ -55,6 +55,32 @@ router.post('/', authenticate, (req, res) => {
 });
 
 
+router.post('/like/:id', authenticate, (req, res) => {
+    Post.findOne({_id: req.params.id})
+    .then(post => {
+        const arrOfID = [];
+
+        post.likes.map(post => {
+            arrOfID.push(post.user.toString());
+        });
+
+        if (!arrOfID.includes(req.user.id)) {
+                
+            post.likes.unshift({user: req.user.id});
+            post.save()
+            .then(post => {
+                return res.json(post);
+            })
+            .catch(e => res.status(400).json({error: 'Cannot do that'}));
+        } else {
+            return res.json({warning: 'You already liked that!'});
+        }
+
+    })
+    .catch(e => res.status(404).json(e));
+});
+
+
 // DELETE routes
 
 router.delete('/:id', authenticate, (req, res) => {
@@ -67,7 +93,7 @@ router.delete('/:id', authenticate, (req, res) => {
                 .catch(e => res.status(400).json({error: 'Cannot make that!'}));
 
         } else {
-            res.status(400).json({warning: 'You cannot delete someones else post!'});
+            res.status(401).json({warning: 'You cannot delete someones else post!'});
         }
     })
     .catch(e => res.status(400).json({error: 'Cannot delete that post!'}));
