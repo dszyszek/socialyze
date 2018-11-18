@@ -36,6 +36,14 @@ const validateInput = (data, range) => {
     }
 
 
+    // Post validation
+
+    if (range.includes('text') && !validator.isLength(data.text, {min: 10, max: 400})) {
+        errors.text = 'Text field must be between 10 and 400 characters long!';
+    }
+
+
+    ///
 
     for (let x of range) {
 
@@ -44,7 +52,6 @@ const validateInput = (data, range) => {
             else if (!data[x]) errors[x] = `Confirm password is required!`;
         } else {
             if (!validator.isEmpty(data[x])) {
-                //console.log('asljdkasjdkjasd');
                 if (!validator.isURL(data[x])) {
                     errors[x] = 'Not a valid URL';
                   }
