@@ -7,6 +7,7 @@ const validateInput = require('../../validation/validateInput');
 
 const router = express.Router();
 
+
 // GET routes
 
 router.get('/test', (req, res) => {
@@ -23,7 +24,13 @@ router.get('/', authenticate, (req, res) => {
     .catch(e => res.status(400).json({error: 'Cannot fetch posts!'}));
 });
 
-
+router.get('/:id', authenticate, (req, res) => {
+    Post.find({_id: req.params.id})
+    .then( docs => {
+        res.json(docs);
+    })
+    .catch(e => res.status(400).json({error: 'Cannot fetch posts!'}));
+});
 
 
 
