@@ -81,6 +81,33 @@ router.post('/like/:id', authenticate, (req, res) => {
 });
 
 
+router.post('/dislike/:id', authenticate, (req, res) => {
+    Post.findOne({_id: req.params.id})
+    .then(post => {
+        const arrOfID = [];
+
+        post.likes.map(post => {
+            arrOfID.push(post.user.toString());
+        });
+
+        if (arrOfID.includes(req.user.id)) {
+            post.likes.map(postObj => {
+                if (postObj.user.toString() === req.user.id) {
+                    post.likes.splice(post.likes.indexOf(postObj), 1);
+
+                    post.save()
+                    .then(post => res.json(post))
+                    .catch(e => res.status(400).json({error: 'Cannot do that'}));
+                }
+            });
+        } else {
+            res.status(400).json({warning: 'You haven\'t liked this post yet'});
+        }
+    })
+    .catch(e => res.status(404).json({error: 'No post with such ID!'}))
+});
+
+
 // DELETE routes
 
 router.delete('/:id', authenticate, (req, res) => {
