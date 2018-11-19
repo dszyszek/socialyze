@@ -151,5 +151,24 @@ router.delete('/:id', authenticate, (req, res) => {
 
 });
 
+router.delete('/comment/:id/:comment_id', authenticate, (req, res) => {
+    Post.findOne({_id: req.params.id})
+    .then(docs => {
+
+        if (docs.comments.filter(x => x._id.toString() === req.params.comment_id).length === 0) {
+            return res.status(404).json({error: 'No comment with such ID'});
+        }
+
+        const removeIndex = docs.comments.map(x => x._id.toString()).indexOf(req.params.comment_id);
+
+        docs.comments.splice(removeIndex, 1);
+
+        docs.save()
+        .then(docs => res.json({success: 'Comment successfully deleted'}))
+        .catch(e => res.status(400).json({error: 'Cannot remove the comment'}));
+
+    })
+    .catch(e => res.status(404).json({error: 'Cannot find post with such ID'}));
+});
 
 module.exports = router;
