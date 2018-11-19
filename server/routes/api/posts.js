@@ -77,7 +77,7 @@ router.post('/like/:id', authenticate, (req, res) => {
         }
 
     })
-    .catch(e => res.status(404).json(e));
+    .catch(e => res.status(404).json({error: 'Post not found'}));
 });
 
 
@@ -107,6 +107,29 @@ router.post('/dislike/:id', authenticate, (req, res) => {
     .catch(e => res.status(404).json({error: 'No post with such ID!'}))
 });
 
+
+router.post('/comment/:id', authenticate, (req, res) => {
+    const {errors, isValid} = validateInput(req.body, ['text']);
+    if (!isValid) res.status(400).json(errors);
+
+
+    Post.findOne({_id: req.params.id})
+    .then(docs => {
+        const comment = {
+            text: req.body.text,
+            name: req.body.name,
+            avatar: req.body.avatar,
+            user: req.body.user
+        };
+
+        docs.comments.unshift(comment);
+
+        docs.save()
+        .then(com => res.json({success: 'Comment successfully added!'}))
+        .catch(e => res.status(400).json({error: 'Cannot post the comment'}))
+    })
+    .catch(e => res.status(404).json(e));    //{error: 'No post with such ID!'}
+});
 
 // DELETE routes
 
