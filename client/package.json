@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "socialmedia-app",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Damian",
@@ -31,5 +31,6 @@
   },
   "devDependencies": {
     "webpack-cli": "^3.1.2"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
