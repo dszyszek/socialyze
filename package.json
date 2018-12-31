@@ -5,13 +5,17 @@
   "main": "server.js",
   "scripts": {
     "start": "node ./server/server.js",
-    "serve": "nodemon ./server/server.js"
+    "serve": "nodemon ./server/server.js",
+    "client-install": "npm install --prefix client",
+    "client": "cd ./client && npm run dev-server",
+    "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\""
   },
   "author": "Damian Szyszka",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.3.0",
