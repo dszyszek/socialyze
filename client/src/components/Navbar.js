@@ -2,33 +2,21 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-        <div className="container">
-          <a className="navbar-brand" href="landing.html">Socialyze</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-    
-          <div className="collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="profiles.html"> Developers
-                </a>
-              </li>
-            </ul>
-    
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="register.html">Sign Up</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="login.html">Login</a>
-              </li>
-            </ul>
-          </div>
-            
-        </div>
-      </nav>
+            <header class="masthead mb-lg-auto mb-md-auto mb-sm-5 mb-5">
+                <div class="inner mt-sm-2 mt-2">
+                <h3 class="masthead-brand">Socialyze</h3>
+                <hr class='d-md-none hr-line' />
+
+                <nav class="nav nav-masthead justify-content-center mt-sm-2 mt-2">
+                    <a class="nav-link" href="#">Sign up</a>
+                    <a class="nav-link" href="#">Log in</a>
+                    <a class="nav-link" href="#">About</a>
+
+                </nav>
+
+                </div>
+            </header>
+        
     );
 };
 

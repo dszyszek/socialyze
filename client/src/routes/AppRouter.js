@@ -10,7 +10,7 @@ import NotFound from '../components/NotFound';
 const AppRouter = () => (
 
     <BrowserRouter>
-        <div>
+        <div className='main_wrapper'>
             <Switch>
                 <Route path='/' component={Main} exact={true} />
                 
