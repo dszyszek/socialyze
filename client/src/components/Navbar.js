@@ -9,7 +9,7 @@ const Navbar = () => {
 
                 <nav class="nav nav-masthead justify-content-center mt-sm-2 mt-2">
                     <a class="nav-link" href="#">Sign up</a>
-                    <a class="nav-link" href="#">Log in</a>
+                    <a class="nav-link" href="/Login">Log in</a>
                     <a class="nav-link" href="#">About</a>
 
                 </nav>
