@@ -1,3 +1,12 @@
+$main_color: #297c6c;
+
+@mixin outline_green {
+  outline: none !important;
+  border:1px solid $main_color;
+  box-shadow: 0 0 10px $main_color;
+}
+
+
 /* Links */
 a,
 a:focus,
@@ -201,8 +210,52 @@ body {
 }
 
 
+.jumbotron {
+  background: #fff;
+  height: 80%;
+  padding: 32px 60px;
 
+}
 
+.log-in-form {
+  margin-top: 10%;
+}
 
+.no_margin {
+  margin: 0;
+}
+  
+.main_color {
+  background: $main_color
+}
 
-    
+.white_text {
+  color: white;
+}
+
+.logInH1 {
+  border-bottom: 1px solid #aaa;
+  padding: 10% 0;
+  margin: 5% 0;
+}
+
+.aaa {
+  margin-top: 5%;
+}
+
+.form-control:focus {
+  @include outline_green;
+}
+
+.text {
+  color: #aaa;
+  text-align: center;
+}
+
+.align_bottom {
+  position: absolute;
+  bottom: 0;
+  width: 30%;
+  left: 35%;
+  right: 35%;
+}
