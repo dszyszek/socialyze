@@ -1,11 +1,43 @@
 import React from 'react';
+
 import Navbar_secondary from './Navbar_secondary';
+import Footer_main from './Footer_main';
 
 class LogIn extends React.Component{
 
     render() {
         return (
-            <Navbar_secondary />
+            <div class='main_wrapper'>
+                <Navbar_secondary />
+                <section class="jumbotron d-flex justify-content-center no_margin">
+                    <div class='justify-content-center'>
+                        <h1 class="logInH1 display-4">Log in to your account!</h1>
+
+                        <form class='log-in-form'>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                            </div>
+                            
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <button type="submit" class="aaa btn main_color white_text">Submit</button>
+                        
+                        </form>
+                    </div>
+                    
+
+                </section>
+                <Footer_main />
+
+            </div>
         )
     }
 
