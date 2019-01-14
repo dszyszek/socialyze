@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Landing_page from './Landing_page';
 
-import '../styles/styles.scss';
+import '../../styles/styles.scss';
 
 class Main extends React.Component {
     render() {

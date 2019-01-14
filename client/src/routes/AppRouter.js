@@ -4,10 +4,10 @@ import {NavLink, BrowserRouter, Switch, Route} from 'react-router-dom';
 
 
 
-import Main from '../components/Main';
-import LogIn from '../components/LogIn';
+import Main from '../components/landing_page/Main';
+import LogIn from '../components/the_rest/LogIn';
 
-import NotFound from '../components/NotFound';
+import NotFound from '../components/the_rest/NotFound';
 
 const AppRouter = () => (
 

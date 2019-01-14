@@ -2,7 +2,7 @@ import React from 'react';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
-
+ 
 class LogIn extends React.Component{
 
     render() {
