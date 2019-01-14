@@ -9,7 +9,7 @@ class LogIn extends React.Component{
         return (
             <div class='main_wrapper'>
                 <Navbar_secondary />
-                <section class="jumbotron d-flex justify-content-center no_margin">
+                <section class="jumbotron d-flex justify-content-center m-0">
                     <div class='justify-content-center'>
                         <h1 class="logInH1 display-4">Log in to your account!</h1>
 
