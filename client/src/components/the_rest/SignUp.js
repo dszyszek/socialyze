@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 
+
 class SignUp extends React.Component {
     render() {
         return (
