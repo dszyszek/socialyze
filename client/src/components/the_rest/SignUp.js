@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import classnames from 'classnames';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
@@ -40,10 +41,12 @@ class SignUp extends React.Component {
 
         axios.post('http://localhost:3000/api/users/register', userCredentials)
         .then(res => console.log(res.data))
-        .catch(e => console.log(e.response.data));
+        .catch(e => this.setState({errors: e.response.data}));
     }
 
     render() {
+        const {errors} = this.state;
+
         return (
             <div class='main_wrapper'>
             <Navbar_logged_out />
@@ -51,23 +54,44 @@ class SignUp extends React.Component {
                 <div class='justify-content-center'>
                     <h1 class="logInH1 display-4">Create your account!</h1>
 
-                    <form class='log-in-form' onSubmit={this.submitForm}>
+                    <form class='log-in-form' noValidate onSubmit={this.submitForm}>
                         <div class="form-group">
                             <label for="Name">Name</label>
-                            <input type="text" class="form-control"  aria-describedby="nameInfo" name='name' placeholder="Name" value={this.state.name} onChange={this.changeValueOfInput} />
+                            <input type="text" class={classnames('form-control',
+                            {
+                                'is-invalid': errors.name
+                            })}
+                             aria-describedby="nameInfo" name='name' placeholder="Name" value={this.state.name} onChange={this.changeValueOfInput} />
+                             {this.state.errors && <div class='invalid-feedback'>{this.state.errors.name}</div>}
                         </div>
                         <div class="form-group">
                             <label for="Email">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailInfo" name='email' placeholder="Enter email" value={this.state.email} onChange={this.changeValueOfInput}/>
+                            <input type="email" class={classnames('form-control',
+                            {
+                                'is-invalid': errors.email
+                            })}
+                            aria-describedby="emailInfo" name='email' placeholder="Enter email" value={this.state.email} onChange={this.changeValueOfInput}/>
+
                             <small id="emaiInfo" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            {this.state.errors && <div class='invalid-feedback'>{this.state.errors.email}</div>}
                         </div>
                         <div class="form-group">
                             <label for="Password">Password</label>
-                            <input type="password" class="form-control" placeholder="Password..." name='password' value={this.state.password} onChange={this.changeValueOfInput}/>
+                            <input type="password" class={classnames('form-control',
+                            {
+                                'is-invalid': errors.password
+                            })}
+                            placeholder="Password..." name='password' value={this.state.password} onChange={this.changeValueOfInput}/>
+                            {this.state.errors && <div class='invalid-feedback'>{this.state.errors.password}</div>}
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm password</label>
-                            <input type="password" class="form-control" placeholder="Confirm password.." name='confirmPassword' value={this.state.confirmPassword} onChange={this.changeValueOfInput}/>
+                            <input type="password" class={classnames('form-control',
+                            {
+                                'is-invalid': errors.confirmPassword
+                            })}
+                            placeholder="Confirm password.." name='confirmPassword' value={this.state.confirmPassword} onChange={this.changeValueOfInput}/>
+                            {this.state.errors && <div class='invalid-feedback'>{this.state.errors.confirmPassword}</div>}
                         </div>
                         
                         <button type="submit" class="aaa btn main_color white_text">Submit</button>
