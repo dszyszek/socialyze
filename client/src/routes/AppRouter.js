@@ -12,6 +12,7 @@ import Feed from '../components/the_rest/Feed'
 import EditProfile from '../components/the_rest/EditProfile'
 import Profile from '../components/the_rest/Profile'
 import Profiles from '../components/the_rest/Profiles'
+import Post from '../components/the_rest/Post'
 
 import NotFound from '../components/the_rest/NotFound';
 
@@ -30,6 +31,7 @@ const AppRouter = () => (
                 <Route path='/EditProfile' component={EditProfile} />
                 <Route path='/Profile' component={Profile} />
                 <Route path='/Profiles' component={Profiles} />
+                <Route path='/Post' component={Post} />
 
 
                 <Route component={NotFound} />
