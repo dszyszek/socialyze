@@ -26,7 +26,7 @@ router.post('/register', (req, res) => {
         if (usr) {
             return res.status(400).json({email: 'Email already exists'});
         }
-        const userData = _.pick(req.body, ['email', 'name', 'password', 'avatar']);
+        const userData = _.pick(req.body, ['email', 'name', 'password']);
         const avatar = gravatar.url('userData.email', {s: '200', r: 'pg', d: 'mm'})
 
         const newUser = new User({

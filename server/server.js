@@ -18,6 +18,13 @@ let port = process.env.PORT;
 
 app.use(bodyParser());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth");
+    next();
+  });
+
 // Routes
 app.use('/api/users', users);
 app.use('/api/posts', posts);
