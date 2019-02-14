@@ -5,6 +5,39 @@ import Footer_main from './Footer_main';
 
 
 class SignUp extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            password2: '',
+            errors: {}
+        };
+
+        this.changeValueOfInput = this.changeValueOfInput.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+    }
+
+    changeValueOfInput(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    submitForm(e) {
+        e.preventDefault();
+
+        const userCredentials = {
+            name: this.state.name,
+            emai: this.state.email,
+            password: this.state.password,
+            confirmPassword: this.state.password2
+        }
+
+        console.log('New user: ', userCredentials);
+    }
+
     render() {
         return (
             <div class='main_wrapper'>
@@ -13,23 +46,23 @@ class SignUp extends React.Component {
                 <div class='justify-content-center'>
                     <h1 class="logInH1 display-4">Create your account!</h1>
 
-                    <form class='log-in-form'>
+                    <form class='log-in-form' onSubmit={this.submitForm}>
                         <div class="form-group">
                             <label for="Name">Name</label>
-                            <input type="text" class="form-control"  aria-describedby="nameInfo" placeholder="Name" />
+                            <input type="text" class="form-control"  aria-describedby="nameInfo" name='name' placeholder="Name" value={this.state.name} onChange={this.changeValueOfInput} />
                         </div>
                         <div class="form-group">
                             <label for="Email">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailInfo" placeholder="Enter email" />
+                            <input type="email" class="form-control" aria-describedby="emailInfo" name='email' placeholder="Enter email" value={this.state.email} onChange={this.changeValueOfInput}/>
                             <small id="emaiInfo" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="Password">Password</label>
-                            <input type="password" class="form-control" placeholder="Password..." />
+                            <input type="password" class="form-control" placeholder="Password..." name='password' value={this.state.password} onChange={this.changeValueOfInput}/>
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm password</label>
-                            <input type="password" class="form-control" placeholder="Confirm password.." />
+                            <input type="password" class="form-control" placeholder="Confirm password.." name='confirmPassword' value={this.state.password2} onChange={this.changeValueOfInput}/>
                         </div>
                         
                         <button type="submit" class="aaa btn main_color white_text">Submit</button>
