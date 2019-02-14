@@ -16,7 +16,7 @@ class Profile extends React.Component {
                     <div class="col-md-12">
                       <div class="row">
                         <div class="col-6">
-                          <a href="Profiles" class="btn btn-light mb-3 float-left">Back To Profiles</a>
+                          <Link to="Profiles" class="btn btn-light mb-3 float-left">Back To Profiles</Link>
                         </div>
                         <div class="col-6">
             
@@ -25,7 +25,7 @@ class Profile extends React.Component {
             
                       <div class="row">
                         <div class="col-md-12">
-                          <div class="card card-body bg-info text-white mb-3">
+                          <div class="card card-body main_color text-white mb-3">
                             <div class="row">
                               <div class="col-4 col-md-3 m-auto text-center">
                                 <img class="rounded-circle" src="https://www.gravatar.com/avatar/anything?s=200&d=mm" alt="" />
@@ -36,18 +36,18 @@ class Profile extends React.Component {
                               <p class="lead text-center">Developer at NASA</p>
                               <p>Warsaw, PL</p>
                               <p>
-                                <a class="text-white p-2" href="#">
+                                <Link class="text-white p-2" to="#">
                                   <i class="fas fa-globe fa-2x"></i>
-                                </a>
-                                <a class="text-white p-2" href="#">
+                                </Link>
+                                <Link class="text-white p-2" to="#">
                                   <i class="fab fa-facebook fa-2x"></i>
-                                </a>
-                                <a class="text-white p-2" href="#">
+                                </Link>
+                                <Link class="text-white p-2" to="#">
                                   <i class="fab fa-linkedin fa-2x"></i>
-                                </a>
-                                <a class="text-white p-2" href="#">
+                                </Link>
+                                <Link class="text-white p-2" to="#">
                                   <i class="fab fa-instagram fa-2x"></i>
-                                </a>
+                                </Link>
                               </p>
                             </div>
                           </div>
@@ -57,13 +57,13 @@ class Profile extends React.Component {
                       <div class="row">
                         <div class="col-md-12">
                           <div class="card card-body bg-light mb-3">
-                            <h3 class="text-center text-info">Anonymous's Bio</h3>
+                            <h3 class="text-center" style={{color: '#297c6c'}}>Anonymous's Bio</h3>
                             <p class="lead">Bacon ipsum dolor amet capicola hamburger salami burgdoggen ball tip meatball, andouille cow jowl cupim swine t-bone pork 
                             belly beef short loin. Shank drumstick short loin, sirloin meatball pork chop andouille pastrami pork belly 
                             bacon ball tip alcatra sausage pancetta. 
                             </p>
                             <hr />
-                            <h3 class="text-center text-info">Skill Set</h3>
+                            <h3 class="text-center" style={{color: '#297c6c'}}>Skill Set</h3>
                             <div class="row">
                               <div class="d-flex flex-wrap justify-content-center align-items-center">
                                 <div class="p-3">
@@ -84,7 +84,7 @@ class Profile extends React.Component {
             
                       <div class="row">
                         <div class="col-md-6">
-                          <h3 class="text-center text-info">Experience</h3>
+                          <h3 class="text-center" style={{color: '#297c6c'}}>Experience</h3>
                           <ul class="list-group">
                             <li class="list-group-item">
                               <h4>NASA</h4>
@@ -111,7 +111,7 @@ class Profile extends React.Component {
                           </ul>
                         </div>
                         <div class="col-md-6">
-                          <h3 class="text-center text-info">Education</h3>
+                          <h3 class="text-center" style={{color: '#297c6c'}}>Education</h3>
                           <ul class="list-group">
                             <li class="list-group-item">
                               <h4>Oxford</h4>
@@ -135,7 +135,7 @@ class Profile extends React.Component {
                           <div class="row">
                             <div class="col-md-6">
                               <h4>
-                                <Link to='Dashboard' class="text-info" target="_blank"> Some repo
+                                <Link to='Dashboard' class="" style={{color: '#297c6c'}} target="_blank"> Some repo
                                 </Link>
                               </h4>
                               <p>Description here</p>

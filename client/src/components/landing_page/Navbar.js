@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -8,9 +9,9 @@ const Navbar = () => {
                 <hr class='d-md-none hr-line' />
 
                 <nav class="nav nav-masthead justify-content-center mt-sm-2 mt-2">
-                    <a class="nav-link" href="/SignUp">Sign up</a>
-                    <a class="nav-link" href="/Login">Log in</a>
-                    <a class="nav-link" href="#">About</a>
+                    <Link class="nav-link" to="/SignUp">Sign up</Link>
+                    <Link class="nav-link" to="/Login">Log in</Link>
+                    <Link class="nav-link" to="#">About</Link>
 
                 </nav>
 

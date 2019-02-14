@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
@@ -13,9 +14,9 @@ class AddEducation extends React.Component {
                     <div class="container">
                     <div class="row">
                         <div class="col-md-8 mt-4 mr-auto mb-auto ml-auto">
-                            <a href="Dashboard" class="btn btn-light">
+                            <Link to="Dashboard" class="btn btn-light">
                                 Go Back
-                            </a>
+                            </Link>
                             <h1 class="display-4 text-center">Add Your Experience</h1>
                             <p class="lead text-center">Add any developer/programming positions that you have had in the past</p>
                             <small class="d-block pb-3">* = required field</small>

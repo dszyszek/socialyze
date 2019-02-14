@@ -1,10 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Navbar_secondary = () => {
     return (
         <nav class="navbar navbar-expand-sm main_color mb-4">
         <div class="container">
-          <a class="navbar-brand" href="/">Socialyze</a>
+          <Link class="navbar-brand" to="/">Socialyze</Link>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -13,10 +14,10 @@ const Navbar_secondary = () => {
     
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="SignUp">Sign Up</a>
+                <Link class="nav-link" to="SignUp">Sign Up</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="LogIn">Login</a>
+                <Link class="nav-link" to="LogIn">Login</Link>
               </li>
             </ul>
 

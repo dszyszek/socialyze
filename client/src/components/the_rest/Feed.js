@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
@@ -35,10 +36,10 @@ class Feed extends React.Component {
                         <div class="card card-body mb-3">
                           <div class="row">
                             <div class="col-md-2">
-                              <a href="profile.html">
+                              <Link to="Profile">
                                 <img class="rounded-circle" src="https://www.gravatar.com/avatar/anything?s=153&d=mm"
                                   alt="" />
-                              </a>
+                              </Link>
                               <br />
                               <p class="text-center">Anonymous</p>
                             </div>
@@ -55,9 +56,9 @@ class Feed extends React.Component {
                               <button type="button" class="btn btn-light mr-1">
                                 <i class="text-secondary fas fa-thumbs-down"></i>
                               </button>
-                              <a href="post.html" class="btn main_color mr-1">
+                              <Link to="Post" class="btn main_color mr-1">
                                 Comments
-                              </a>
+                              </Link>
 
                             </div>
                           </div>

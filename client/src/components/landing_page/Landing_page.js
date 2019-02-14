@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 
 class Landing_page extends React.Component {
     render(){
@@ -8,7 +8,7 @@ class Landing_page extends React.Component {
                 <h1 class="cover-heading">Find your way to connect...</h1>
                 <p class="lead">...and socialyze!</p>
                 <p class="lead">
-                <a href="/Login" class="myBtn myBtn--white myBtn--animated">Log in</a>
+                <Link to="/Login" class="myBtn myBtn--white myBtn--animated">Log in</Link>
                 </p>
           </main>
         );

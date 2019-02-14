@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
@@ -17,10 +18,10 @@ class Post extends React.Component {
                             <div class="card card-body mb-3">
                                 <div class="row">
                                 <div class="col-md-2">
-                                    <a href="profile.html">
+                                    <Link to="Profile">
                                     <img class="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=153&d=mm"
                                         alt="" />
-                                    </a>
+                                    </Link>
                                     <br />
                                     <p class="text-center">Anonymous_1</p>
                                 </div>
@@ -53,9 +54,9 @@ class Post extends React.Component {
                                 <div class="card card-body mb-3">
                                 <div class="row">
                                     <div class="col-md-2">
-                                    <a href="profile.html">
+                                    <Link to="Profile">
                                         <img class="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=153&d=mm" alt="" />
-                                    </a>
+                                    </Link>
                                     <br />
                                     <p class="text-center">Anonymous_2</p>
                                     </div>
@@ -69,9 +70,9 @@ class Post extends React.Component {
                                 <div class="card card-body mb-3">
                                 <div class="row">
                                     <div class="col-md-2">
-                                    <a href="profile.html">
+                                    <Link to="Profile">
                                         <img class="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=153&d=mm" alt="" />
-                                    </a>
+                                    </Link>
                                     <br />
                                     <p class="text-center">Anonymous_3</p>
                                     </div>

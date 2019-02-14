@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main'
 
@@ -17,17 +19,17 @@ class Dashboard extends React.Component {
                         <p class="lead text-muted">Welcome Anonymous</p>
 
                         <div class="btn-group mb-4" role="group">
-                          <a href="Profile" class="btn btn-light">
+                          <Link to="Profile" class="btn btn-light">
                           <i class="fas fa-user text-success mr-1"></i>
-                          Your Profile</a>
-                          <a href="EditProfile" class="btn btn-light">
-                          <i class="fas fa-user-edit text-success mr-1"></i> Edit Profile</a>
-                          <a href="AddExperience" class="btn btn-light">
+                          Your Profile</Link>
+                          <Link to="EditProfile" class="btn btn-light">
+                          <i class="fas fa-user-edit text-success mr-1"></i> Edit Profile</Link>
+                          <Link to="AddExperience" class="btn btn-light">
                             <i class="fab fa-black-tie text-success mr-1"></i>
-                            Add Experience</a>
-                          <a href="AddEducation" class="btn btn-light">
+                            Add Experience</Link>
+                          <Link to="AddEducation" class="btn btn-light">
                             <i class="fas fa-graduation-cap text-success mr-1"></i>
-                            Add Education</a>
+                            Add Education</Link>
                         </div>
               
                         <div>

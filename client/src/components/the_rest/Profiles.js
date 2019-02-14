@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
@@ -25,7 +26,7 @@ class AddEducation extends React.Component {
                                 <h3>Anonymous_1</h3>
                                 <p>Developer at NASA</p>
                                 <p>Warsaw, PL</p>
-                                <a href="Profile" class="btn btn-info">View Profile</a>
+                                <Link to="Profile" class="btn main_color">View Profile</Link>
                             </div>
                             <div class="col-md-4 d-none d-lg-block">
                                 <h4>Skill Set</h4>
@@ -54,7 +55,7 @@ class AddEducation extends React.Component {
                                 <h3>Anonymous_2</h3>
                                 <p>Developer at Google</p>
                                 <p>Wroclove, PL</p>
-                                <a href="Profile" class="btn btn-info">View Profile</a>
+                                <Link to="Profile" class="btn main_color">View Profile</Link>
                             </div>
                             <div class="col-md-4 d-none d-lg-block">
                                 <h4>Skill Set</h4>
