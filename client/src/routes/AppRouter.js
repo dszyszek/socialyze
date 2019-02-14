@@ -9,6 +9,7 @@ import Dashboard from '../components/the_rest/Dashboard';
 import AddEducation from '../components/the_rest/AddEducation'
 import AddExperience from '../components/the_rest/AddExperience'
 import Feed from '../components/the_rest/Feed'
+import EditProfile from '../components/the_rest/EditProfile'
 
 import NotFound from '../components/the_rest/NotFound';
 
@@ -24,6 +25,7 @@ const AppRouter = () => (
                 <Route path='/AddEducation' component={AddEducation} />
                 <Route path='/AddExperience' component={AddExperience} />
                 <Route path='/Feed' component={Feed} />
+                <Route path='/EditProfile' component={EditProfile} />
 
                 <Route component={NotFound} />
             </Switch>
