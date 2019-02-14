@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
                     <div class="row">
                       <div class="col-md-12">
                         <h1 class="display-4">Dashboard</h1>
-                        <p class="lead text-muted">Welcome John Doe</p>
+                        <p class="lead text-muted">Welcome Anonymous</p>
 
                         <div class="btn-group mb-4" role="group">
                           <a href="EditProfile" class="btn btn-light">
@@ -40,10 +40,10 @@ class Dashboard extends React.Component {
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Tech Guy Web Solutions</td>
-                                <td>Senior Developer</td>
+                                <td>Web Solutions</td>
+                                <td>Tech Guy</td>
                                 <td>
-                                  02-03-2009 - 01-02-2014
+                                  02-03-2009 - 01-02-2018
                                 </td>
                                 <td>
                                   <button class="btn btn-danger">
@@ -52,10 +52,10 @@ class Dashboard extends React.Component {
                                 </td>
                               </tr>
                               <tr>
-                                <td>Traversy Media</td>
-                                <td>Instructor & Developer</td>
+                                <td>NASA</td>
+                                <td>Software Engineer</td>
                                 <td>
-                                  02-03-2015 - Now
+                                  02-03-2018 - Now
                                 </td>
                                 <td>
                                   <button class="btn btn-danger">
@@ -80,10 +80,10 @@ class Dashboard extends React.Component {
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Northern Essex</td>
-                                <td>Associates</td>
+                                <td>Oxford</td>
+                                <td>Master</td>
                                 <td>
-                                  02-03-2007 - 01-02-2009
+                                  02-03-2004 - 01-02-2009
                                 </td>
                                 <td>
                                   <button class="btn btn-danger">
