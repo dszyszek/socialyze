@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
@@ -30,12 +31,16 @@ class SignUp extends React.Component {
 
         const userCredentials = {
             name: this.state.name,
-            emai: this.state.email,
+            email: this.state.email,
             password: this.state.password,
-            confirmPassword: this.state.password2
+            confirmPassword: this.state.confirmPassword
         }
 
-        console.log('New user: ', userCredentials);
+        // console.log('New user: ', userCredentials);
+
+        axios.post('http://localhost:3000/api/users/register', userCredentials)
+        .then(res => console.log(res.data))
+        .catch(e => console.log(e.response.data));
     }
 
     render() {
@@ -62,7 +67,7 @@ class SignUp extends React.Component {
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm password</label>
-                            <input type="password" class="form-control" placeholder="Confirm password.." name='confirmPassword' value={this.state.password2} onChange={this.changeValueOfInput}/>
+                            <input type="password" class="form-control" placeholder="Confirm password.." name='confirmPassword' value={this.state.confirmPassword} onChange={this.changeValueOfInput}/>
                         </div>
                         
                         <button type="submit" class="aaa btn main_color white_text">Submit</button>
