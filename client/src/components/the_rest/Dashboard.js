@@ -17,8 +17,11 @@ class Dashboard extends React.Component {
                         <p class="lead text-muted">Welcome Anonymous</p>
 
                         <div class="btn-group mb-4" role="group">
+                          <a href="Profile" class="btn btn-light">
+                          <i class="fas fa-user text-success mr-1"></i>
+                          Your Profile</a>
                           <a href="EditProfile" class="btn btn-light">
-                            <i class="fas fa-user-circle text-success mr-1"></i> Edit Profile</a>
+                          <i class="fas fa-user-edit text-success mr-1"></i> Edit Profile</a>
                           <a href="AddExperience" class="btn btn-light">
                             <i class="fab fa-black-tie text-success mr-1"></i>
                             Add Experience</a>
