@@ -13,7 +13,7 @@ class AddEducation extends React.Component {
                     <div class="container">
                     <div class="row">
                         <div class="col-md-8 mt-4 mr-auto mb-auto ml-auto">
-                        <a href="dashboard.html" class="btn btn-light">
+                        <a href="Dashboard" class="btn btn-light">
                             Go Back
                         </a>
                         <h1 class="display-4 text-center">Add Your Education</h1>
@@ -47,7 +47,7 @@ class AddEducation extends React.Component {
                             <textarea class="form-control form-control-lg" placeholder="Program Description" name="description"></textarea>
                             <small class="form-text text-muted">Tell us about your experience and what you learned</small>
                             </div>
-                            <button type="submit" class="aaa btn main_color white_text">Submit</button>
+                            <button type="submit" class="mt-2 btn main_color white_text">Submit</button>
                         </form>
                         </div>
                     </div>

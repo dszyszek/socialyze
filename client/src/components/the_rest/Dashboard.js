@@ -17,12 +17,12 @@ class Dashboard extends React.Component {
                         <p class="lead text-muted">Welcome John Doe</p>
 
                         <div class="btn-group mb-4" role="group">
-                          <a href="edit-profile.html" class="btn btn-light">
+                          <a href="EditProfile" class="btn btn-light">
                             <i class="fas fa-user-circle text-info mr-1"></i> Edit Profile</a>
-                          <a href="add-experience.html" class="btn btn-light">
+                          <a href="AddExperience" class="btn btn-light">
                             <i class="fab fa-black-tie text-info mr-1"></i>
                             Add Experience</a>
-                          <a href="add-education.html" class="btn btn-light">
+                          <a href="AddEducation" class="btn btn-light">
                             <i class="fas fa-graduation-cap text-info mr-1"></i>
                             Add Education</a>
                         </div>
