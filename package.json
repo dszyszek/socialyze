@@ -7,7 +7,7 @@
     "start": "node ./server/server.js",
     "serve": "nodemon ./server/server.js",
     "client-install": "npm install --prefix client",
-    "client": "cd ./client && npm run dev-server",
+    "client": "cd ./client && npm run start",
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\""
   },
   "author": "Damian Szyszka",
