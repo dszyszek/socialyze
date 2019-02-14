@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar_secondary from './Navbar_secondary';
+import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
  
 class LogIn extends React.Component{
@@ -8,12 +8,12 @@ class LogIn extends React.Component{
     render() {
         return (
             <div class='main_wrapper'>
-                <Navbar_secondary />
+                <Navbar_logged_out />
                 <section class="jumbotron d-flex justify-content-center m-0">
                     <div class='justify-content-center'>
                         <h1 class="logInH1 display-4">Log in to your account!</h1>
 
-                        <form class='log-in-form'>
+                        <form class='log-in-form' action='/Dashboard'>
                             <div class="form-group">
                                 <label for="Email">Email address</label>
                                 <input type="email" class="form-control" aria-describedby="emailInfo" placeholder="Email..." />

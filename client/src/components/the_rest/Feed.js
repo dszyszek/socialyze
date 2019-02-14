@@ -50,7 +50,7 @@ class Feed extends React.Component {
                                 </p>
                               <button type="button" class="btn btn-light mr-1">
                                 <i class="text-info fas fa-thumbs-up"></i>
-                                <span class="badge badge-light">4</span>
+                                <span class="badge badge-light">1</span>
                               </button>
                               <button type="button" class="btn btn-light mr-1">
                                 <i class="text-secondary fas fa-thumbs-down"></i>

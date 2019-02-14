@@ -18,12 +18,12 @@ class Dashboard extends React.Component {
 
                         <div class="btn-group mb-4" role="group">
                           <a href="EditProfile" class="btn btn-light">
-                            <i class="fas fa-user-circle text-info mr-1"></i> Edit Profile</a>
+                            <i class="fas fa-user-circle text-success mr-1"></i> Edit Profile</a>
                           <a href="AddExperience" class="btn btn-light">
-                            <i class="fab fa-black-tie text-info mr-1"></i>
+                            <i class="fab fa-black-tie text-success mr-1"></i>
                             Add Experience</a>
                           <a href="AddEducation" class="btn btn-light">
-                            <i class="fas fa-graduation-cap text-info mr-1"></i>
+                            <i class="fas fa-graduation-cap text-success mr-1"></i>
                             Add Education</a>
                         </div>
               
