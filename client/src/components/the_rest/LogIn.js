@@ -52,7 +52,7 @@ class LogIn extends React.Component{
                     <div class='justify-content-center'>
                         <h1 class="logInH1 display-4">Log in to your account!</h1>
 
-                        <form class='log-in-form' onSubmit={this.submitForm} >
+                        <form class='log-in-form' noValidate onSubmit={this.submitForm} >
                             <div class="form-group">
                                 <label for="Email">Email address</label>
                                 <input type="email" class="form-control" aria-describedby="emailInfo" name='email' placeholder="Email..." value={this.state.email} onChange={this.changeValueOfInput}/>

@@ -1,9 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import {connect} from 'react-redux';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
+import {registerUser} from '../../actions/authActions';
 
 
 class SignUp extends React.Component {
@@ -39,9 +42,11 @@ class SignUp extends React.Component {
 
         // console.log('New user: ', userCredentials);
 
-        axios.post('http://localhost:3000/api/users/register', userCredentials)
-        .then(res => console.log(res.data))
-        .catch(e => this.setState({errors: e.response.data}));
+        // axios.post('http://localhost:3000/api/users/register', userCredentials)
+        // .then(res => console.log(res.data))
+        // .catch(e => this.setState({errors: e.response.data}));
+
+        this.props.registerUser(userCredentials);
     }
 
     render() {
@@ -108,4 +113,13 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
+SignUp.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, {registerUser})(SignUp);
