@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
@@ -23,6 +24,14 @@ class SignUp extends React.Component {
         this.submitForm = this.submitForm.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
     changeValueOfInput(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -39,7 +48,7 @@ class SignUp extends React.Component {
             confirmPassword: this.state.confirmPassword
         }
 
-        this.props.registerUser(userCredentials);
+        this.props.registerUser(userCredentials, this.props.history);
     }
 
     render() {
@@ -108,11 +117,13 @@ class SignUp extends React.Component {
 
 SignUp.propTypes = {
     registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+    auth: state.auth,
+    errors: state.errors
 });
 
-export default connect(mapStateToProps, {registerUser})(SignUp);
+export default connect(mapStateToProps, {registerUser})(withRouter(SignUp));

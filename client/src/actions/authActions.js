@@ -3,10 +3,10 @@ import axios from 'axios';
 
 // Register user
 
-export const registerUser = userData => dispatch => {
+export const registerUser = (userData, history) => dispatch => {
 
     axios.post('http://localhost:3000/api/users/register', userData)
-    .then(res => console.log(res.data))
+    .then(res => history.push('/login'))
     .catch(e => (
         dispatch({
             type: GET_ERRORS,
