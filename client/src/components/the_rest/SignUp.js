@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
@@ -39,12 +38,6 @@ class SignUp extends React.Component {
             password: this.state.password,
             confirmPassword: this.state.confirmPassword
         }
-
-        // console.log('New user: ', userCredentials);
-
-        // axios.post('http://localhost:3000/api/users/register', userCredentials)
-        // .then(res => console.log(res.data))
-        // .catch(e => this.setState({errors: e.response.data}));
 
         this.props.registerUser(userCredentials);
     }
