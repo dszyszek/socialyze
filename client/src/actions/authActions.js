@@ -20,16 +20,18 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login user
 
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
     axios.post('http://localhost:3000/api/users/login', userData)
     .then(res => {
-        const {token} = res.data.token;
+        const {token} = res.data;
 
         localStorage.setItem('jwt_token', token);
         setAuthToken(token);
 
         const decodedToken = jwt_decode(token);
         dispatch(setCurrentUser(decodedToken));
+
+        return history.push('/Dashboard');
     })
     .catch(e => (
         dispatch({

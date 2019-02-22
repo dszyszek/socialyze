@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux'
+import classnames from 'classnames';
+import {withRouter} from 'react-router-dom';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
- 
+import {loginUser} from '../../actions/authActions'; 
+
 class LogIn extends React.Component{
     constructor() {
         super();
@@ -17,6 +22,14 @@ class LogIn extends React.Component{
         this.changeValueOfInput = this.changeValueOfInput.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.changeStateOfCheckbox = this.changeStateOfCheckbox.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
     }
 
     changeValueOfInput(e) {
@@ -35,7 +48,7 @@ class LogIn extends React.Component{
             errors: this.state.errors
         };
 
-        console.log('User info to log in', userCredentials);
+        this.props.loginUser(userCredentials, this.props.history);
     }
 
     changeStateOfCheckbox() {
@@ -45,6 +58,8 @@ class LogIn extends React.Component{
     }
 
     render() {
+        const {errors} = this.state;
+
         return (
             <div class='main_wrapper'>
                 <Navbar_logged_out />
@@ -55,11 +70,20 @@ class LogIn extends React.Component{
                         <form class='log-in-form' noValidate onSubmit={this.submitForm} >
                             <div class="form-group">
                                 <label for="Email">Email address</label>
-                                <input type="email" class="form-control" aria-describedby="emailInfo" name='email' placeholder="Email..." value={this.state.email} onChange={this.changeValueOfInput}/>
+                                <input type="email" class={classnames('form-control',
+                                {
+                                    'is-invalid': errors.email
+                                })}
+                                 aria-describedby="emailInfo" name='email' placeholder="Email..." value={this.state.email} onChange={this.changeValueOfInput}/>
+                                 {this.state.errors && <div class='invalid-feedback'>{this.state.errors.email}</div>}
                             </div>
                             <div class="form-group">
                                 <label for="Password">Password</label>
-                                <input type="password" class="form-control" name='password' placeholder="Password..." value={this.state.password} onChange={this.changeValueOfInput}/>
+                                <input type="password" class={classnames('form-control',
+                                {
+                                    'is-invalid': errors.password
+                                })} name='password' placeholder="Password..." value={this.state.password} onChange={this.changeValueOfInput}/>
+                                {this.state.errors && <div class='invalid-feedback'>{this.state.errors.password}</div>}
                             </div>
                             
                             <div class="form-check">
@@ -81,4 +105,15 @@ class LogIn extends React.Component{
 
 };
 
-export default LogIn;
+LogIn.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+    errors: state.errors
+});
+
+export default connect(mapStateToProps, {loginUser})(withRouter(LogIn));
