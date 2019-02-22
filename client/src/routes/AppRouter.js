@@ -1,7 +1,6 @@
 import React from 'react';
-import {NavLink, BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
-
 
 import Main from '../components/landing_page/Main';
 import LogIn from '../components/the_rest/LogIn';
@@ -18,6 +17,18 @@ import NotFound from '../components/the_rest/NotFound';
 
 import store from '../store';
 
+import jwt_decode from 'jwt-decode';
+
+import setAuthToken from '../utils/setAuthToken';
+import {setCurrentUser} from '../actions/authActions';
+
+
+if (localStorage.jwt_token) {
+    setAuthToken(localStorage.jwt_token);
+
+    const decoded = jwt_decode(localStorage.jwt_token);
+    store.dispatch(setCurrentUser(decoded));
+}
 
 const AppRouter = () => (
 
