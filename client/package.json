@@ -19,6 +19,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "classnames": "^2.2.6",
     "css-loader": "^1.0.0",
+    "jwt-decode": "^2.2.0",
     "live-server": "^1.2.0",
     "node-sass": "^4.11.0",
     "normalize.css": "^8.0.0",
