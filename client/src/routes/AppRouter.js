@@ -20,7 +20,7 @@ import store from '../store';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
-import {setCurrentUser} from '../actions/authActions';
+import {setCurrentUser, logoutUser} from '../actions/authActions';
 
 
 if (localStorage.jwt_token) {
@@ -28,6 +28,13 @@ if (localStorage.jwt_token) {
 
     const decoded = jwt_decode(localStorage.jwt_token);
     store.dispatch(setCurrentUser(decoded));
+
+    // Check if token expired
+    const current_time = Date.now()/1000;
+    if (decoded.expiresIn < current_time) {
+        store.dispatch(logoutUser);
+        window.location.assign('/Login');
+    }
 }
 
 const AppRouter = () => (
