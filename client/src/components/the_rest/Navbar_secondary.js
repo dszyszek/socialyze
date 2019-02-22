@@ -1,21 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux'
 
-import {logoutUser} from '../../actions/authActions';
-
-class Navbar_secondary extends React.Component {
-    constructor() {
-        super();
-
-        this.logoutAction = this.logoutAction.bind(this);
-    }
-
-    logoutAction() {
-        this.props.logoutUser();
-    }
-
-    render() {
+const Navbar_secondary = () => {
         return (
             <nav class="navbar navbar-expand-sm main_color mb-4">
                 <div class="container">
@@ -44,7 +30,7 @@ class Navbar_secondary extends React.Component {
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link class="nav-link" to="/" onClick={this.logoutAction}>
+                        <Link class="nav-link" to="/">
                         <img class="rounded-circle" style={{width: '25px', marginRight:'5px'}} src="https://www.gravatar.com/avatar/anything?s=200&d=mm"
                             alt="" title="You must have a Gravatar connected to your email to display an image" /> Logout
                         </Link>
@@ -54,8 +40,7 @@ class Navbar_secondary extends React.Component {
                 </div>
             </nav>
         );
-    }
     
 };
 
-export default connect(null, {logoutUser})(Navbar_secondary);
+export default Navbar_secondary;

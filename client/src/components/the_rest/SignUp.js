@@ -5,8 +5,9 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import Navbar_logged_out from './Navbar_logged_out';
+import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
-import {registerUser} from '../../actions/authActions';
+import {registerUser, logoutUser} from '../../actions/authActions';
 
 
 class SignUp extends React.Component {
@@ -22,6 +23,12 @@ class SignUp extends React.Component {
 
         this.changeValueOfInput = this.changeValueOfInput.bind(this);
         this.submitForm = this.submitForm.bind(this);
+    }
+
+    componentWillMount() {
+        if (localStorage.jwt_token) {
+            this.props.logoutUser();
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -56,7 +63,7 @@ class SignUp extends React.Component {
 
         return (
             <div class='main_wrapper'>
-            <Navbar_logged_out />
+            {localStorage.jwt_token ? <Navbar_secondary /> : <Navbar_logged_out />}
             <section class="jumbotron d-flex justify-content-center m-0 pt-0">
                 <div class='justify-content-center'>
                     <h1 class="logInH1 display-4">Create your account!</h1>
@@ -126,4 +133,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {registerUser})(withRouter(SignUp));
+export default connect(mapStateToProps, {registerUser, logoutUser})(withRouter(SignUp));
