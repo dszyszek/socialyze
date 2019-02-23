@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Navbar_secondary = () => {
+const Navbar_looged_out = () => {
     return (
         <nav class="navbar navbar-expand-sm main_color mb-4">
         <div class="container">
@@ -27,4 +27,4 @@ const Navbar_secondary = () => {
     );
 };
 
-export default Navbar_secondary;
+export default Navbar_looged_out;
