@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import Main from '../components/landing_page/Main';
 import LogIn from '../components/the_rest/LogIn';
 import SignUp from '../components/the_rest/SignUp';
-import Dashboard from '../components/the_rest/Dashboard';
+import Dashboard from '../components/the_rest/dashboard/Dashboard';
 import AddEducation from '../components/the_rest/AddEducation'
 import AddExperience from '../components/the_rest/AddExperience'
 import Feed from '../components/the_rest/Feed'
