@@ -6,7 +6,8 @@ import {withRouter} from 'react-router-dom';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
-import {loginUser, logoutUser} from '../../actions/authActions'; 
+import {loginUser, logoutUser} from '../../actions/authActions';
+import InputComponent from '../common/InputComponent';
 
 class LogIn extends React.Component{
     constructor() {
@@ -74,23 +75,9 @@ class LogIn extends React.Component{
                         <h1 class="logInH1 display-4">Log in to your account!</h1>
 
                         <form class='log-in-form' noValidate onSubmit={this.submitForm} >
-                            <div class="form-group">
-                                <label for="Email">Email address</label>
-                                <input type="email" class={classnames('form-control',
-                                {
-                                    'is-invalid': errors.email
-                                })}
-                                 aria-describedby="emailInfo" name='email' placeholder="Email..." value={this.state.email} onChange={this.changeValueOfInput}/>
-                                 {this.state.errors && <div class='invalid-feedback'>{this.state.errors.email}</div>}
-                            </div>
-                            <div class="form-group">
-                                <label for="Password">Password</label>
-                                <input type="password" class={classnames('form-control',
-                                {
-                                    'is-invalid': errors.password
-                                })} name='password' placeholder="Password..." value={this.state.password} onChange={this.changeValueOfInput}/>
-                                {this.state.errors && <div class='invalid-feedback'>{this.state.errors.password}</div>}
-                            </div>
+                            <InputComponent label='Email' type='email' error={errors.email} aria_describe='emailInfo' name='email' placeholder='Email...' value={this.state.email} onChange={this.changeValueOfInput} />
+                            
+                            <InputComponent label='Password' type='password' error={errors.password} aria_describe='passwordInfo' name='password' placeholder='Password...' value={this.state.password} onChange={this.changeValueOfInput} />
                             
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1" name='checkOut' onChange={this.changeStateOfCheckbox}/>
