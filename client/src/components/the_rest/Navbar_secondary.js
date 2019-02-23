@@ -3,7 +3,10 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {logoutUser} from '../../actions/authActions';
 import {logoutProfile} from '../../actions/profileActions';
+
+
 
 class Navbar_secondary extends React.Component {
         constructor() {
@@ -12,6 +15,7 @@ class Navbar_secondary extends React.Component {
         }
 
         logoutProfileFunction() {
+            this.props.logoutUser();
             this.props.logoutProfile();
         }
 
@@ -60,6 +64,7 @@ class Navbar_secondary extends React.Component {
 
 Navbar_secondary.propTypes = {
     logoutProfile: PropTypes.func.isRequired,
+    logoutUser: PropTypes.func.isRequired
 };
 
-export default connect(null, {logoutProfile})(Navbar_secondary);
+export default connect(null, {logoutUser, logoutProfile})(Navbar_secondary);
