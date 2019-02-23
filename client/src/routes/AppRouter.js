@@ -21,6 +21,7 @@ import jwt_decode from 'jwt-decode';
 
 import setAuthToken from '../utils/setAuthToken';
 import {setCurrentUser, logoutUser} from '../actions/authActions';
+import {logoutProfile} from '../actions/profileActions';
 
 
 if (localStorage.jwt_token) {
@@ -32,6 +33,7 @@ if (localStorage.jwt_token) {
     // Check if token expired
     const current_time = Date.now()/1000;
     if (decoded.expiresIn < current_time) {
+        store.dispatch(logoutProfile);
         store.dispatch(logoutUser);
         window.location.assign('/Login');
     }
