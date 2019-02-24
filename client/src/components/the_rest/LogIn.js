@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
-import {loginUser, logoutUser} from '../../actions/authActions';
+import {loginUser} from '../../actions/authActions';
 import InputComponent from '../common/InputComponent';
 
 class LogIn extends React.Component{
@@ -25,17 +25,17 @@ class LogIn extends React.Component{
         this.changeStateOfCheckbox = this.changeStateOfCheckbox.bind(this);
     }
 
-    componentWillMount() {
-        if (localStorage.jwt_token) {
-            this.props.logoutUser();
-        }
-    }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
             });
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.auth.auth) {
+            this.props.history.push('/Dashboard');
         }
     }
 
@@ -109,4 +109,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {loginUser, logoutUser})(withRouter(LogIn));
+export default connect(mapStateToProps, {loginUser})(withRouter(LogIn));

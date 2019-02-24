@@ -7,7 +7,7 @@ import {withRouter} from 'react-router-dom';
 import Navbar_logged_out from './Navbar_logged_out';
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
-import {registerUser, logoutUser} from '../../actions/authActions';
+import {registerUser} from '../../actions/authActions';
 import InputComponent from '../common/InputComponent';
 
 class SignUp extends React.Component {
@@ -25,12 +25,6 @@ class SignUp extends React.Component {
         this.submitForm = this.submitForm.bind(this);
     }
 
-    componentWillMount() {
-        if (localStorage.jwt_token) {
-            this.props.logoutUser();
-        }
-    }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
@@ -43,6 +37,12 @@ class SignUp extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    componentDidMount() {
+        if (this.props.auth.auth) {
+            this.props.history.push('/Dashboard');
+        }
     }
 
     submitForm(e) {
@@ -102,4 +102,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {registerUser, logoutUser})(withRouter(SignUp));
+export default connect(mapStateToProps, {registerUser})(withRouter(SignUp));
