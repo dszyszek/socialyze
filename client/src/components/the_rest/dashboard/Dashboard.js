@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main'
 import {getCurrentProfile} from '../../../actions/profileActions';
-
+import Loader from '../../common/Loader';
 
 class Dashboard extends React.Component {
 
@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
         let content;
 
         if (profile === null || loading) {
-          content = <h3>Loading...</h3>;
+          content = <Loader />;
 
         } else {
           content = (
