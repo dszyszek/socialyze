@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
             <div class='ml-0 mr-0 mt-3 text-center mb-5'>
                     
                     <h1 class='display-6'>
-                        You've not created your profile yet!
+                        Hi, {this.props.auth.user.name}, you've not created your profile yet!
                     </h1>
                     <Link to="EditProfile" class="btn btn-light">
                   <i class="fas fa-user-edit text-success mr-1"></i> Create Profile</Link>
