@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main'
@@ -23,6 +24,18 @@ class Dashboard extends React.Component {
         if (profile === null || loading) {
           content = <Loader />;
 
+        } else if (isEmpty(profile) && !loading) {
+          content = (
+            <div class='ml-0 mr-0 mt-3 text-center mb-5'>
+                    
+                    <h1 class='display-6'>
+                        You've not created your profile yet!
+                    </h1>
+                    <Link to="EditProfile" class="btn btn-light">
+                  <i class="fas fa-user-edit text-success mr-1"></i> Create Profile</Link>
+
+              </div>
+          );
         } else {
           content = (
             <div>
