@@ -22,6 +22,7 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
 import {setCurrentUser, logoutUser} from '../actions/authActions';
 import {logoutProfile} from '../actions/profileActions';
+import PrivateRoute from '../components/common/PrivateRoute';
 
 
 if (localStorage.jwt_token) {
@@ -48,14 +49,14 @@ const AppRouter = () => (
                     <Route path='/' component={Main} exact={true} />
                     <Route path='/Login' component={LogIn} />
                     <Route path='/SignUp' component={SignUp} />
-                    <Route path='/Dashboard' component={Dashboard} />
-                    <Route path='/AddEducation' component={AddEducation} />
-                    <Route path='/AddExperience' component={AddExperience} />
-                    <Route path='/Feed' component={Feed} />
-                    <Route path='/EditProfile' component={EditProfile} />
-                    <Route path='/Profile' component={Profile} />
-                    <Route path='/Profiles' component={Profiles} />
-                    <Route path='/Post' component={Post} />
+                    <PrivateRoute path='/Dashboard' component={Dashboard} />
+                    <PrivateRoute path='/AddEducation' component={AddEducation} />
+                    <PrivateRoute path='/AddExperience' component={AddExperience} />
+                    <PrivateRoute path='/Feed' component={Feed} />
+                    <PrivateRoute path='/EditProfile' component={EditProfile} />
+                    <PrivateRoute path='/Profile' component={Profile} />
+                    <PrivateRoute path='/Profiles' component={Profiles} />
+                    <PrivateRoute path='/Post' component={Post} />
 
 
                     <Route component={NotFound} />

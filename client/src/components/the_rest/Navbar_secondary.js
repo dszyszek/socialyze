@@ -48,7 +48,7 @@ class Navbar_secondary extends React.Component {
                             </Link>
                         </li>
                         <li class="nav-item">
-                            <Link class="nav-link" to="/" onClick={this.logoutProfileFunction}>
+                            <Link class="nav-link" to="/Login" onClick={this.logoutProfileFunction}>
                             <img class="rounded-circle" style={{width: '25px', marginRight:'5px'}} src="https://www.gravatar.com/avatar/anything?s=200&d=mm"
                                 alt="" title="You must have a Gravatar connected to your email to display an image" /> Logout
                             </Link>
