@@ -11,17 +11,18 @@ const InputComponent = ({
     value,
     label,
     aria_describe,
-    onChange
+    onChange,
+    ...rest
 }) => {
     return (
         <div class="form-group">
 
-            <label for={label}>{label}</label>
+            {label && <label for={label}>{label}</label>}
             <input type={type} class={classnames('form-control',
             {
                 'is-invalid': error
             })}
-                aria-describedby={aria_describe} name={name} placeholder={placeholder} value={value} onChange={onChange}/>
+                aria-describedby={aria_describe} name={name} placeholder={placeholder} value={value} onChange={onChange} {...rest}/>
             
                 {info && <small class='form-text text-muted'>{info}</small>}
                 {error && <div class='invalid-feedback'>{error}</div>}
