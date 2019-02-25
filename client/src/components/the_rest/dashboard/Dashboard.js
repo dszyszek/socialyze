@@ -26,12 +26,12 @@ class Dashboard extends React.Component {
 
         } else if (isEmpty(profile) && !loading) {
           content = (
-            <div class='ml-0 mr-0 mt-3 text-center mb-5'>
+            <div class='ml-0 mr-0 mt-5 text-center mb-5'>
                     
-                    <h1 class='display-6'>
+                    <h1 class='display-6 font-weight-normal'>
                         Hi, {this.props.auth.user.name}, you've not created your profile yet!
                     </h1>
-                    <Link to="EditProfile" class="btn btn-light">
+                    <Link to="EditProfile" class="btn btn-light mt-3">
                   <i class="fas fa-user-edit text-success mr-1"></i> Create Profile</Link>
 
               </div>
@@ -39,7 +39,8 @@ class Dashboard extends React.Component {
         } else {
           content = (
             <div>
-                <p class="lead text-muted">Welcome Anonymous</p>
+                <h1 class="display-4">Dashboard</h1>
+                <p class="lead text-muted">Welcome {this.props.auth.user.name}</p>
 
                 <div class="btn-group mb-4" role="group">
                   <Link to="Profile" class="btn btn-light">
@@ -142,7 +143,6 @@ class Dashboard extends React.Component {
                   <div class="container">
                     <div class="row">
                       <div class="col-md-12">
-                        <h1 class="display-4">Dashboard</h1>
                           {content}
                       </div>
                     </div>

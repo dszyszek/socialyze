@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
@@ -50,7 +51,7 @@ class EditProfile extends React.Component {
                         <Link to="Dashboard" class="btn btn-light">
                             Go Back
                         </Link>
-                        <h1 class="display-4 text-center">Edit Your Profile</h1>
+                        <h1 class="display-4 text-center">{isEmpty(this.props.profile.profile) ? 'Create' : 'Edit'} Your Profile</h1>
                         <p class="lead text-center">Ok, now tell something about yourself</p>
                         <small class="d-block pb-3">* = required field</small>
                         <form action="Dashboard">
