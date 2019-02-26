@@ -31,3 +31,14 @@ export const logoutProfile = () => dispatch => {
         type: CLEAR_CURRENT_PROFILE
     });
 };
+
+export const createProfile = (data, history) => dispatch => {
+    axios.post('http://localhost:3000/api/profile/me', data)
+        .then(res => history.push('/Dashboard'))
+        .catch(e => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: e.response.data
+            });
+        })
+};

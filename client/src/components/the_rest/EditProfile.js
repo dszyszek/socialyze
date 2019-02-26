@@ -8,6 +8,7 @@ import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import InputComponent from '../common/InputComponent';
 import TextareaComponent from '../common/TextareaComponent';
+import {createProfile} from '../../actions/profileActions';
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -30,6 +31,8 @@ class EditProfile extends React.Component {
         };
 
         this.changeValueOfInput = this.changeValueOfInput.bind(this);
+        this.submitProfile = this.submitProfile.bind(this);
+        this.updateStatus = this.updateStatus.bind(this);
   
     }
 
@@ -37,6 +40,21 @@ class EditProfile extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    updateStatus(e) {
+        let selected = e.target[e.target.selectedIndex].value;
+
+        this.setState(prev => ({
+            ...prev,
+            status: selected
+        }));
+
+    }
+
+    submitProfile(e) {
+        e.preventDefault();
+        this.props.createProfile(this.state, this.props.history);
     }
 
     render() {
@@ -86,7 +104,8 @@ class EditProfile extends React.Component {
                         <h1 class="display-4 text-center">{isEmpty(this.props.profile.profile) ? 'Create' : 'Edit'} Your Profile</h1>
                         <p class="lead text-center">Ok, now tell something about yourself</p>
                         <small class="d-block pb-3">* = required field</small>
-                        <form action="Dashboard">
+                        
+                        <form onSubmit={this.submitProfile}>
 
                         <InputComponent
                              type='text'
@@ -101,7 +120,7 @@ class EditProfile extends React.Component {
                          
 
                             <div class="form-group">
-                                <select class="form-control form-control-lg" name="status">
+                                <select class="form-control form-control-lg" name="status" onChange={this.updateStatus}>
                                     <option value="0" selected>* Select Professional Status</option>
                                     <option value="Developer">Developer</option>
                                     <option value="Junior Developer">Junior Developer</option>
@@ -220,4 +239,4 @@ const mapStateToProps =  state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps)(EditProfile);
+export default connect(mapStateToProps, {createProfile})(EditProfile);
