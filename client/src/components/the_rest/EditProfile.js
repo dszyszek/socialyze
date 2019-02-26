@@ -3,11 +3,13 @@ import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
+import classnames from 'classnames';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import InputComponent from '../common/InputComponent';
 import TextareaComponent from '../common/TextareaComponent';
+import SocialsInputComponent from '../common/SocialsInputComponent';
 import {createProfile} from '../../actions/profileActions';
 
 class EditProfile extends React.Component {
@@ -69,32 +71,32 @@ class EditProfile extends React.Component {
         const {errors} = this.state;
         const socials = (
             <div>
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                    <i class="fab fa-facebook"></i>
-                    </span>
-                </div>
-                <input type="text" class="form-control form-control-lg" placeholder="Facebook Page URL" name="facebook" value={this.state.facebook} onChange={this.changeValueOfInput}/>
-                </div>
 
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                    <i class="fab fa-linkedin"></i>
-                    </span>
-                </div>
-                <input type="text" class="form-control form-control-lg" placeholder="Linkedin Profile URL" name="linkedin" value={this.state.linkedin} onChange={this.changeValueOfInput}/>
-                </div>
+                <SocialsInputComponent
+                    icon_class='fa-facebook'
+                    placeholder='Facebook URL...'
+                    name='facebook'
+                    value={this.state.facebook}
+                    error={errors.facebook}
+                />
 
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                    <i class="fab fa-instagram"></i>
-                    </span>
-                </div>
-                <input type="text" class="form-control form-control-lg" placeholder="Instagram Page URL" name="instagram" value={this.state.instagram} onChange={this.changeValueOfInput}/>
-                </div>
+                <SocialsInputComponent
+                    icon_class='fa-linkedin'
+                    placeholder='Linkedin URL...'
+                    name='linkedin'
+                    value={this.state.linkedin}
+                    error={errors.linkedin}
+                />
+
+                <SocialsInputComponent
+                icon_class='fa-instagram'
+                placeholder='Instagram URL...'
+                name='instagram'
+                value={this.state.instagram}
+                error={errors.instagram}
+                />
+
+
             </div>          
         );
 
@@ -121,7 +123,7 @@ class EditProfile extends React.Component {
                              info="Nickname (This CAN'T be changed later)" 
                              aria_describe='handleInfo' 
                              name='handle' 
-                             placeholder='* Profile handle' 
+                             placeholder='Profile handle *' 
                              value={this.state.handle} 
                              onChange={this.changeValueOfInput}
                              error={errors.handle}
@@ -129,8 +131,8 @@ class EditProfile extends React.Component {
                          
 
                             <div class="form-group">
-                                <select class="form-control form-control-lg" name="status" onChange={this.updateStatus} error={errors.status}>
-                                    <option value="0" selected>* Select Professional Status</option>
+                                <select class={classnames('form-control', 'form-control-lg', {'is-invalid': errors.status})} name="status" onChange={this.updateStatus} error={errors.status}>
+                                    <option value="0" selected>Select Professional Status *</option>
                                     <option value="Developer">Developer</option>
                                     <option value="Junior Developer">Junior Developer</option>
                                     <option value="Senior Developer">Senior Developer</option>
@@ -139,6 +141,8 @@ class EditProfile extends React.Component {
                                     <option value="Other">Other</option>
                                 </select>
                                 <small class="form-text">Current point of your career</small>
+
+                                {errors.status && <div class='invalid-feedback'>{errors.status}</div>}
                             </div>
 
                         <InputComponent
@@ -179,7 +183,7 @@ class EditProfile extends React.Component {
                             info="Please stick to csv (comma separated values) format (eg. Python,JavaScript,C++)" 
                             aria_describe='skillsInfo' 
                             name='skills' 
-                            placeholder='Skills...' 
+                            placeholder='Skills *' 
                             value={this.state.skills} 
                             onChange={this.changeValueOfInput}  
                             error={errors.skills}
