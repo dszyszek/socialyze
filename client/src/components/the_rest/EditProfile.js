@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
@@ -36,6 +36,14 @@ class EditProfile extends React.Component {
   
     }
 
+    componentWillReceiveProps(newProps) {
+        if (newProps.errors) {
+            this.setState({
+                errors: newProps.errors
+            });
+        }
+    }
+
     changeValueOfInput(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -58,6 +66,7 @@ class EditProfile extends React.Component {
     }
 
     render() {
+        const {errors} = this.state;
         const socials = (
             <div>
                 <div class="input-group mb-3">
@@ -66,7 +75,7 @@ class EditProfile extends React.Component {
                     <i class="fab fa-facebook"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control form-control-lg" placeholder="Facebook Page URL" name="facebook" />
+                <input type="text" class="form-control form-control-lg" placeholder="Facebook Page URL" name="facebook" value={this.state.facebook} onChange={this.changeValueOfInput}/>
                 </div>
 
                 <div class="input-group mb-3">
@@ -75,7 +84,7 @@ class EditProfile extends React.Component {
                     <i class="fab fa-linkedin"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control form-control-lg" placeholder="Linkedin Profile URL" name="linkedin" />
+                <input type="text" class="form-control form-control-lg" placeholder="Linkedin Profile URL" name="linkedin" value={this.state.linkedin} onChange={this.changeValueOfInput}/>
                 </div>
 
                 <div class="input-group mb-3">
@@ -84,7 +93,7 @@ class EditProfile extends React.Component {
                     <i class="fab fa-instagram"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control form-control-lg" placeholder="Instagram Page URL" name="instagram" />
+                <input type="text" class="form-control form-control-lg" placeholder="Instagram Page URL" name="instagram" value={this.state.instagram} onChange={this.changeValueOfInput}/>
                 </div>
             </div>          
         );
@@ -114,13 +123,13 @@ class EditProfile extends React.Component {
                              name='handle' 
                              placeholder='* Profile handle' 
                              value={this.state.handle} 
-                             onChange={this.changeValueOfInput}  
-                             required
+                             onChange={this.changeValueOfInput}
+                             error={errors.handle}
                         />
                          
 
                             <div class="form-group">
-                                <select class="form-control form-control-lg" name="status" onChange={this.updateStatus}>
+                                <select class="form-control form-control-lg" name="status" onChange={this.updateStatus} error={errors.status}>
                                     <option value="0" selected>* Select Professional Status</option>
                                     <option value="Developer">Developer</option>
                                     <option value="Junior Developer">Junior Developer</option>
@@ -140,6 +149,7 @@ class EditProfile extends React.Component {
                              placeholder='Company...' 
                              value={this.state.company} 
                              onChange={this.changeValueOfInput}  
+                             error={errors.company}
                         />
 
                         <InputComponent
@@ -150,6 +160,7 @@ class EditProfile extends React.Component {
                              placeholder='Website...' 
                              value={this.state.website} 
                              onChange={this.changeValueOfInput}  
+                             error={errors.website}
                         />
 
                         <InputComponent
@@ -160,6 +171,7 @@ class EditProfile extends React.Component {
                             placeholder='Location...' 
                             value={this.state.location} 
                             onChange={this.changeValueOfInput}  
+                            error={errors.location}
                          />
 
                         <InputComponent
@@ -170,6 +182,7 @@ class EditProfile extends React.Component {
                             placeholder='Skills...' 
                             value={this.state.skills} 
                             onChange={this.changeValueOfInput}  
+                            error={errors.skills}
                           />
 
                         <InputComponent
@@ -180,6 +193,7 @@ class EditProfile extends React.Component {
                             placeholder='Github Username...' 
                             value={this.state.githubusername} 
                             onChange={this.changeValueOfInput}  
+                            error={errors.githubusername}
                         />
 
                             <div class="form-group">
@@ -190,6 +204,7 @@ class EditProfile extends React.Component {
                                     placeholder='A short bio of yourself...' 
                                     value={this.state.bio} 
                                     onChange={this.changeValueOfInput}  
+                                    error={errors.bio}
                                 />
                             </div>
 
@@ -239,4 +254,4 @@ const mapStateToProps =  state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps, {createProfile})(EditProfile);
+export default connect(mapStateToProps, {createProfile})(withRouter(EditProfile));
