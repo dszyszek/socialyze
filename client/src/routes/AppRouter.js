@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
+import jwt_decode from 'jwt-decode';
+import {connect} from 'react-redux';
 
 import Main from '../components/landing_page/Main';
 import LogIn from '../components/the_rest/LogIn';
@@ -17,27 +19,27 @@ import NotFound from '../components/the_rest/NotFound';
 
 import store from '../store';
 
-import jwt_decode from 'jwt-decode';
-
 import setAuthToken from '../utils/setAuthToken';
 import {setCurrentUser, logoutUser} from '../actions/authActions';
 import {logoutProfile} from '../actions/profileActions';
 import PrivateRoute from '../components/common/PrivateRoute';
-
+import { SET_CURRENT_USER } from '../actions/types';
+import { decode } from 'punycode';
 
 if (localStorage.jwt_token) {
-    setAuthToken(localStorage.jwt_token);
-
     const decoded = jwt_decode(localStorage.jwt_token);
+    const current_time = Date.now()/1000;
+
+    setAuthToken(localStorage.jwt_token);
     store.dispatch(setCurrentUser(decoded));
 
-    // Check if token expired
-    const current_time = Date.now()/1000;
-    if (decoded.expiresIn < current_time) {
-        store.dispatch(logoutProfile);
-        store.dispatch(logoutUser);
+    if (decoded.exp < current_time) {
+
+        store.dispatch(logoutUser());
+        store.dispatch(logoutProfile());
         window.location.assign('/Login');
     }
+
 }
 
 const AppRouter = () => (
@@ -69,6 +71,4 @@ const AppRouter = () => (
 );
 
 
-export {
-    AppRouter as default
-};
+export default AppRouter;
