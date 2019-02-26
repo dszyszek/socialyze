@@ -7,6 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import InputComponent from '../common/InputComponent';
+import TextareaComponent from '../common/TextareaComponent';
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -39,6 +40,37 @@ class EditProfile extends React.Component {
     }
 
     render() {
+        const socials = (
+            <div>
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    <i class="fab fa-facebook"></i>
+                    </span>
+                </div>
+                <input type="text" class="form-control form-control-lg" placeholder="Facebook Page URL" name="facebook" />
+                </div>
+
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    <i class="fab fa-linkedin"></i>
+                    </span>
+                </div>
+                <input type="text" class="form-control form-control-lg" placeholder="Linkedin Profile URL" name="linkedin" />
+                </div>
+
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                    <i class="fab fa-instagram"></i>
+                    </span>
+                </div>
+                <input type="text" class="form-control form-control-lg" placeholder="Instagram Page URL" name="instagram" />
+                </div>
+            </div>          
+        );
+
         return (
             <div class='main_wrapper'>
                 <Navbar_secondary/>
@@ -111,7 +143,7 @@ class EditProfile extends React.Component {
                             onChange={this.changeValueOfInput}  
                          />
 
-                         <InputComponent
+                        <InputComponent
                             type='text'
                             info="Please stick to csv (comma separated values) format (eg. Python,JavaScript,C++)" 
                             aria_describe='skillsInfo' 
@@ -121,7 +153,7 @@ class EditProfile extends React.Component {
                             onChange={this.changeValueOfInput}  
                           />
 
-                          <InputComponent
+                        <InputComponent
                             type='text'
                             info="If you want your latest repos and a Github link, include your username" 
                             aria_describe='githubusernameInfo' 
@@ -129,44 +161,41 @@ class EditProfile extends React.Component {
                             placeholder='Github Username...' 
                             value={this.state.githubusername} 
                             onChange={this.changeValueOfInput}  
-                          />
+                        />
 
                             <div class="form-group">
-                            <textarea class="form-control form-control-lg" placeholder="A short bio of yourself" name="bio"></textarea>
-                            <small class="form-text">Describe yourself</small>
+                                <TextareaComponent
+                                    info="Describe yourself" 
+                                    aria_describe='bioInfo' 
+                                    name='bio' 
+                                    placeholder='A short bio of yourself...' 
+                                    value={this.state.bio} 
+                                    onChange={this.changeValueOfInput}  
+                                />
                             </div>
 
                             <div class="mb-3">
-                            <button type="button" class="btn btn-light">Add Social Network Links</button>
-                            <span class="Optional"></span>
+
+                                <button type="button"
+                                    class="btn btn-light" 
+                                    onClick={() => {
+                                        this.setState((prev) => ({
+                                            ...prev, 
+                                            displaySocialInput: !this.state.displaySocialInput
+                                        }))
+                                    }}
+
+                                >
+                                Add Social Network Links
+                                </button>
+
+                                <span class="Optional"></span>
                             </div>
 
-                            <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                <i class="fab fa-facebook"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control form-control-lg" placeholder="Facebook Page URL" name="facebook" />
-                            </div>
 
-                            <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                <i class="fab fa-linkedin"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control form-control-lg" placeholder="Linkedin Profile URL" name="linkedin" />
-                            </div>
+                            {this.state.displaySocialInput && socials}
 
-                            <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                <i class="fab fa-instagram"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control form-control-lg" placeholder="Instagram Page URL" name="instagram" />
-                            </div>
+
                             <button type="submit" class="mt-2 btn main_color white_text">Submit</button>
                         </form>
                         </div>
