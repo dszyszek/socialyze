@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-const InputComponent = ({
+const TextareaComponent = ({
     name,
     placeholder,
     error,
@@ -27,7 +27,7 @@ const InputComponent = ({
     );
 };
 
-InputComponent.propTypes = {
+TextareaComponent.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     error: PropTypes.string,
@@ -36,4 +36,4 @@ InputComponent.propTypes = {
     onChange: PropTypes.func.isRequired,
 }
 
-export default InputComponent;
+export default TextareaComponent;
