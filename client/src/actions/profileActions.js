@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE} from './types';
+import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS} from './types';
 import {logoutUser} from './authActions';
 
 export const getCurrentProfile = () => dispatch => {
@@ -53,4 +53,11 @@ export const deleteProfile = (history) => dispatch => {
         history.push('/SignUp');
     })
     .catch(e => console.log(e));
+};
+
+export const clearErrors = () => dispatch => {
+    console.log('done clearErrors');
+    dispatch({
+        type: CLEAR_ERRORS
+    });
 };
