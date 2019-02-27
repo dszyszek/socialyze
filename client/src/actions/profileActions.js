@@ -56,7 +56,6 @@ export const deleteProfile = (history) => dispatch => {
 };
 
 export const clearErrors = () => dispatch => {
-    console.log('done clearErrors');
     dispatch({
         type: CLEAR_ERRORS
     });

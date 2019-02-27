@@ -79,13 +79,6 @@ class EditProfile extends React.Component {
     render() {
         const {errors} = this.state;
         const {profile} = this.props;
-        console.log(profile, 'profile');
-
-        if (!!profile.profile) {
-
-            console.log(profile.profile.handle);
-        }
-
 
         const socials = (
             <div>

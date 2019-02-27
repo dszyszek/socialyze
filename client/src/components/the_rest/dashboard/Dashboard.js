@@ -52,7 +52,6 @@ class Dashboard extends React.Component {
             <div>
                 <h1 class="display-4">Dashboard</h1>
                 <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
-                {console.log(this.props.profile.profile.handle)}
                 <DashboardProfileButtons />
 
                 <div>
