@@ -10,7 +10,7 @@ import Footer_main from './Footer_main';
 import InputComponent from '../common/InputComponent';
 import TextareaComponent from '../common/TextareaComponent';
 import SocialsInputComponent from '../common/SocialsInputComponent';
-import {createProfile} from '../../actions/profileActions';
+import {createProfile, getCurrentProfile, clearErrors} from '../../actions/profileActions';
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -38,12 +38,21 @@ class EditProfile extends React.Component {
   
     }
 
+    componentWillMount() {
+        this.props.getCurrentProfile();
+    }
+
     componentWillReceiveProps(newProps) {
         if (newProps.errors) {
             this.setState({
-                errors: newProps.errors
+                errors: newProps.errors,
+                profile: newProps.profile
             });
         }
+    }
+
+    componentWillUnmount() {
+        this.props.clearErrors();
     }
 
     changeValueOfInput(e) {
@@ -69,31 +78,43 @@ class EditProfile extends React.Component {
 
     render() {
         const {errors} = this.state;
+        const {profile} = this.props;
+        console.log(profile, 'profile');
+
+        if (!!profile.profile) {
+
+            console.log(profile.profile.handle);
+        }
+
+
         const socials = (
             <div>
 
                 <SocialsInputComponent
                     icon_class='fa-facebook'
-                    placeholder='Facebook URL...'
+                    placeholder={!!profile.profile ? `Facebook: ${profile.profile.facebook}...` : 'Facebook URL...'}
                     name='facebook'
                     value={this.state.facebook}
                     error={errors.facebook}
+                    onChange={this.changeValueOfInput}
                 />
 
                 <SocialsInputComponent
                     icon_class='fa-linkedin'
-                    placeholder='Linkedin URL...'
+                    placeholder={!!profile.profile ? `Linkedin: ${profile.profile.linkedin}...` : 'Linkedin URL...'}
                     name='linkedin'
                     value={this.state.linkedin}
                     error={errors.linkedin}
+                    onChange={this.changeValueOfInput}
                 />
 
                 <SocialsInputComponent
                 icon_class='fa-instagram'
-                placeholder='Instagram URL...'
+                placeholder={!!profile.profile ? `Instagram: ${profile.profile.instagram}...` : 'Instagram URL...'}
                 name='instagram'
                 value={this.state.instagram}
                 error={errors.instagram}
+                onChange={this.changeValueOfInput}
                 />
 
 
@@ -123,7 +144,7 @@ class EditProfile extends React.Component {
                              info="Nickname (This CAN'T be changed later)" 
                              aria_describe='handleInfo' 
                              name='handle' 
-                             placeholder='Profile handle *' 
+                             placeholder={!!profile.profile ? `Handle: ${profile.profile.handle} *` : 'Profile handle *'}
                              value={this.state.handle} 
                              onChange={this.changeValueOfInput}
                              error={errors.handle}
@@ -150,7 +171,7 @@ class EditProfile extends React.Component {
                              info="Name of the company you're working for (or you own)" 
                              aria_describe='companyInfo' 
                              name='company' 
-                             placeholder='Company...' 
+                             placeholder={!!profile.profile ? `Company: ${profile.profile.company}...` : 'Company...'}
                              value={this.state.company} 
                              onChange={this.changeValueOfInput}  
                              error={errors.company}
@@ -161,7 +182,7 @@ class EditProfile extends React.Component {
                              info="Place URL of your (or company) website" 
                              aria_describe='websiteInfo' 
                              name='website' 
-                             placeholder='Website...' 
+                             placeholder={!!profile.profile ? `Website: ${profile.profile.website}...` : 'Website...'}
                              value={this.state.website} 
                              onChange={this.changeValueOfInput}  
                              error={errors.website}
@@ -183,7 +204,7 @@ class EditProfile extends React.Component {
                             info="Please stick to csv (comma separated values) format (eg. Python,JavaScript,C++)" 
                             aria_describe='skillsInfo' 
                             name='skills' 
-                            placeholder='Skills *' 
+                            placeholder={!!profile.profile ? `Skills: ${profile.profile.skills} *` : 'Skills *'}
                             value={this.state.skills} 
                             onChange={this.changeValueOfInput}  
                             error={errors.skills}
@@ -194,7 +215,7 @@ class EditProfile extends React.Component {
                             info="If you want your latest repos and a Github link, include your username" 
                             aria_describe='githubusernameInfo' 
                             name='githubusername' 
-                            placeholder='Github Username...' 
+                            placeholder={!!profile.profile ? `GitHub Username: ${profile.profile.githubusername}...` : 'Github Username...'}
                             value={this.state.githubusername} 
                             onChange={this.changeValueOfInput}  
                             error={errors.githubusername}
@@ -205,7 +226,7 @@ class EditProfile extends React.Component {
                                     info="Describe yourself" 
                                     aria_describe='bioInfo' 
                                     name='bio' 
-                                    placeholder='A short bio of yourself...' 
+                                    placeholder={!!profile.profile ? `Bio: ${profile.profile.bio}...` : 'A short bio of yourself...'} 
                                     value={this.state.bio} 
                                     onChange={this.changeValueOfInput}  
                                     error={errors.bio}
@@ -220,7 +241,7 @@ class EditProfile extends React.Component {
                                         this.setState((prev) => ({
                                             ...prev, 
                                             displaySocialInput: !this.state.displaySocialInput
-                                        }))
+                                        }));
                                     }}
 
                                 >
@@ -234,7 +255,8 @@ class EditProfile extends React.Component {
                             {this.state.displaySocialInput && socials}
 
 
-                            <button type="submit" class="mt-2 btn main_color white_text">Submit</button>
+                            <button type="submit" class="mt-2 btn main_color white_text"> Submit </button>
+
                         </form>
                         </div>
                     </div>
@@ -258,4 +280,4 @@ const mapStateToProps =  state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps, {createProfile})(withRouter(EditProfile));
+export default connect(mapStateToProps, {createProfile, getCurrentProfile, clearErrors})(withRouter(EditProfile));
