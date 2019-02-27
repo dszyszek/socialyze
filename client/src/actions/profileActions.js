@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE} from './types';
+import {logoutUser} from './authActions';
 
 export const getCurrentProfile = () => dispatch => {
     loadProfile();
@@ -41,4 +42,15 @@ export const createProfile = (data, history) => dispatch => {
                 payload: e.response.data
             });
         })
+};
+
+export const deleteProfile = (history) => dispatch => {
+    axios.delete('http://localhost:3000/api/profile/')
+    .then(res => {
+        dispatch(logoutProfile());
+        dispatch(logoutUser());
+
+        history.push('/SignUp');
+    })
+    .catch(e => console.log(e));
 };

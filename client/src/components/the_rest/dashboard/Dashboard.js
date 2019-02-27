@@ -1,18 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main'
-import {getCurrentProfile} from '../../../actions/profileActions';
+import {getCurrentProfile, deleteProfile} from '../../../actions/profileActions';
 import Loader from '../../common/Loader';
+import DashboardProfileButtons from './DashboardProfileButtons';
 
 class Dashboard extends React.Component {
+    constructor() {
+      super();
+      this.deleteProfileFunction = this.deleteProfileFunction.bind(this);
+    }
 
     componentDidMount() {
       this.props.getCurrentProfile();
+    }
+
+    deleteProfileFunction() {
+        console.log('ready');
+        this.props.deleteProfile(this.props.history);
     }
 
     render(){
@@ -40,22 +50,10 @@ class Dashboard extends React.Component {
           content = (
             <div>
                 <h1 class="display-4">Dashboard</h1>
-                <p class="lead text-muted">Welcome {this.props.auth.user.name}</p>
+                <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
+                {console.log(this.props.profile.profile.handle)}
+                <DashboardProfileButtons />
 
-                <div class="btn-group mb-4" role="group">
-                  <Link to="Profile" class="btn btn-light">
-                  <i class="fas fa-user text-success mr-1"></i>
-                  Your Profile</Link>
-                  <Link to="EditProfile" class="btn btn-light">
-                  <i class="fas fa-user-edit text-success mr-1"></i> Edit Profile</Link>
-                  <Link to="AddExperience" class="btn btn-light">
-                    <i class="fab fa-black-tie text-success mr-1"></i>
-                    Add Experience</Link>
-                  <Link to="AddEducation" class="btn btn-light">
-                    <i class="fas fa-graduation-cap text-success mr-1"></i>
-                    Add Education</Link>
-                </div>
-      
                 <div>
                   <h4 class="mb-2">Experience Credentials</h4>
                   <table class="table">
@@ -125,7 +123,7 @@ class Dashboard extends React.Component {
                 </div>
     
                 <div style={{marginBottom: '60px'}}>
-                  <button class="btn btn-danger">
+                  <button class="btn btn-danger" onClick={this.deleteProfileFunction}>
                     Delete My Account
                   </button>
               </div>
@@ -157,6 +155,7 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -166,4 +165,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile, deleteProfile})(withRouter(Dashboard));
