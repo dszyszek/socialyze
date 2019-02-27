@@ -6,7 +6,7 @@ const SocialsInput = ({
     placeholder = '', 
     name, 
     value,
-    onChange = 'this.changeValueOfInput',
+    onChange,
     error
 }) => (
     <div class={classnames('input-group mb-3', {'is-invalid': error})}>
