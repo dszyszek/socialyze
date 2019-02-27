@@ -21,8 +21,9 @@ class Dashboard extends React.Component {
     }
 
     deleteProfileFunction() {
-        console.log('ready');
-        this.props.deleteProfile(this.props.history);
+        if (window.confirm('Are you sure? (no way to undo that)')) {
+          this.props.deleteProfile(this.props.history);
+        }
     }
 
     render(){
