@@ -1,4 +1,4 @@
-import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE} from '../actions/types';
+import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, SET_EDUCATION} from '../actions/types';
 
 const initialState = {
     profile: null,
@@ -25,6 +25,12 @@ export default function(state = initialState, action) {
                 profile: null,
                 loading: false
             }; 
+        case SET_EDUCATION: 
+            state.profile.education.push(action.payload);
+            return {
+                ...state,
+                [state.profile.education]: state.education
+            }
         default: 
             return state;
     }

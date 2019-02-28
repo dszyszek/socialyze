@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS} from './types';
+import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS, SET_EDUCATION} from './types';
 import {logoutUser} from './authActions';
 
 export const getCurrentProfile = () => dispatch => {
@@ -59,4 +59,11 @@ export const clearErrors = () => dispatch => {
     dispatch({
         type: CLEAR_ERRORS
     });
+};
+
+export const setEducation = (educationData) => dispatch => {
+    dispatch({
+        type: SET_EDUCATION,
+        payload: educationData
+    })
 };
