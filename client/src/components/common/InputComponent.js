@@ -12,13 +12,14 @@ const InputComponent = ({
     label,
     aria_describe,
     onChange,
+    addClass = [],
     ...rest
 }) => {
     return (
         <div class="form-group">
 
             {label && <label for={label}>{label}</label>}
-            <input type={type} class={classnames('form-control',
+            <input type={type} class={classnames('form-control',...addClass, 
             {
                 'is-invalid': error
             })}
