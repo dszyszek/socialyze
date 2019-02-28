@@ -43,7 +43,7 @@ class AddEducation extends React.Component {
 
     submitEducation(e) {
         e.preventDefault();
-        this.props.setEducation(this.state, this.props.history);
+        this.props.setEducation(this.state, this.props.history, 'education');
     }
 
     render() {
@@ -71,21 +71,24 @@ class AddEducation extends React.Component {
                             name='school'
                             onChange={this.changeValueOfInput}  
                             addClass={['form-control-lg']}
-                            error={errors.school} />
+                            error={errors.school}
+                            value={this.state.school} />
 
                             <InputComponent 
                             placeholder='Degree Or Certificate *'
                             name='degree'
                             onChange={this.changeValueOfInput}  
                             addClass={['form-control-lg']}
-                            error={errors.degree} />
+                            error={errors.degree}
+                            value={this.state.degree} />
 
                             <InputComponent 
                             placeholder='Field Of Study *'
                             name='fieldofstudy'
                             onChange={this.changeValueOfInput}  
                             addClass={['form-control-lg']}
-                            error={errors.fieldofstudy} />
+                            error={errors.fieldofstudy}
+                            value={this.state.fieldofstudy} />
 
                             <h6>From Date</h6>
 
@@ -94,7 +97,8 @@ class AddEducation extends React.Component {
                             name='from'
                             onChange={this.changeValueOfInput}  
                             addClass={['form-control-lg']}
-                            error={errors.from} />
+                            error={errors.from}
+                            value={this.state.from} />
 
                             <h6>To Date</h6>
 
@@ -103,7 +107,8 @@ class AddEducation extends React.Component {
                             name='to'
                             onChange={this.changeValueOfInput}  
                             addClass={['form-control-lg']}
-                            error={errors.to} />
+                            error={errors.to}
+                            value={this.state.to} />
 
                             <div class="form-check mb-4">
                             <input class="form-check-input" type="checkbox" name="current" value="" id="current" onChange={() => {this.setState((prev) => ({...prev, current: !this.state.current}))}} />

@@ -61,8 +61,8 @@ export const clearErrors = () => dispatch => {
     });
 };
 
-export const setEducation = (educationData, history) => dispatch => {
-    axios.post('http://localhost:3000/api/profile/education', educationData)
+export const setEducation = (educationData, history, route) => dispatch => {
+    axios.post(`http://localhost:3000/api/profile/${route}`, educationData)
     .then(res => {
         dispatch({
         type: SET_EDUCATION,
