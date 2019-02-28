@@ -2,11 +2,13 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import TextareaComponent from '../common/TextareaComponent';
 import {getCurrentProfile, setEducation} from '../../actions/profileActions';
+import InputComponent from '../common/InputComponent';
 
 class AddEducation extends React.Component {
     constructor(props) {
@@ -18,7 +20,7 @@ class AddEducation extends React.Component {
             fieldofstudy: '',
             from: '',
             to: '',
-            current: '',
+            current: false,
             description: '',
             errors: {}
         };
@@ -44,6 +46,7 @@ class AddEducation extends React.Component {
 
     render() {
         const {errors} = this.state;
+        const {profile} = this.props;
 
         return (
             <div class='main_wrapper'>
@@ -60,14 +63,18 @@ class AddEducation extends React.Component {
                         <p class="lead text-center">Add any school, bootcamp, etc that you have attended</p>
                         <small class="d-block pb-3">* = required field</small>
                         <form action="login.html">
+                        
+                            <InputComponent 
+                            placeholder='School Or Bootcamp *'
+                            name='school'
+                            onChange={this.changeValueOfInput}  
+                            addClass={['form-control-lg']} />
 
-                            <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="* School Or Bootcamp" name="school" onChange={this.changeValueOfInput} required />
-                            </div>
-
-                            <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="* Degree Or Certificate" name="degree" onChange={this.changeValueOfInput} required />
-                            </div>
+                            <InputComponent 
+                            placeholder='Degree Or Certificate *'
+                            name='degree'
+                            onChange={this.changeValueOfInput}  
+                            addClass={['form-control-lg']} />
 
                             <div class="form-group">
                             <input type="text" class="form-control form-control-lg" placeholder="Field Of Study" name="fieldofstudy" onChange={this.changeValueOfInput} />
@@ -86,7 +93,7 @@ class AddEducation extends React.Component {
                             </div>
 
                             <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" name="current" value="" id="current" onChange={this.changeValueOfInput} />
+                            <input class="form-check-input" type="checkbox" name="current" value="" id="current" onChange={() => {this.setState((prev) => ({...prev, current: !this.state.current}))}} />
                             <label class="form-check-label" for="current">
                                 Current Job
                             </label>

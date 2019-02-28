@@ -62,8 +62,14 @@ export const clearErrors = () => dispatch => {
 };
 
 export const setEducation = (educationData) => dispatch => {
-    dispatch({
+    axios.post('http://localhost:3000/api/profile/education', educationData)
+    .then(res => dispatch({
         type: SET_EDUCATION,
         payload: educationData
-    })
+    }))
+    .catch(e => dispatch({
+        type: GET_ERRORS,
+        payload: e.response.data
+    }));
+    
 };
