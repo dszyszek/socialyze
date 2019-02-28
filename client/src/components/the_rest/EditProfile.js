@@ -85,7 +85,7 @@ class EditProfile extends React.Component {
 
                 <SocialsInputComponent
                     icon_class='fa-facebook'
-                    placeholder={!!profile.profile ? `Facebook: ${profile.profile.facebook}...` : 'Facebook URL...'}
+                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Facebook: ${profile.profile.facebook}...` : 'Facebook URL...'}
                     name='facebook'
                     value={this.state.facebook}
                     error={errors.facebook}
@@ -94,7 +94,7 @@ class EditProfile extends React.Component {
 
                 <SocialsInputComponent
                     icon_class='fa-linkedin'
-                    placeholder={!!profile.profile ? `Linkedin: ${profile.profile.linkedin}...` : 'Linkedin URL...'}
+                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Linkedin: ${profile.profile.linkedin}...` : 'Linkedin URL...'}
                     name='linkedin'
                     value={this.state.linkedin}
                     error={errors.linkedin}
@@ -103,7 +103,7 @@ class EditProfile extends React.Component {
 
                 <SocialsInputComponent
                 icon_class='fa-instagram'
-                placeholder={!!profile.profile ? `Instagram: ${profile.profile.instagram}...` : 'Instagram URL...'}
+                placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Instagram: ${profile.profile.instagram}...` : 'Instagram URL...'}
                 name='instagram'
                 value={this.state.instagram}
                 error={errors.instagram}
@@ -126,7 +126,7 @@ class EditProfile extends React.Component {
                         <Link to="Dashboard" class="btn btn-light">
                             Go Back
                         </Link>
-                        <h1 class="display-4 text-center">{isEmpty(this.props.profile.profile) ? 'Create' : 'Edit'} Your Profile</h1>
+                        <h1 class="display-4 text-center">{isEmpty(this.props.profile.profile) && !isEmpty(profile.profile) ? 'Create' : 'Edit'} Your Profile</h1>
                         <p class="lead text-center">Ok, now tell something about yourself</p>
                         <small class="d-block pb-3">* = required field</small>
                         
@@ -137,7 +137,7 @@ class EditProfile extends React.Component {
                              info="Nickname (This CAN'T be changed later)" 
                              aria_describe='handleInfo' 
                              name='handle' 
-                             placeholder={!!profile.profile ? `Handle: ${profile.profile.handle} *` : 'Profile handle *'}
+                             placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Handle: ${profile.profile.handle} *` : 'Profile handle *'}
                              value={this.state.handle} 
                              onChange={this.changeValueOfInput}
                              error={errors.handle}
@@ -164,7 +164,7 @@ class EditProfile extends React.Component {
                              info="Name of the company you're working for (or you own)" 
                              aria_describe='companyInfo' 
                              name='company' 
-                             placeholder={!!profile.profile ? `Company: ${profile.profile.company}...` : 'Company...'}
+                             placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Company: ${profile.profile.company}...` : 'Company...'}
                              value={this.state.company} 
                              onChange={this.changeValueOfInput}  
                              error={errors.company}
@@ -175,7 +175,7 @@ class EditProfile extends React.Component {
                              info="Place URL of your (or company) website" 
                              aria_describe='websiteInfo' 
                              name='website' 
-                             placeholder={!!profile.profile ? `Website: ${profile.profile.website}...` : 'Website...'}
+                             placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Website: ${profile.profile.website}...` : 'Website...'}
                              value={this.state.website} 
                              onChange={this.changeValueOfInput}  
                              error={errors.website}
@@ -186,7 +186,7 @@ class EditProfile extends React.Component {
                             info="Tell us where do you live" 
                             aria_describe='locationInfo' 
                             name='location' 
-                            placeholder='Location...' 
+                            placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Location: ${profile.profile.location}` : 'Location...'} 
                             value={this.state.location} 
                             onChange={this.changeValueOfInput}  
                             error={errors.location}
@@ -197,7 +197,7 @@ class EditProfile extends React.Component {
                             info="Please stick to csv (comma separated values) format (eg. Python,JavaScript,C++)" 
                             aria_describe='skillsInfo' 
                             name='skills' 
-                            placeholder={!!profile.profile ? `Skills: ${profile.profile.skills} *` : 'Skills *'}
+                            placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Skills: ${profile.profile.skills} *` : 'Skills *'}
                             value={this.state.skills} 
                             onChange={this.changeValueOfInput}  
                             error={errors.skills}
@@ -208,7 +208,7 @@ class EditProfile extends React.Component {
                             info="If you want your latest repos and a Github link, include your username" 
                             aria_describe='githubusernameInfo' 
                             name='githubusername' 
-                            placeholder={!!profile.profile ? `GitHub Username: ${profile.profile.githubusername}...` : 'Github Username...'}
+                            placeholder={!!profile.profile && !isEmpty(profile.profile) ? `GitHub Username: ${profile.profile.githubusername}...` : 'Github Username...'}
                             value={this.state.githubusername} 
                             onChange={this.changeValueOfInput}  
                             error={errors.githubusername}
@@ -219,7 +219,7 @@ class EditProfile extends React.Component {
                                     info="Describe yourself" 
                                     aria_describe='bioInfo' 
                                     name='bio' 
-                                    placeholder={!!profile.profile ? `Bio: ${profile.profile.bio}...` : 'A short bio of yourself...'} 
+                                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Bio: ${profile.profile.bio}...` : 'A short bio of yourself...'} 
                                     value={this.state.bio} 
                                     onChange={this.changeValueOfInput}  
                                     error={errors.bio}
