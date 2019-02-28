@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import TextareaComponent from '../common/TextareaComponent';
-import {getCurrentProfile} from '../../actions/profileActions';
+import {getCurrentProfile, setEducation} from '../../actions/profileActions';
 
 class AddEducation extends React.Component {
     constructor(props) {
@@ -24,6 +24,7 @@ class AddEducation extends React.Component {
         };
 
         this.changeValueOfInput = this.changeValueOfInput.bind(this);
+        this.submitEducation = this.submitEducation.bind(this);
     }
 
     componentWillMount() {
@@ -34,6 +35,11 @@ class AddEducation extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    submitEducation(e) {
+        e.preventDefault();
+        this.props.setEducation(this.state);
     }
 
     render() {
@@ -96,7 +102,7 @@ class AddEducation extends React.Component {
                                 error={errors.description}
                             />
 
-                            <button type="submit" class="mt-2 btn main_color white_text">Submit</button>
+                            <button type="submit" class="mt-2 btn main_color white_text" onClick={this.submitEducation}>Submit</button>
 
                         </form>
                         </div>
@@ -120,4 +126,4 @@ const mapStateToProps =  state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps, {getCurrentProfile})(AddEducation);
+export default connect(mapStateToProps, {getCurrentProfile, setEducation})(AddEducation);
