@@ -1,11 +1,44 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
+import TextareaComponent from '../common/TextareaComponent';
+import {getCurrentProfile} from '../../actions/profileActions';
 
 class AddEducation extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            school: '',
+            degree: '',
+            fieldofstudy: '',
+            from: '',
+            to: '',
+            current: '',
+            description: '',
+            errors: {}
+        };
+
+        this.changeValueOfInput = this.changeValueOfInput.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.getCurrentProfile();
+    }
+
+    changeValueOfInput(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
     render() {
+        const {errors} = this.state;
+
         return (
             <div class='main_wrapper'>
                 <Navbar_secondary/>
@@ -21,34 +54,50 @@ class AddEducation extends React.Component {
                         <p class="lead text-center">Add any school, bootcamp, etc that you have attended</p>
                         <small class="d-block pb-3">* = required field</small>
                         <form action="login.html">
+
                             <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="* School Or Bootcamp" name="school" required />
+                            <input type="text" class="form-control form-control-lg" placeholder="* School Or Bootcamp" name="school" onChange={this.changeValueOfInput} required />
                             </div>
+
                             <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="* Degree Or Certificate" name="degree" required />
+                            <input type="text" class="form-control form-control-lg" placeholder="* Degree Or Certificate" name="degree" onChange={this.changeValueOfInput} required />
                             </div>
+
                             <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="Field Of Study" name="fieldofstudy" />
+                            <input type="text" class="form-control form-control-lg" placeholder="Field Of Study" name="fieldofstudy" onChange={this.changeValueOfInput} />
                             </div>
+
                             <h6>From Date</h6>
+
                             <div class="form-group">
-                            <input type="date" class="form-control form-control-lg" name="from" />
+                            <input type="date" class="form-control form-control-lg" name="from" onChange={this.changeValueOfInput} />
                             </div>
+
                             <h6>To Date</h6>
+
                             <div class="form-group">
-                            <input type="date" class="form-control form-control-lg" name="to" />
+                            <input type="date" class="form-control form-control-lg" name="to" onChange={this.changeValueOfInput} />
                             </div>
+
                             <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" name="current" value="" id="current" />
+                            <input class="form-check-input" type="checkbox" name="current" value="" id="current" onChange={this.changeValueOfInput} />
                             <label class="form-check-label" for="current">
                                 Current Job
                             </label>
                             </div>
-                            <div class="form-group">
-                            <textarea class="form-control form-control-lg" placeholder="Program Description" name="description"></textarea>
-                            <small class="form-text text-muted">Tell us about your experience and what you learned</small>
-                            </div>
+
+                            <TextareaComponent
+                                info="Tell us about your experience and what you learned" 
+                                aria_describe='descriptionInfo' 
+                                name='description' 
+                                placeholder={'Program Description...'} 
+                                value={this.state.description} 
+                                onChange={this.changeValueOfInput}  
+                                error={errors.description}
+                            />
+
                             <button type="submit" class="mt-2 btn main_color white_text">Submit</button>
+
                         </form>
                         </div>
                     </div>
@@ -57,8 +106,18 @@ class AddEducation extends React.Component {
 
                 <Footer_main/>
             </div>
-        )
+        );
     }
 }
 
-export default AddEducation;
+AddEducation.propTypes = {
+    errors: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired
+};
+
+const mapStateToProps =  state => ({
+    errors: state.errors,
+    profile: state.profile
+});
+
+export default connect(mapStateToProps, {getCurrentProfile})(AddEducation);
