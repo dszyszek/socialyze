@@ -61,12 +61,15 @@ export const clearErrors = () => dispatch => {
     });
 };
 
-export const setEducation = (educationData) => dispatch => {
+export const setEducation = (educationData, history) => dispatch => {
     axios.post('http://localhost:3000/api/profile/education', educationData)
-    .then(res => dispatch({
+    .then(res => {
+        dispatch({
         type: SET_EDUCATION,
         payload: educationData
-    }))
+        })
+        history.push('/Dashboard');
+    })
     .catch(e => dispatch({
         type: GET_ERRORS,
         payload: e.response.data

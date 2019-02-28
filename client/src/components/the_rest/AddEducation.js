@@ -1,13 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import TextareaComponent from '../common/TextareaComponent';
-import {getCurrentProfile, setEducation} from '../../actions/profileActions';
+import {getCurrentProfile, setEducation, clearErrors} from '../../actions/profileActions';
 import InputComponent from '../common/InputComponent';
 
 class AddEducation extends React.Component {
@@ -21,8 +20,7 @@ class AddEducation extends React.Component {
             from: '',
             to: '',
             current: false,
-            description: '',
-            errors: {}
+            description: ''
         };
 
         this.changeValueOfInput = this.changeValueOfInput.bind(this);
@@ -33,6 +31,10 @@ class AddEducation extends React.Component {
         this.props.getCurrentProfile();
     }
 
+    componentWillUnmount() {
+        this.props.clearErrors();
+    }
+
     changeValueOfInput(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -41,11 +43,11 @@ class AddEducation extends React.Component {
 
     submitEducation(e) {
         e.preventDefault();
-        this.props.setEducation(this.state);
+        this.props.setEducation(this.state, this.props.history);
     }
 
     render() {
-        const {errors} = this.state;
+        const {errors} = this.props;
         const {profile} = this.props;
 
         return (
@@ -68,29 +70,40 @@ class AddEducation extends React.Component {
                             placeholder='School Or Bootcamp *'
                             name='school'
                             onChange={this.changeValueOfInput}  
-                            addClass={['form-control-lg']} />
+                            addClass={['form-control-lg']}
+                            error={errors.school} />
 
                             <InputComponent 
                             placeholder='Degree Or Certificate *'
                             name='degree'
                             onChange={this.changeValueOfInput}  
-                            addClass={['form-control-lg']} />
+                            addClass={['form-control-lg']}
+                            error={errors.degree} />
 
-                            <div class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="Field Of Study" name="fieldofstudy" onChange={this.changeValueOfInput} />
-                            </div>
+                            <InputComponent 
+                            placeholder='Field Of Study *'
+                            name='fieldofstudy'
+                            onChange={this.changeValueOfInput}  
+                            addClass={['form-control-lg']}
+                            error={errors.fieldofstudy} />
 
                             <h6>From Date</h6>
 
-                            <div class="form-group">
-                            <input type="date" class="form-control form-control-lg" name="from" onChange={this.changeValueOfInput} />
-                            </div>
+                            <InputComponent 
+                            type='date'
+                            name='from'
+                            onChange={this.changeValueOfInput}  
+                            addClass={['form-control-lg']}
+                            error={errors.from} />
 
                             <h6>To Date</h6>
 
-                            <div class="form-group">
-                            <input type="date" class="form-control form-control-lg" name="to" onChange={this.changeValueOfInput} />
-                            </div>
+                            <InputComponent 
+                            type='date'
+                            name='to'
+                            onChange={this.changeValueOfInput}  
+                            addClass={['form-control-lg']}
+                            error={errors.to} />
 
                             <div class="form-check mb-4">
                             <input class="form-check-input" type="checkbox" name="current" value="" id="current" onChange={() => {this.setState((prev) => ({...prev, current: !this.state.current}))}} />
@@ -133,4 +146,4 @@ const mapStateToProps =  state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps, {getCurrentProfile, setEducation})(AddEducation);
+export default connect(mapStateToProps, {getCurrentProfile, setEducation, clearErrors})(withRouter(AddEducation));
