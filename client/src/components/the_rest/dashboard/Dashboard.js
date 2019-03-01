@@ -9,6 +9,7 @@ import Footer_main from '../Footer_main'
 import {getCurrentProfile, deleteProfile} from '../../../actions/profileActions';
 import Loader from '../../common/Loader';
 import DashboardProfileButtons from './DashboardProfileButtons';
+import ExperienceTab from './ExperienceTab';
 
 class Dashboard extends React.Component {
     constructor() {
@@ -54,45 +55,7 @@ class Dashboard extends React.Component {
                 <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
                 <DashboardProfileButtons />
 
-                <div>
-                  <h4 class="mb-2">Experience Credentials</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Company</th>
-                        <th>Title</th>
-                        <th>Years</th>
-                        <th />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Web Solutions</td>
-                        <td>Tech Guy</td>
-                        <td>
-                          02-03-2009 - 01-02-2018
-                        </td>
-                        <td>
-                          <button class="btn btn-danger">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>NASA</td>
-                        <td>Software Engineer</td>
-                        <td>
-                          02-03-2018 - Now
-                        </td>
-                        <td>
-                          <button class="btn btn-danger">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <ExperienceTab />
       
                 <div>
                   <h4 class="mb-2">Education Credentials</h4>
