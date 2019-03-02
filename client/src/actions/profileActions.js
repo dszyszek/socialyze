@@ -76,3 +76,8 @@ export const setEducation = (educationData, history, route) => dispatch => {
     }));
     
 };
+
+export const updateExperienceArray = (expID, newExpArray) => dispatch => {
+    // axios.delete(`http://localhost:3000/api/profile/experience/${expID}`)
+    console.log(expID, newExpArray);
+};
