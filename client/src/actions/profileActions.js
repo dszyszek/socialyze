@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS, SET_EDUCATION} from './types';
+import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS, SET_EDUCATION, UPDATE_EXPERIENCE_ARRAY} from './types';
 import {logoutUser} from './authActions';
 
 export const getCurrentProfile = () => dispatch => {
@@ -78,6 +78,13 @@ export const setEducation = (educationData, history, route) => dispatch => {
 };
 
 export const updateExperienceArray = (expID, newExpArray) => dispatch => {
-    // axios.delete(`http://localhost:3000/api/profile/experience/${expID}`)
-    console.log(expID, newExpArray);
+    axios.delete(`http://localhost:3000/api/profile/experience/${expID}`)
+    .then(res => {
+        dispatch({
+            type: UPDATE_EXPERIENCE_ARRAY,
+            payload: newExpArray
+        });
+    })
+    .catch(e => console.log(e));
+
 };
