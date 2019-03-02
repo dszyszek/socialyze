@@ -39,7 +39,7 @@ class ExperienceTab extends React.Component {
                     <td>{exp.company}</td>
                     <td>{exp.title}</td>
                     <td>
-                        02-03-2009 - 01-02-2018
+                        {exp.from.slice(0, 10)} - {exp.to ? exp.to.slice(0, 10) : ''}
                     </td>
                     <td>
                         <button class="btn btn-danger" onClick={this.deleteRow}>
