@@ -15,6 +15,11 @@ class ExperienceTab extends React.Component {
 
         this.createTable = this.createTable.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
+        this.capitalize = this.capitalize.bind(this);
+    }
+
+    capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     deleteRow(e) {
@@ -41,7 +46,7 @@ class ExperienceTab extends React.Component {
             tableContent.push(
                 <tr id={row._id}>
         
-                    <td>{row[this.state.rowArray[0].toCa]}</td>
+                    <td>{row[this.state.rowArray[0]]}</td>
                     <td>{row[this.state.rowArray[1]]}</td>
                     <td>
                         {row.from.slice(0, 10)} - {row.to ? row.to.slice(0, 10) : ''}
@@ -67,12 +72,12 @@ class ExperienceTab extends React.Component {
 
         const table = (
                 <div>
-                    <h4 class="mb-2">{this.state.whichTable} Credentials</h4>
+                    <h4 class="mb-2">{this.capitalize(this.state.whichTable)} Credentials</h4>
                     <table class="table">
                     <thead>
                         <tr>
-                        <th>{this.state.rowArray[0]}</th>
-                        <th>{this.state.rowArray[1]}</th>
+                        <th>{this.capitalize(this.state.rowArray[0])}</th>
+                        <th>{this.capitalize(this.state.rowArray[1])}</th>
                         <th>Years</th>
                         <th />
                         </tr>
@@ -89,7 +94,7 @@ class ExperienceTab extends React.Component {
         return (
             <div>
                 
-                {this.state.whichTable === 'experience' ? (!isExperience ? table : <div class='mt-4 mb-5'><h4>No experience to show</h4><p class='mt-2'>You can change that by clicking 'Add Experience' tab.</p></div>) : (!isEducation ? table : <div class='mt-4 mb-5'><h4>No education to show</h4><p class='mt-2'>You can change that by clicking 'Add Education' tab.</p></div>)}
+                {this.state.whichTable === 'experience' ? (!isExperience ? table : <div class='mt-4 mb-5'><h4>No experience to show</h4><p class='mt-2'>You can change that by clicking on 'Add Experience' tab.</p></div>) : (!isEducation ? table : <div class='mt-4 mb-5'><h4>No education to show</h4><p class='mt-2'>You can change that by clicking on 'Add Education' tab.</p></div>)}
             
             </div>
 
