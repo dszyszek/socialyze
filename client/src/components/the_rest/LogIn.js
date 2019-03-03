@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
-import classnames from 'classnames';
 import {withRouter} from 'react-router-dom';
 
 import Navbar_logged_out from './Navbar_logged_out';
@@ -16,7 +15,7 @@ class LogIn extends React.Component{
         this.state = {
             emai: '',
             password: '',
-            checkOut: false,
+            checkOut: true,
             errors: {}
         };
 
@@ -29,6 +28,15 @@ class LogIn extends React.Component{
         if (nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
+            });
+        }
+    }
+
+    componentWillMount() {
+        if (localStorage.getItem('email') && localStorage.getItem('password')) {
+            this.setState({
+                email: localStorage.getItem('email'),
+                password: localStorage.getItem('password')
             });
         }
     }
@@ -56,6 +64,14 @@ class LogIn extends React.Component{
         };
 
         this.props.loginUser(userCredentials, this.props.history);
+
+        if (this.state.checkOut) {
+            localStorage.setItem('email', userCredentials.email);
+            localStorage.setItem('password', userCredentials.password);
+        } else {
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+        }
     }
 
     changeStateOfCheckbox() {
@@ -80,7 +96,7 @@ class LogIn extends React.Component{
                             <InputComponent label='Password' type='password' error={errors.password} aria_describe='passwordInfo' name='password' placeholder='Password...' value={this.state.password} onChange={this.changeValueOfInput} />
                             
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" name='checkOut' onChange={this.changeStateOfCheckbox}/>
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" name='checkOut' onChange={this.changeStateOfCheckbox} checked={this.state.checkOut}/>
                                 <label class="formCheck" for="checkBox">Check me out</label>
                             </div>
                             <button type="submit" class="aaa btn main_color white_text">Submit</button>
