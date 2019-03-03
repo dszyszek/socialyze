@@ -13,7 +13,7 @@ import AddExperience from '../components/the_rest/AddExperience'
 import Feed from '../components/the_rest/Feed'
 import EditProfile from '../components/the_rest/EditProfile'
 import Profile from '../components/the_rest/Profile'
-import Profiles from '../components/the_rest/Profiles'
+import Profiles from '../components/the_rest/profiles/Profiles'
 import Post from '../components/the_rest/Post'
 import NotFound from '../components/the_rest/NotFound';
 
