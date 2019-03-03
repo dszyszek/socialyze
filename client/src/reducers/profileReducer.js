@@ -39,7 +39,7 @@ export default function(state = initialState, action) {
                     experience: action.payload
                 }
             };
-        case UPDATE_EXPERIENCE_ARRAY: 
+        case UPDATE_EDUCATION_ARRAY: 
             return {
                 ...state,
                 profile: {
