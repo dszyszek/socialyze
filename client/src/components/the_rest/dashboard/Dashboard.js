@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
                 <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
                 <DashboardProfileButtons />
 
-                <ExperienceTab />
+                <ExperienceTab whichTable='experience' rowArray={['company', 'title']} />
       
                 <div>
                   <h4 class="mb-2">Education Credentials</h4>

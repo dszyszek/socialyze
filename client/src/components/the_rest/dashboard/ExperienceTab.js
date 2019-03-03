@@ -5,8 +5,13 @@ import {updateExperienceArray} from '../../../actions/profileActions';
 
 
 class ExperienceTab extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            whichTable: this.props.whichTable,
+            rowArray: this.props.rowArray
+        }
 
         this.createTable = this.createTable.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
@@ -16,15 +21,15 @@ class ExperienceTab extends React.Component {
         const {profile} = this.props;
         let expToDeleteID;
 
-        profile.profile.experience.forEach(exp => {
+        profile.profile[this.state.whichTable].forEach(exp => {
             if (exp._id === e.target.parentElement.parentElement.id) {
                 expToDeleteID = exp._id;
             }
         });
 
-        const newTab = profile.profile.experience.filter(exp => (exp._id !== e.target.parentElement.parentElement.id));
+        const newTab = profile.profile[this.state.whichTable].filter(exp => (exp._id !== e.target.parentElement.parentElement.id));
         
-        this.props.updateExperienceArray(expToDeleteID, newTab);
+        this.props.updateExperienceArray(expToDeleteID, newTab, this.state.whichTable);
    
     }
 
@@ -32,14 +37,14 @@ class ExperienceTab extends React.Component {
         const {profile} = this.props;
         const tableContent = [];
 
-        profile.profile.experience.forEach(exp => {
+        profile.profile[this.state.whichTable].forEach(row => {
             tableContent.push(
-                <tr id={exp._id}>
+                <tr id={row._id}>
         
-                    <td>{exp.company}</td>
-                    <td>{exp.title}</td>
+                    <td>{row[this.state.rowArray[0]]}</td>
+                    <td>{row[this.state.rowArray[1]]}</td>
                     <td>
-                        {exp.from.slice(0, 10)} - {exp.to ? exp.to.slice(0, 10) : ''}
+                        {row.from.slice(0, 10)} - {row.to ? row.to.slice(0, 10) : ''}
                     </td>
                     <td>
                         <button class="btn btn-danger" onClick={this.deleteRow}>
@@ -65,8 +70,8 @@ class ExperienceTab extends React.Component {
                     <table class="table">
                     <thead>
                         <tr>
-                        <th>Company</th>
-                        <th>Title</th>
+                        <th>{this.state.rowArray[0]}</th>
+                        <th>{this.state.rowArray[1]}</th>
                         <th>Years</th>
                         <th />
                         </tr>
@@ -74,8 +79,6 @@ class ExperienceTab extends React.Component {
                     <tbody>
 
                     {this.createTable()}
-
-                   
 
                     </tbody>
                     </table>
