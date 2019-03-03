@@ -56,34 +56,8 @@ class Dashboard extends React.Component {
                 <DashboardProfileButtons />
 
                 <ExperienceTab whichTable='experience' rowArray={['company', 'title']} />
-      
-                <div>
-                  <h4 class="mb-2">Education Credentials</h4>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>School</th>
-                        <th>Degree</th>
-                        <th>Years</th>
-                        <th />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Oxford</td>
-                        <td>Master</td>
-                        <td>
-                          02-03-2004 - 01-02-2009
-                        </td>
-                        <td>
-                          <button class="btn btn-danger">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+
+                <ExperienceTab whichTable='education' rowArray={['school', 'degree']} />
     
                 <div style={{marginBottom: '60px'}}>
                   <button class="btn btn-danger" onClick={this.deleteProfileFunction}>

@@ -41,7 +41,7 @@ class ExperienceTab extends React.Component {
             tableContent.push(
                 <tr id={row._id}>
         
-                    <td>{row[this.state.rowArray[0]]}</td>
+                    <td>{row[this.state.rowArray[0].toCa]}</td>
                     <td>{row[this.state.rowArray[1]]}</td>
                     <td>
                         {row.from.slice(0, 10)} - {row.to ? row.to.slice(0, 10) : ''}
@@ -63,10 +63,11 @@ class ExperienceTab extends React.Component {
     render() {
         const {profile} = this.props;
         const isExperience = isEmpty(profile.profile.experience);
+        const isEducation = isEmpty(profile.profile.education);
 
         const table = (
                 <div>
-                    <h4 class="mb-2">Experience Credentials</h4>
+                    <h4 class="mb-2">{this.state.whichTable} Credentials</h4>
                     <table class="table">
                     <thead>
                         <tr>
@@ -87,7 +88,9 @@ class ExperienceTab extends React.Component {
 
         return (
             <div>
-                {!isExperience ? table : <div class='mt-4 mb-5'><h4>No experience to show</h4><p class='mt-2'>Please create one by clicking 'Add Experience' tab.</p></div>}
+                
+                {this.state.whichTable === 'experience' ? (!isExperience ? table : <div class='mt-4 mb-5'><h4>No experience to show</h4><p class='mt-2'>You can change that by clicking 'Add Experience' tab.</p></div>) : (!isEducation ? table : <div class='mt-4 mb-5'><h4>No education to show</h4><p class='mt-2'>You can change that by clicking 'Add Education' tab.</p></div>)}
+            
             </div>
 
         );
