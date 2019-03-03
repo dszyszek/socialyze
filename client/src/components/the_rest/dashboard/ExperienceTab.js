@@ -49,7 +49,7 @@ class ExperienceTab extends React.Component {
                     <td>{row[this.state.rowArray[0]]}</td>
                     <td>{row[this.state.rowArray[1]]}</td>
                     <td>
-                        {row.from.slice(0, 10)} - {row.to ? row.to.slice(0, 10) : ''}
+                        {row.from.slice(0, 10)} - {row.current ? 'Now' : (row.to ? row.to.slice(0, 10) : '')}
                     </td>
                     <td>
                         <button class="btn btn-danger" onClick={this.deleteRow}>

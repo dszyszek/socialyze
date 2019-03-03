@@ -113,7 +113,7 @@ class AddEducation extends React.Component {
                             <div class="form-check mb-4">
                             <input class="form-check-input" type="checkbox" name="current" value="" id="current" onChange={() => {this.setState((prev) => ({...prev, current: !this.state.current}))}} />
                             <label class="form-check-label" for="current">
-                                Current Job
+                                Current
                             </label>
                             </div>
 
