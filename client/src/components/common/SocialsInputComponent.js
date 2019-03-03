@@ -15,7 +15,7 @@ const SocialsInput = ({
                     <i class={`fab ${icon_class}`}></i>
                     </span>
                 </div>
-                <input type="text" class="form-control form-control-lg" placeholder={placeholder} name={name} value={value} onChange={onChange}/>
+                <input type="text" class={classnames('form-control','form-control-lg', {'is-invalid': error})} placeholder={placeholder} name={name} value={value} onChange={onChange}/>
                 
                 {error && <div class='invalid-feedback'>{error}</div>}
     </div>

@@ -85,7 +85,7 @@ class EditProfile extends React.Component {
 
                 <SocialsInputComponent
                     icon_class='fa-facebook'
-                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Facebook: ${profile.profile.facebook}...` : 'Facebook URL...'}
+                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? (profile.profile.social.facebook ? `Facebook: ${profile.profile.social.facebook}...` : 'Facebook URL...') : 'Facebook URL...'}
                     name='facebook'
                     value={this.state.facebook}
                     error={errors.facebook}
@@ -94,7 +94,7 @@ class EditProfile extends React.Component {
 
                 <SocialsInputComponent
                     icon_class='fa-linkedin'
-                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Linkedin: ${profile.profile.linkedin}...` : 'Linkedin URL...'}
+                    placeholder={!!profile.profile && !isEmpty(profile.profile) ? (profile.profile.social.linkedin ? `Linkedin: ${profile.profile.social.linkedin}...` : 'Linkedin URL...') : 'Linkedin URL...'}
                     name='linkedin'
                     value={this.state.linkedin}
                     error={errors.linkedin}
@@ -103,7 +103,7 @@ class EditProfile extends React.Component {
 
                 <SocialsInputComponent
                 icon_class='fa-instagram'
-                placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Instagram: ${profile.profile.instagram}...` : 'Instagram URL...'}
+                placeholder={!!profile.profile && !isEmpty(profile.profile) ? (profile.profile.social.instagram ? `Instagram: ${profile.profile.social.instagram}...` : 'Instagram URL...') : 'Instagram URL...'}
                 name='instagram'
                 value={this.state.instagram}
                 error={errors.instagram}
