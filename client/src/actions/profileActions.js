@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS, SET_EDUCATION, UPDATE_EXPERIENCE_ARRAY, UPDATE_EDUCATION_ARRAY} from './types';
+import {GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, CLEAR_ERRORS, SET_EDUCATION, UPDATE_EXPERIENCE_ARRAY, UPDATE_EDUCATION_ARRAY, UPDATE_PROFILES_ARRAY} from './types';
 import {logoutUser} from './authActions';
 
 export const getCurrentProfile = () => dispatch => {
@@ -94,4 +94,15 @@ export const updateExperienceArray = (expID, newExpArray, whichTable) => dispatc
     })
     .catch(e => console.log(e));
 
+};
+
+export const getAllUsers = () => dispatch => {
+    axios.get('http://localhost:3000/api/profile/all')
+    .then(res => {
+        dispatch({
+            type: UPDATE_PROFILES_ARRAY,
+            payload: res.data
+        });
+    })
+    .catch(e => console.log(e))
 };
