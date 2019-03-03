@@ -1,10 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
+import {getAllUsers} from '../../actions/profileActions';
 
 class AddEducation extends React.Component {
+    constructor() {
+        super();
+    }
+
+    componentWillMount() {
+        this.props.getAllUsers();
+    }
+
     render() {
         return (
             <div class='main_wrapper'>
@@ -84,4 +94,9 @@ class AddEducation extends React.Component {
     }
 }
 
-export default AddEducation;
+const mapStateToProps = state => ({
+    profile: state.profile,
+    errors: state.errors
+});
+
+export default connect(mapStateToProps, {getAllUsers})(AddEducation);
