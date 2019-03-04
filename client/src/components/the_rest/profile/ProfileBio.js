@@ -36,7 +36,6 @@ class ProfileBio extends React.Component {
         let body;
         if (!isEmpty(this.state.profile.profile)) {
             let profile = this.state.profile.profile;
-            console.log(profile, 'from ProfileBio');
 
             body = (
                 <div class="card card-body bg-light mb-3">

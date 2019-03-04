@@ -46,7 +46,7 @@ class Profile extends React.Component {
                     <div class="col-md-12">
                       <div class="row">
                         <div class="col-6">
-                          <Link to="/Profiles" class="btn btn-light mb-3 float-left">Back To Profiles</Link>
+                          <button onClick={this.props.history.goBack} class="btn btn-light mb-3 float-left">Back</button>
                         </div>
                         <div class="col-6">
             

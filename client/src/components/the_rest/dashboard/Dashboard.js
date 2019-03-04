@@ -30,7 +30,6 @@ class Dashboard extends React.Component {
     render(){
         const {user} = this.props.auth;
         const  {profile, loading} = this.props.profile;
-
         let content;
 
         if (profile === null || loading) {
@@ -53,7 +52,7 @@ class Dashboard extends React.Component {
             <div>
                 <h1 class="display-4">Dashboard</h1>
                 <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
-                <DashboardProfileButtons />
+                <DashboardProfileButtons currentProfile={profile.user._id} />
 
                 <ExperienceTab whichTable='experience' rowArray={['company', 'title']} />
 
