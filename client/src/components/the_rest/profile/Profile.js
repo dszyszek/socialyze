@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
 import {getAllUsers} from '../../../actions/profileActions';
+import ProfileBio from './ProfileBio';
 
 class Profile extends React.Component {
     constructor() {
@@ -32,6 +33,7 @@ class Profile extends React.Component {
 
 
     render() {
+        // const profile = this.state.visitedProfile;
 
         return (
             <div class='main_wrapper'>
@@ -81,33 +83,7 @@ class Profile extends React.Component {
                         </div>
                       </div>
             
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card card-body bg-light mb-3">
-                            <h3 class="text-center" style={{color: '#297c6c'}}>Anonymous's Bio</h3>
-                            <p class="lead">Bacon ipsum dolor amet capicola hamburger salami burgdoggen ball tip meatball, andouille cow jowl cupim swine t-bone pork 
-                            belly beef short loin. Shank drumstick short loin, sirloin meatball pork chop andouille pastrami pork belly 
-                            bacon ball tip alcatra sausage pancetta. 
-                            </p>
-                            <hr />
-                            <h3 class="text-center" style={{color: '#297c6c'}}>Skill Set</h3>
-                            <div class="row">
-                              <div class="d-flex flex-wrap justify-content-center align-items-center">
-                                <div class="p-3">
-                                  <i class="fa fa-check"></i> HTML</div>
-                                <div class="p-3">
-                                  <i class="fa fa-check"></i> CSS</div>
-                                <div class="p-3">
-                                  <i class="fa fa-check"></i> JavaScript</div>
-                                <div class="p-3">
-                                  <i class="fa fa-check"></i> Python</div>
-                                <div class="p-3">
-                                  <i class="fa fa-check"></i> C#</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <ProfileBio profile={this.state.visitedProfile} />
             
                       <div class="row">
                         <div class="col-md-6">
