@@ -46,11 +46,9 @@ class ProfileBio extends React.Component {
 
                         <h3 class="text-center" style={{color: '#297c6c'}}>Skill Set</h3>
 
-                        <div class="">
                             <div class='d-flex justify-content-around'>
                                 {this.fillSkillList(profile.skills)}
                             </div>
-                        </div>
 
                 </div>
             );

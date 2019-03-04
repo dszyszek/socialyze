@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
@@ -33,7 +34,7 @@ class Profile extends React.Component {
 
 
     render() {
-        // const profile = this.state.visitedProfile;
+        const profile = this.state.visitedProfile;
 
         return (
             <div class='main_wrapper'>
@@ -61,9 +62,10 @@ class Profile extends React.Component {
                               </div>
                             </div>
                             <div class="text-center">
-                              <h1 class="display-4 text-center">Anonymous</h1>
-                              <p class="lead text-center">Developer at NASA</p>
-                              <p>Warsaw, PL</p>
+                              <h1 class="display-4 text-center">{profile.handle}</h1>
+                              {!isEmpty(profile.experience) ? <p class='lead text-center'>{profile.status} at {profile.experience[profile.experience.length - 1].company}</p>  : <p class='lead text-center'>Currently not employed</p>}
+                              {!isEmpty(profile.location) ? <p>{profile.location}</p> : <p>Location unknown</p>}
+                              
                               <p>
                                 <Link class="text-white p-2" to="#">
                                   <i class="fas fa-globe fa-2x"></i>
