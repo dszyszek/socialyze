@@ -40,7 +40,7 @@ class ProfileBox extends React.Component {
                         {!isEmpty(profile.experience) ? <p>{profile.status} at {profile.experience[profile.experience.length - 1].company}</p>  : <p>Currently not employed</p>}
 
                         {!isEmpty(profile.location) ? <p>{profile.location}</p> : <p>Location unknown</p>}
-                        <Link to={`/Profile/${profile.handle}`} class="btn main_color">View Profile</Link>
+                        <Link to={`/Profile/${profile.user._id}`} class="btn main_color">View Profile</Link>
                     </div>
                     <div class="col-md-4 d-none d-lg-block">
                         <h4>Skill Set</h4>

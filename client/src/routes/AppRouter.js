@@ -12,7 +12,7 @@ import AddEducation from '../components/the_rest/AddEducation'
 import AddExperience from '../components/the_rest/AddExperience'
 import Feed from '../components/the_rest/Feed'
 import EditProfile from '../components/the_rest/EditProfile'
-import Profile from '../components/the_rest/Profile'
+import Profile from '../components/the_rest/profile/Profile'
 import Profiles from '../components/the_rest/profiles/Profiles'
 import Post from '../components/the_rest/Post'
 import NotFound from '../components/the_rest/NotFound';
@@ -56,7 +56,7 @@ const AppRouter = () => (
                     <PrivateRoute path='/AddExperience' component={AddExperience} />
                     <PrivateRoute path='/Feed' component={Feed} />
                     <PrivateRoute path='/EditProfile' component={EditProfile} />
-                    <PrivateRoute path='/Profile/:handle' component={Profile} />
+                    <PrivateRoute path='/Profile/:id' component={Profile} />
                     <PrivateRoute path='/Profiles' component={Profiles} />
                     <PrivateRoute path='/Post' component={Post} />
 

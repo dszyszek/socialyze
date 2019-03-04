@@ -1,11 +1,38 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
 
-import Navbar_secondary from './Navbar_secondary';
-import Footer_main from './Footer_main';
+import Navbar_secondary from '../Navbar_secondary';
+import Footer_main from '../Footer_main';
+import {getAllUsers} from '../../../actions/profileActions';
 
 class Profile extends React.Component {
+    constructor() {
+      super();
+
+      this.state = {
+        visitedProfile: ''
+      };
+    }
+
+    componentWillMount() {
+      this.props.getAllUsers();
+    }
+
+    componentWillReceiveProps(newProps) {
+      newProps.profile.profiles.forEach(usr => {
+        if (usr.user._id === this.props.match.params.id){
+          this.setState({
+            visitedProfile: usr
+          });
+        }
+      });
+
+    }
+
+
     render() {
+
         return (
             <div class='main_wrapper'>
                 <Navbar_secondary/>
@@ -165,4 +192,8 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, {getAllUsers})(Profile);
