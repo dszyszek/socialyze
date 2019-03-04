@@ -56,7 +56,7 @@ const AppRouter = () => (
                     <PrivateRoute path='/AddExperience' component={AddExperience} />
                     <PrivateRoute path='/Feed' component={Feed} />
                     <PrivateRoute path='/EditProfile' component={EditProfile} />
-                    <PrivateRoute path='/Profile' component={Profile} />
+                    <PrivateRoute path='/Profile/:handle' component={Profile} />
                     <PrivateRoute path='/Profiles' component={Profiles} />
                     <PrivateRoute path='/Post' component={Post} />
 

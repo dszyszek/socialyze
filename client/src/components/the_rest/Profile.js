@@ -16,7 +16,7 @@ class Profile extends React.Component {
                     <div class="col-md-12">
                       <div class="row">
                         <div class="col-6">
-                          <Link to="Profiles" class="btn btn-light mb-3 float-left">Back To Profiles</Link>
+                          <Link to="/Profiles" class="btn btn-light mb-3 float-left">Back To Profiles</Link>
                         </div>
                         <div class="col-6">
             
