@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import {updateExperienceArray} from '../../../actions/profileActions';
-
+import {capitalize} from '../../common/capitalize'
 
 class ExperienceTab extends React.Component {
     constructor(props) {
@@ -15,11 +15,6 @@ class ExperienceTab extends React.Component {
 
         this.createTable = this.createTable.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
-        this.capitalize = this.capitalize.bind(this);
-    }
-
-    capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     deleteRow(e) {
@@ -72,12 +67,12 @@ class ExperienceTab extends React.Component {
 
         const table = (
                 <div>
-                    <h4 class="mb-2">{this.capitalize(this.state.whichTable)} Credentials</h4>
+                    <h4 class="mb-2">{capitalize(this.state.whichTable)} Credentials</h4>
                     <table class="table">
                     <thead>
                         <tr>
-                        <th>{this.capitalize(this.state.rowArray[0])}</th>
-                        <th>{this.capitalize(this.state.rowArray[1])}</th>
+                        <th>{capitalize(this.state.rowArray[0])}</th>
+                        <th>{capitalize(this.state.rowArray[1])}</th>
                         <th>Years</th>
                         <th />
                         </tr>
