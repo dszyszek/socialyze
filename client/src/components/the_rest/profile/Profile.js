@@ -7,6 +7,7 @@ import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
 import {getAllUsers} from '../../../actions/profileActions';
 import ProfileBio from './ProfileBio';
+import ProfileBody from './ProfileBody';
 
 class Profile extends React.Component {
     constructor() {
@@ -78,13 +79,13 @@ class Profile extends React.Component {
                                   </Link>)
                                 }
 
-                                {!isEmpty(profile.social) && profile.social.facebook && (
+                                {!isEmpty(profile.social) && profile.social.linkedin && (
                                   <Link class="text-white p-2" to="#">
                                     <i class="fab fa-linkedin fa-2x"></i>
                                   </Link>)
                                 }
 
-                                {!isEmpty(profile.social) && profile.social.facebook && (
+                                {!isEmpty(profile.social) && profile.social.instagram && (
                                   <Link class="text-white p-2" to="#">
                                     <i class="fab fa-instagram fa-2x"></i>
                                   </Link>)
@@ -99,33 +100,9 @@ class Profile extends React.Component {
                       <ProfileBio profile={this.state.visitedProfile} />
             
                       <div class="row">
-                        <div class="col-md-6">
-                          <h3 class="text-center" style={{color: '#297c6c'}}>Experience</h3>
-                          <ul class="list-group">
-                            <li class="list-group-item">
-                              <h4>NASA</h4>
-                              <p>Oct 2011 - Current</p>
-                              <p>
-                                <strong>Position:</strong> Senior Developer
-                              </p>
-                              <p>
-                                <strong>Description:</strong> Bacon ipsum dolor amet capicola hamburger salami burgdoggen ball tip meatball, andouille cow jowl cupim swine t-bone pork 
-                                belly beef short loin. Shank drumstick short loin.</p>
-                            </li>
-                            <li class="list-group-item">
-                              <h4>Fun Microsystems</h4>
-                              <p>Oct 2004 - Nov 2011</p>
-                              <p>
-                                <strong>Position: </strong> Systems Admin</p>
-                              <p>
-                                <p>
-                                  <strong>Location: </strong> Miami, FL
-                                </p>
-                                <strong>Description: </strong> Bacon ipsum dolor amet capicola hamburger salami burgdoggen ball tip meatball, andouille cow jowl cupim swine t-bone pork 
-                                belly beef short loin. Shank drumstick short loin.</p>
-                            </li>
-                          </ul>
-                        </div>
+
+                        <ProfileBody type='experience' param={profile.experience} />
+
                         <div class="col-md-6">
                           <h3 class="text-center" style={{color: '#297c6c'}}>Education</h3>
                           <ul class="list-group">
@@ -142,6 +119,7 @@ class Profile extends React.Component {
                             </li>
                           </ul>
                         </div>
+
                       </div>
             
                       <div ref="myRef">
