@@ -42,10 +42,11 @@ class ProfileBody extends React.Component {
             <div class="col-md-6">
                 <h3 class="text-center" style={{color: '#297c6c'}}>{capitalize(this.props.type)}</h3>
                 
-
+                {isEmpty(this.props.param) && <p class='lead text-center mt-2 mt-md-5'> No content to show</p>}
                 <ul class="list-group">
 
                     {!isEmpty(this.props.param) && this.fillList()}
+                    
 
                 </ul>
             </div>
