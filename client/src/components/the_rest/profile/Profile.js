@@ -67,18 +67,29 @@ class Profile extends React.Component {
                               {!isEmpty(profile.location) ? <p>{profile.location}</p> : <p>Location unknown</p>}
                               
                               <p>
+                              
                                 <Link class="text-white p-2" to="#">
                                   <i class="fas fa-globe fa-2x"></i>
                                 </Link>
-                                <Link class="text-white p-2" to="#">
-                                  <i class="fab fa-facebook fa-2x"></i>
-                                </Link>
-                                <Link class="text-white p-2" to="#">
-                                  <i class="fab fa-linkedin fa-2x"></i>
-                                </Link>
-                                <Link class="text-white p-2" to="#">
-                                  <i class="fab fa-instagram fa-2x"></i>
-                                </Link>
+
+                                {!isEmpty(profile.social) && profile.social.facebook && (
+                                  <Link class="text-white p-2" to="#">
+                                    <i class="fab fa-facebook fa-2x"></i>
+                                  </Link>)
+                                }
+
+                                {!isEmpty(profile.social) && profile.social.facebook && (
+                                  <Link class="text-white p-2" to="#">
+                                    <i class="fab fa-linkedin fa-2x"></i>
+                                  </Link>)
+                                }
+
+                                {!isEmpty(profile.social) && profile.social.facebook && (
+                                  <Link class="text-white p-2" to="#">
+                                    <i class="fab fa-instagram fa-2x"></i>
+                                  </Link>)
+                                }
+                  
                               </p>
                             </div>
                           </div>
