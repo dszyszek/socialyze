@@ -17,20 +17,18 @@ class ProfileBody extends React.Component {
 
     fillList() {
         const arrayOfElements = [];
+        let whichType = this.props.type;
 
         this.props.param.forEach(p => {
 
             arrayOfElements.push(
                 <li class="list-group-item">
-                        <h4>{capitalize(p.company)}</h4>
+                        <h4>{whichType === 'experience' ? capitalize(p.company) : capitalize(p.school)}</h4>
                         <p> {this.parseDate(p.from)} - {p.current ? 'Now' : (p.to ? this.parseDate(p.to) : '')}</p>
                         <p>
-                        {p.title ? <span> <strong>Position:</strong> {p.title} </span> : ''}
+                        {p.title ? <span> <strong>Position:</strong> {p.title} </span> : (p.fieldofstudy ? <span> <strong>Position:</strong> {p.fieldofstudy} </span> : '')}
                         </p>
-                        {p.description ? 
-                        <p>
-                            <strong>Description:</strong> {p.description}
-                        </p> : ''}
+                        {p.description ? <p> <strong>Description:</strong> {p.description} </p> : ''}
                 </li>
             );
         });

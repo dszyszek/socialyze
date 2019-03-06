@@ -100,25 +100,9 @@ class Profile extends React.Component {
                       <ProfileBio profile={this.state.visitedProfile} />
             
                       <div class="row">
-
+                        {console.log(profile.education)}
                         <ProfileBody type='experience' param={profile.experience} />
-
-                        <div class="col-md-6">
-                          <h3 class="text-center" style={{color: '#297c6c'}}>Education</h3>
-                          <ul class="list-group">
-                            <li class="list-group-item">
-                              <h4>Oxford</h4>
-                              <p>Sep 1993 - June 1999</p>
-                              <p>
-                                <strong>Degree: </strong>Masters</p>
-                              <p>
-                                <strong>Field Of Study: </strong>Computer Science</p>
-                                <p>
-                                  <strong>Description:</strong> Bacon ipsum dolor amet capicola hamburger salami burgdoggen ball tip meatball, andouille cow jowl cupim swine t-bone pork 
-                                  belly beef short loin. Shank drumstick short loin.</p>
-                            </li>
-                          </ul>
-                        </div>
+                        <ProfileBody type='education' param={profile.education} />
 
                       </div>
             
