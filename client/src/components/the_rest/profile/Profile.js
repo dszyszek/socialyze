@@ -8,6 +8,8 @@ import Footer_main from '../Footer_main';
 import {getAllUsers} from '../../../actions/profileActions';
 import ProfileBio from './ProfileBio';
 import ProfileBody from './ProfileBody';
+import GithubTab from './GithubTab';
+
 
 class Profile extends React.Component {
     constructor() {
@@ -100,7 +102,7 @@ class Profile extends React.Component {
                       <ProfileBio profile={this.state.visitedProfile} />
             
                       <div class="row">
-                        {console.log(profile.education)}
+
                         <ProfileBody type='experience' param={profile.experience} />
                         <ProfileBody type='education' param={profile.education} />
 
@@ -108,29 +110,9 @@ class Profile extends React.Component {
             
                       <div ref="myRef">
                         <hr />
-                        <h3 class="mb-4">Latest Github Repos</h3>
-                        <div class="card card-body mb-2">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <h4>
-                                <Link to='Dashboard' class="" style={{color: '#297c6c'}} target="_blank"> Some repo
-                                </Link>
-                              </h4>
-                              <p>Description here</p>
-                            </div>
-                            <div class="col-md-6">
-                              <span class="badge badge-info mr-1">
-                                Stars: 44
-                              </span>
-                              <span class="badge badge-secondary mr-1">
-                                Watchers: 21
-                              </span>
-                              <span class="badge badge-success">
-                                Forks: 122
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+
+                        <GithubTab githubUsername={profile.githubusername} />
+
                       </div>
                     </div>
                   </div>
