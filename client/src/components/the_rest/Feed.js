@@ -5,17 +5,32 @@ import {isEmpty} from 'lodash';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
-import {getPosts} from '../../actions/postActions';
+import {getPosts, addLike} from '../../actions/postActions';
 
 
 class Feed extends React.Component {
     constructor() {
         super();
 
+        this.state = {
+          likesStatus: []
+        }
+
+        this.like = this.like.bind(this);
+        this.checkIfLikeable = this.checkIfLikeable.bind(this);
     }
 
     componentDidMount() {
         this.props.getPosts();
+    }
+
+    checkIfLikeable(likesArray, user) {
+      return !likesArray.includes(user);
+    }
+
+    like(e) {
+      e.persist();
+      this.props.addLike(e.target.getAttribute('data-id'));
     }
 
     render() {
@@ -24,12 +39,42 @@ class Feed extends React.Component {
 
         if (!isEmpty(this.props.posts)) {
             const data = postsState.data;
-            console.log(data, 'data from Post');
+            console.log(data, 'data from Feed');
 
-            // content = data.map(d =>  (
-            //         // content of component here
-            //         // need to fetch profile data of every user that made comment (e.g. gravatar img)
-            // ));
+            content = data.map(d => (
+                <div class="card card-body mb-3">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <Link to="Profile">
+                          <img class="rounded-circle" src={d.avatar}
+                            alt="Profile picture" />
+                        </Link>
+                        <br />
+                        <p class="text-center">{d.name}</p>
+                      </div>
+
+                      <div class="col-md-10">
+                        <p class="lead">{d.text}</p>
+
+                        <button data-id={d._id} data-user={d.user} type="button" class="btn btn-light mr-1" onClick={e => {this.like(e, d.likes)}}>
+                          <i data-id={d._id} data-user={d.user} class="text-info fas fa-thumbs-up"></i>
+                          <span data-id={d._id} data-user={d.user} class="badge badge-light">{d.likes.length}</span>
+                        </button>
+
+                        <button type="button" class="btn btn-light mr-1">
+                          <i class="text-secondary fas fa-thumbs-down"></i>
+                          <span class="badge badge-light">{d.likes.length}</span>
+                        </button>
+
+                        <Link to="Post" class="btn main_color mr-1">
+                          Comments
+                        </Link>
+
+                      </div>
+                    </div>
+                </div>
+            ));
+                    
         }
 
         return (
@@ -59,36 +104,7 @@ class Feed extends React.Component {
           
 
                     <div class="posts">
-                      <div class="card card-body mb-3">
-                        <div class="row">
-                          <div class="col-md-2">
-                            <Link to="Profile">
-                              <img class="rounded-circle" src="https://www.gravatar.com/avatar/anything?s=153&d=mm"
-                                alt="" />
-                            </Link>
-                            <br />
-                            <p class="text-center">Anonymous</p>
-                          </div>
-
-                          <div class="col-md-10">
-                            <p class="lead"> Bacon ipsum dolor amet capicola hamburger salami burgdoggen ball tip meatball, andouille cow jowl cupim swine t-bone pork 
-                              belly beef short loin. Shank drumstick short loin, sirloin meatball pork chop andouille pastrami pork belly 
-                              bacon ball tip alcatra sausage pancetta. 
-                              </p>
-                            <button type="button" class="btn btn-light mr-1">
-                              <i class="text-info fas fa-thumbs-up"></i>
-                              <span class="badge badge-light">1</span>
-                            </button>
-                            <button type="button" class="btn btn-light mr-1">
-                              <i class="text-secondary fas fa-thumbs-down"></i>
-                            </button>
-                            <Link to="Post" class="btn main_color mr-1">
-                              Comments
-                            </Link>
-
-                          </div>
-                        </div>
-                      </div>
+                      {content}
           
                     </div>
                   </div>
@@ -106,4 +122,4 @@ const mapStateToProps = state => ({
     posts: state.posts
 });
 
-export default connect(mapStateToProps, {getPosts})(Feed);
+export default connect(mapStateToProps, {getPosts, addLike})(Feed);
