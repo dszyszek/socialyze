@@ -1,10 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
+import {getPosts} from '../../actions/postActions';
+
 
 class Post extends React.Component {
+    constructor() {
+        super();
+
+    }
+
+    componentDidMount() {
+        this.props.getPosts();
+    }
+
+
     render() {
         return (
             <div class='main_wrapper'>
@@ -96,4 +109,8 @@ class Post extends React.Component {
     }
 }
 
-export default Post;
+const mapStateToProps = state => ({
+    posts: state.posts
+});
+
+export default connect(mapStateToProps, {getPosts})(Post);
