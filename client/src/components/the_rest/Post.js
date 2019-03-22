@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {isEmpty} from 'lodash';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
@@ -17,8 +18,14 @@ class Post extends React.Component {
         this.props.getPosts();
     }
 
-
     render() {
+        let content;
+        const postsState = this.props.posts;
+
+        if (!isEmpty(this.props.posts)) {
+        
+        }
+
         return (
             <div class='main_wrapper'>
                 <Navbar_secondary/>
