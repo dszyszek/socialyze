@@ -2,10 +2,11 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {isEmpty} from 'lodash';
+import classnames from 'classnames';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
-import {getPosts, addLike} from '../../actions/postActions';
+import {getPosts, addLike, removeLike} from '../../actions/postActions';
 
 
 class Feed extends React.Component {
@@ -13,24 +14,50 @@ class Feed extends React.Component {
         super();
 
         this.state = {
-          likesStatus: []
-        }
+            likesStatus: {},
+            liked: false
+        };
 
         this.like = this.like.bind(this);
-        this.checkIfLikeable = this.checkIfLikeable.bind(this);
+        this.dislike = this.dislike.bind(this);
     }
 
     componentDidMount() {
         this.props.getPosts();
     }
 
-    checkIfLikeable(likesArray, user) {
-      return !likesArray.includes(user);
+    componentWillReceiveProps(newProps) {
+      const likesStatus = newProps.posts.data.map(d => (
+        {
+          id: d._id,
+          likes: d.likes
+        }
+      ));
+
+      
+      this.setState({
+        likesStatus
+      });
     }
 
     like(e) {
       e.persist();
       this.props.addLike(e.target.getAttribute('data-id'));
+
+      this.setState(prev => ({
+        ...prev, 
+        liked: !this.state.liked
+      }));
+    }
+
+    dislike(e) {
+      e.persist();
+      this.props.removeLike(e.target.getAttribute('data-id'));
+
+      this.setState(prev => ({
+        ...prev, 
+        liked: !this.state.liked
+      }));
     }
 
     render() {
@@ -39,7 +66,6 @@ class Feed extends React.Component {
 
         if (!isEmpty(this.props.posts)) {
             const data = postsState.data;
-            console.log(data, 'data from Feed');
 
             content = data.map(d => (
                 <div class="card card-body mb-3">
@@ -56,14 +82,14 @@ class Feed extends React.Component {
                       <div class="col-md-10">
                         <p class="lead">{d.text}</p>
 
-                        <button data-id={d._id} data-user={d.user} type="button" class="btn btn-light mr-1" onClick={e => {this.like(e, d.likes)}}>
-                          <i data-id={d._id} data-user={d.user} class="text-info fas fa-thumbs-up"></i>
-                          <span data-id={d._id} data-user={d.user} class="badge badge-light">{d.likes.length}</span>
+                        <button data-id={d._id} type="button" class="btn btn-light mr-1" onClick={this.like}>
+                          <i data-id={d._id} class={classnames('fas fa-thumbs-up', 'fas', {'text-info': !this.state.liked})}></i>
+                          <span data-id={d._id} class="badge badge-light">{d.likes.length}</span>
                         </button>
 
-                        <button type="button" class="btn btn-light mr-1">
-                          <i class="text-secondary fas fa-thumbs-down"></i>
-                          <span class="badge badge-light">{d.likes.length}</span>
+                        <button data-id={d._id} type="button" class="btn btn-light mr-1" onClick={this.dislike}>
+                          <i data-id={d._id} class={classnames('fas fa-thumbs-down', 'fas', {'text-info': this.state.liked})}></i>
+                          <span data-id={d._id} class="badge badge-light"></span>
                         </button>
 
                         <Link to="Post" class="btn main_color mr-1">
@@ -119,7 +145,8 @@ class Feed extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    posts: state.posts
+    posts: state.posts,
+    profile: state.profile
 });
 
-export default connect(mapStateToProps, {getPosts, addLike})(Feed);
+export default connect(mapStateToProps, {getPosts, addLike, removeLike})(Feed);
