@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_POSTS, HANDLE_LIKE} from './types';
+import {GET_POSTS, HANDLE_LIKE, ADD_POST} from './types';
 
 
 export const getPosts = () => dispatch => {
@@ -11,6 +11,19 @@ export const getPosts = () => dispatch => {
             });
         })
         .catch(e => console.log(e));
+};
+
+export const addPost = (info) => dispatch => {
+    axios.post('http://localhost:3000/api/posts/', info)
+    .then(data => {
+        console.log('recived post data from postActions/addPost');
+
+        // dispatch({
+        //     type: ADD_POST,
+        //     payload: info
+        // });
+    })
+    .catch(e => console.log(e));
 };
 
 export const addLike = (id) => dispatch => {

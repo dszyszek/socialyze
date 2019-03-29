@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {isEmpty} from 'lodash';
+import {isEmpty, includes} from 'lodash';
 import classnames from 'classnames';
 
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
-import {getPosts, addLike, removeLike} from '../../actions/postActions';
+import {getPosts, addLike, removeLike, addPost} from '../../actions/postActions';
+import {getCurrentProfile} from '../../actions/profileActions';
 
 
 class Feed extends React.Component {
@@ -14,50 +15,119 @@ class Feed extends React.Component {
         super();
 
         this.state = {
-            likesStatus: {},
-            liked: false
+            userLikesStatus: {},
+            liked: false,
+            postTextarea: ''
         };
 
         this.like = this.like.bind(this);
         this.dislike = this.dislike.bind(this);
+        this.setLikesColor = this.setLikesColor.bind(this);
+        this.addPost = this.addPost.bind(this);
+        this.writeContent = this.writeContent.bind(this);
     }
 
     componentDidMount() {
         this.props.getPosts();
+        this.props.getCurrentProfile();
     }
 
     componentWillReceiveProps(newProps) {
-      const likesStatus = newProps.posts.data.map(d => (
-        {
-          id: d._id,
-          likes: d.likes
-        }
-      ));
+      this.setLikesColor();
+      // this.props.getPosts();
+    }
 
-      
-      this.setState({
-        likesStatus
+    setLikesColor() {
+      // console.log('executed seLikesColor');
+
+      this.props.posts.data.map(post => {
+        let likes = post.likes;
+
+        if (!likes) {
+          return;
+        }
+
+        likes.map(like => {
+          // console.log(like.user, 'like from Feed');
+          console.log(post, 'post from Feed');
+
+          if (like.user === post.user) {
+            // console.log('true');
+            this.setState(prev => ({
+              ...prev,
+              userLikesStatus: {
+                ...prev.userLikesStatus,
+                [post._id]: {
+                  userID: post.user,
+                  isLiked: true
+                }
+              }
+            }));
+
+          } else {
+            // console.log('false');
+            this.setState(prev => ({
+              ...prev,
+              userLikesStatus: {
+                ...prev.userLikesStatus,
+                [post._id]: {
+                  userID: post.user,
+                  isLiked: false
+                }
+              }
+            }));
+          }
+
+        });
       });
+
+      // console.log(this.state.userLikesStatus, 'userLikesStatus from Feed');
     }
 
     like(e) {
       e.persist();
       this.props.addLike(e.target.getAttribute('data-id'));
 
+      // future -> make this.setState async and execute this.props.getPosts() here (using componentWillReceiveProps makes too many calls)
       this.setState(prev => ({
         ...prev, 
-        liked: !this.state.liked
+        liked: true
       }));
+
+      this.props.getPosts();
     }
 
     dislike(e) {
       e.persist();
       this.props.removeLike(e.target.getAttribute('data-id'));
 
+      // future -> make this.setState async and execute this.props.getPosts() here (using componentWillReceiveProps makes too many calls)
       this.setState(prev => ({
         ...prev, 
-        liked: !this.state.liked
+        liked: false
       }));
+
+      this.props.getPosts();
+    }
+
+    writeContent(e) {
+      e.persist();
+      this.setState(prev => ({
+        ...prev,
+        [e.target.name]: e.target.value
+      }));
+    }
+
+    addPost(e) {
+      e.preventDefault();
+      const userInfo = {
+        text: this.state.postTextarea,
+        name: this.props.profile.profile.handle,
+        avatar: this.props.profile.profile.user.avatar
+      };
+
+      this.props.addPost(userInfo);
+      this.props.getPosts();
     }
 
     render() {
@@ -83,12 +153,12 @@ class Feed extends React.Component {
                         <p class="lead">{d.text}</p>
 
                         <button data-id={d._id} type="button" class="btn btn-light mr-1" onClick={this.like}>
-                          <i data-id={d._id} class={classnames('fas fa-thumbs-up', 'fas', {'text-info': !this.state.liked})}></i>
-                          <span data-id={d._id} class="badge badge-light">{d.likes.length}</span>
+                          <i data-id={d._id} class={classnames('fas fa-thumbs-up', 'fas', {'text-info': this.state.liked})}></i>
+                          <span data-id={d._id} class="badge badge-light">{d.likes ? d.likes.length: 0}</span>
                         </button>
 
                         <button data-id={d._id} type="button" class="btn btn-light mr-1" onClick={this.dislike}>
-                          <i data-id={d._id} class={classnames('fas fa-thumbs-down', 'fas', {'text-info': this.state.liked})}></i>
+                          <i data-id={d._id} class={classnames('fas fa-thumbs-down', 'fas', {'text-info': !this.state.liked})}></i>
                           <span data-id={d._id} class="badge badge-light"></span>
                         </button>
 
@@ -106,7 +176,6 @@ class Feed extends React.Component {
         return (
           <div class='main_wrapper'>
               <Navbar_secondary/>
-
                   
               <div class="feed">
               <div class="container">
@@ -118,9 +187,9 @@ class Feed extends React.Component {
                           Say Something...
                         </div>
                         <div class="card-body">
-                          <form>
+                          <form onSubmit={this.addPost}>
                             <div class="form-group">
-                              <textarea class="form-control form-control-lg" placeholder="Create a post"></textarea>
+                              <textarea name='postTextarea' class="form-control form-control-lg" placeholder="Create a post" onChange={this.writeContent}></textarea>
                             </div>
                             <button type="submit" class="mt-2 btn btn-light">Submit</button>
                           </form>
@@ -149,4 +218,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 });
 
-export default connect(mapStateToProps, {getPosts, addLike, removeLike})(Feed);
+export default connect(mapStateToProps, {getPosts, addLike, removeLike, getCurrentProfile, addPost})(Feed);
