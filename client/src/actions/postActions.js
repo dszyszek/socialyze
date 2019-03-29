@@ -16,11 +16,16 @@ export const getPosts = () => dispatch => {
 export const addLike = (id) => dispatch => {
     axios.post(`http://localhost:3000/api/posts/like/${id}`)
     .then(res => {
-        // console.log(res.data, 'from addLike');
+        let likes = res.data.likes;
+
+        if (!likes) {
+            return;
+        }
+
         dispatch({
             type: HANDLE_LIKE,
             payload: {
-                data: res.data.likes,
+                data: likes,
                 id}
         });
     })
@@ -38,5 +43,5 @@ export const removeLike = (id) => dispatch => {
                 id}
         });
     })
-    .catch(e => console.log(e))
+    .catch(e => '')
 };

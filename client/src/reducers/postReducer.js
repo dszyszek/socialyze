@@ -14,9 +14,11 @@ export default function (state = initialState, action) {
         case HANDLE_LIKE:
             const dataArray = state.data.map((d, i) => {
                 if (d._id === action.payload.id) {
-                    d.likes = action.payload.data
+                    const newData = d;
+                    newData.likes = action.payload.data;
+                    // console.log(newData, 'newData from postReducer');
                     return {
-                        data: [d]
+                        data: [newData]
                     }
                 }
             })
