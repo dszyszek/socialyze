@@ -7,8 +7,8 @@ import classnames from 'classnames';
 import Navbar_secondary from './Navbar_secondary';
 import Footer_main from './Footer_main';
 import {getPosts, addLike, removeLike, addPost} from '../../actions/postActions';
-import {getCurrentProfile} from '../../actions/profileActions';
-
+import {getCurrentProfile, clearErrors} from '../../actions/profileActions';
+import TextareaComponent from '../common/TextareaComponent';
 
 class Feed extends React.Component {
     constructor() {
@@ -128,6 +128,7 @@ class Feed extends React.Component {
 
       this.props.addPost(userInfo);
       this.props.getPosts();
+      this.props.clearErrors();
     }
 
     render() {
@@ -184,12 +185,21 @@ class Feed extends React.Component {
                     <div class="post-form mb-3">
                       <div class="card card-info">
                         <div class="card-header main_color text-white">
-                          Say Something...
+                          Add new post
                         </div>
                         <div class="card-body">
                           <form onSubmit={this.addPost}>
                             <div class="form-group">
-                              <textarea name='postTextarea' class="form-control form-control-lg" placeholder="Create a post" onChange={this.writeContent}></textarea>
+
+                            <TextareaComponent
+                              aria_describe='postTextareaInfo' 
+                              name='postTextarea' 
+                              placeholder={'Say something...'} 
+                              value={this.state.postTextarea} 
+                              onChange={this.writeContent}  
+                              error={this.props.errors.text}
+                            />
+                            
                             </div>
                             <button type="submit" class="mt-2 btn btn-light">Submit</button>
                           </form>
@@ -215,7 +225,8 @@ class Feed extends React.Component {
 
 const mapStateToProps = state => ({
     posts: state.posts,
-    profile: state.profile
+    profile: state.profile,
+    errors: state.errors
 });
 
-export default connect(mapStateToProps, {getPosts, addLike, removeLike, getCurrentProfile, addPost})(Feed);
+export default connect(mapStateToProps, {getPosts, addLike, removeLike, getCurrentProfile, addPost, clearErrors})(Feed);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_POSTS, HANDLE_LIKE, ADD_POST} from './types';
+import {GET_POSTS, HANDLE_LIKE, GET_ERRORS} from './types';
 
 
 export const getPosts = () => dispatch => {
@@ -23,7 +23,12 @@ export const addPost = (info) => dispatch => {
         //     payload: info
         // });
     })
-    .catch(e => console.log(e));
+    .catch(e => {
+        dispatch({
+            type: GET_ERRORS,
+            payload: e.response.data
+        });
+    });
 };
 
 export const addLike = (id) => dispatch => {
