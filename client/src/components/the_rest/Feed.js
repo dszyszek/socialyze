@@ -144,7 +144,9 @@ class Feed extends React.Component {
                       <div class="col-md-2">
                         <Link to="Profile">
                           <img class="rounded-circle" src={d.avatar}
-                            alt="Profile picture" />
+                            alt="Profile picture"
+                            style={{width: '153px', height: '153px'}}
+                           />
                         </Link>
                         <br />
                         <p class="text-center">{d.name}</p>
