@@ -137,7 +137,7 @@ class Feed extends React.Component {
                           <span data-id={d._id} class="badge badge-light"></span>
                         </button>
 
-                        <Link to="Post" class="btn main_color mr-1">
+                        <Link to={`/Post/${d._id}`} class="btn main_color mr-1">
                           Comments
                         </Link>
 

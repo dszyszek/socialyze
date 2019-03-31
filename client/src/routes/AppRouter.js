@@ -58,7 +58,7 @@ const AppRouter = () => (
                     <PrivateRoute path='/EditProfile' component={EditProfile} />
                     <PrivateRoute path='/Profile/:id' component={Profile} />
                     <PrivateRoute path='/Profiles' component={Profiles} />
-                    <PrivateRoute path='/Post' component={Post} />
+                    <PrivateRoute path='/Post/:id' component={Post} />
 
 
                     <Route component={NotFound} />

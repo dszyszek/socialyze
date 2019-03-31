@@ -13,14 +13,20 @@ export const getPosts = () => dispatch => {
         .catch(e => console.log(e));
 };
 
+export const getPost = (id) => dispatch => {
+    axios.get(`http://localhost:3000/api/posts/${id}`)
+    .then(res => {
+        dispatch({
+            type: GET_POSTS,
+            payload: res
+        });
+    })
+    .catch(e => console.log(e));
+};
+
 export const addPost = (info) => dispatch => {
     axios.post('http://localhost:3000/api/posts/', info)
-    .then(data => {
-        // dispatch({
-        //     type: ADD_POST,
-        //     payload: info
-        // });
-    })
+    .then(data => {})
     .catch(e => {
         dispatch({
             type: GET_ERRORS,
@@ -51,7 +57,6 @@ export const addLike = (id) => dispatch => {
 export const removeLike = (id) => dispatch => {
     axios.post(`http://localhost:3000/api/posts/dislike/${id}`)
     .then(res => {
-        // console.log(res, 'from removeLike');
         dispatch({
             type: HANDLE_LIKE,
             payload: {
