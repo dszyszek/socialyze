@@ -5,10 +5,11 @@ import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
-import {getAllUsers} from '../../../actions/profileActions';
+import {getAllUsers, getCurrentProfile} from '../../../actions/profileActions';
 import ProfileBio from './ProfileBio';
 import ProfileBody from './ProfileBody';
 import GithubTab from './GithubTab';
+import setAuthToken from '../../../utils/setAuthToken';
 
 
 class Profile extends React.Component {
@@ -22,6 +23,7 @@ class Profile extends React.Component {
 
     componentWillMount() {
       this.props.getAllUsers();
+      this.props.getCurrentProfile();
     }
 
     componentWillReceiveProps(newProps) {
@@ -33,6 +35,10 @@ class Profile extends React.Component {
         }
       });
 
+    }
+
+    componentWillUnmount() {
+      setAuthToken(localStorage.jwt_token);
     }
 
 
@@ -111,7 +117,7 @@ class Profile extends React.Component {
                       <div ref="myRef">
                         <hr />
 
-                        <GithubTab githubUsername={profile.githubusername} />
+                        {profile.githubusername ? <GithubTab githubUsername={profile.githubusername} /> : <GithubTab /> }
 
                       </div>
                     </div>
@@ -129,4 +135,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, {getAllUsers})(Profile);
+export default connect(mapStateToProps, {getAllUsers, getCurrentProfile})(Profile);
