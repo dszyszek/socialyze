@@ -105,7 +105,7 @@ class Feed extends React.Component {
         let content;
         const postsState = this.props.posts;
 
-        if (isEmpty(this.props.posts) || isEmpty(this.state.userLikesStatus)){
+        if (isEmpty(this.props.posts.data)){
           content = <Loader />
         } else {
             const data = postsState.data;
