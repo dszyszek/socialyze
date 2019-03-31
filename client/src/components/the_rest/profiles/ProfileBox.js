@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import Loader from '../../common/Loader';
 
 class ProfileBox extends React.Component {
     constructor() {
@@ -62,7 +63,7 @@ class ProfileBox extends React.Component {
 
         return (
             <div>
-                {this.props.profile.profiles ? this.fillProfiles() : ''} 
+                {this.props.profile.profiles ? this.fillProfiles() : <Loader />} 
             </div>
         );
     }

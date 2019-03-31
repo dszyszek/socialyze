@@ -31,19 +31,19 @@ class Navbar_secondary extends React.Component {
                     <div class="collapse navbar-collapse" id="mobile-nav">
                         <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <Link class="nav-link" to="Profiles"> People
+                            <Link class="nav-link" to="/Profiles"> People
                             </Link>
                         </li>
                         </ul>
         
                         <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <Link class="nav-link" to="Feed">
+                            <Link class="nav-link" to="/Feed">
                             Post Feed
                             </Link>
                         </li>
                         <li class="nav-item">
-                            <Link class="nav-link" to="Dashboard">
+                            <Link class="nav-link" to="/Dashboard">
                             Dashboard
                             </Link>
                         </li>

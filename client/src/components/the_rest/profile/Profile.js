@@ -22,14 +22,11 @@ class Profile extends React.Component {
     }
 
     componentWillMount() {
-      console.log('consonent will mount');
       this.props.getAllUsers();
       this.props.getCurrentProfile();
     }
 
     componentWillReceiveProps(newProps) {
-      console.log('consonent will receive props');
-      // console.log(newProps.profile, 'newProps.profile');
       if (!isEmpty(newProps.profile.profiles)) {
         newProps.profile.profiles.forEach(usr => {
           if (usr.user._id === this.props.match.params.id){
