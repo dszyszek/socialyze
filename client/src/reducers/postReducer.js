@@ -1,4 +1,4 @@
-import {GET_POSTS, HANDLE_LIKE, ADD_POST} from '../actions/types';
+import {GET_POSTS, HANDLE_LIKE} from '../actions/types';
 
 const initialState = {
     data: []
@@ -16,18 +16,15 @@ export default function (state = initialState, action) {
                 if (d._id === action.payload.id) {
                     const newData = d;
                     newData.likes = action.payload.data;
-                    // console.log(newData, 'newData from postReducer');
-                    return {
-                        data: [newData]
-                    }
+
+                    return newData;
+                } else {
+                    return d;
                 }
             })
-            return dataArray[0];
-        // case ADD_POST:
-        //     return {
-        //         ...state,
-        //         data: [action.payload, ...state.data]
-        //     };
+            return {
+                data: dataArray
+            };
 
         default: 
             return state;

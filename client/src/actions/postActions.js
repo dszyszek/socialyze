@@ -16,8 +16,6 @@ export const getPosts = () => dispatch => {
 export const addPost = (info) => dispatch => {
     axios.post('http://localhost:3000/api/posts/', info)
     .then(data => {
-        console.log('recived post data from postActions/addPost');
-
         // dispatch({
         //     type: ADD_POST,
         //     payload: info
