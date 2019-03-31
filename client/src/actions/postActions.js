@@ -66,3 +66,14 @@ export const removeLike = (id) => dispatch => {
     })
     .catch(e => '')
 };
+
+export const addComment = (id, info) => dispatch => {
+    axios.post(`http://localhost:3000/api/posts/comment/${id}`, info)
+    .then(data => {getPost(id)})
+    .catch(e => {
+        dispatch({
+            type: GET_ERRORS,
+            payload: e.response.data
+        });
+    });
+};
