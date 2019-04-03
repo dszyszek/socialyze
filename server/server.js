@@ -4,6 +4,7 @@ const express = require('express');
 const {ObjectID} = require('mongodb');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const {mongoose} = require('./db/mongoose.js');
 const users = require('./routes/api/users');
@@ -32,7 +33,14 @@ app.use('/api/profile', profile);
 
 
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../client/public')));
 
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'client', 'public', 'index.html'));
+  });
+
+}
 
 app.listen(port, () => {
     console.log(`App running on port ${port}`);
