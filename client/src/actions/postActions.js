@@ -3,7 +3,7 @@ import {GET_POSTS, HANDLE_LIKE, GET_ERRORS} from './types';
 
 
 export const getPosts = () => dispatch => {
-    axios.get(`http://localhost:3000/api/posts`)
+    axios.get(`/api/posts`)
         .then(res => {
             dispatch({
                 type: GET_POSTS,
@@ -14,7 +14,7 @@ export const getPosts = () => dispatch => {
 };
 
 export const getPost = (id) => dispatch => {
-    axios.get(`http://localhost:3000/api/posts/${id}`)
+    axios.get(`/api/posts/${id}`)
     .then(res => {
         dispatch({
             type: GET_POSTS,
@@ -25,7 +25,7 @@ export const getPost = (id) => dispatch => {
 };
 
 export const addPost = (info) => dispatch => {
-    axios.post('http://localhost:3000/api/posts/', info)
+    axios.post('/api/posts/', info)
     .then(data => {})
     .catch(e => {
         dispatch({
@@ -36,7 +36,7 @@ export const addPost = (info) => dispatch => {
 };
 
 export const addLike = (id) => dispatch => {
-    axios.post(`http://localhost:3000/api/posts/like/${id}`)
+    axios.post(`/api/posts/like/${id}`)
     .then(res => {
         let likes = res.data.likes;
 
@@ -55,7 +55,7 @@ export const addLike = (id) => dispatch => {
 };
 
 export const removeLike = (id) => dispatch => {
-    axios.post(`http://localhost:3000/api/posts/dislike/${id}`)
+    axios.post(`/api/posts/dislike/${id}`)
     .then(res => {
         dispatch({
             type: HANDLE_LIKE,
@@ -68,7 +68,7 @@ export const removeLike = (id) => dispatch => {
 };
 
 export const addComment = (id, info) => dispatch => {
-    axios.post(`http://localhost:3000/api/posts/comment/${id}`, info)
+    axios.post(`/api/posts/comment/${id}`, info)
     .then(data => {getPost(id)})
     .catch(e => {
         dispatch({

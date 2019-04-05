@@ -28,14 +28,6 @@ class Post extends React.Component {
         this.props.getPost(this.props.match.params.id);
     }
 
-    // componentWillReceiveProps(newProps) {
-    //     if (!isEmpty(this.props.posts.data)) {
-    //         if (!isEqual(newProps.posts.data[0].comments, this.props.posts.data[0].comments)) {
-    //             this.props.getPost(this.props.match.params.id);
-    //         }
-    //     }
-    // }
-
     writeContent(e) {
         e.persist();
         this.setState(prev => ({

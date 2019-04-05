@@ -151,7 +151,7 @@ class EditProfile extends React.Component {
                                     <option value="Junior Developer">Junior Developer</option>
                                     <option value="Senior Developer">Senior Developer</option>
                                     <option value="Manager">Manager</option>
-                                    <option value="Student or Learning">Student</option>
+                                    <option value="Student">Student</option>
                                     <option value="Other">Other</option>
                                 </select>
                                 <small class="form-text">Current point of your career</small>
