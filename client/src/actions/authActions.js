@@ -8,7 +8,7 @@ import setAuthToken from '../utils/setAuthToken';
 
 export const registerUser = (userData, history) => dispatch => {
 
-    axios.post('http://localhost:3000/api/users/register', userData)
+    axios.post('/api/users/register', userData)
     .then(res => history.push('/login'))
     .catch(e => (
         dispatch({
@@ -21,7 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Login user
 
 export const loginUser = (userData, history) => dispatch => {
-    axios.post('http://localhost:3000/api/users/login', userData)
+    axios.post('/api/users/login', userData)
     .then(res => {
         const {token} = res.data;
 

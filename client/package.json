@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack -p --config webpack.prod.config.js --progress",
+    "build": "webpack -p --config webpack.prod.js --progress",
     "start": "webpack-dev-server --config webpack.dev.js"
   },
   "dependencies": {
