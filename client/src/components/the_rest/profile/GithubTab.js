@@ -85,7 +85,7 @@ class GithubTab extends React.Component {
                 <div>
                     <h3 class="mb-4" style={{color: '#297c6c'}}>Latest Github Repos</h3>    
 
-                    <div class="card card-body mb-2">
+                    <div class="card card-body mb-2 overflow-auto repos-list">
                     
                         {content}  
 

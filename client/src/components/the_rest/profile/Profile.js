@@ -73,8 +73,8 @@ class Profile extends React.Component {
                               </div>
                             </div>
                             <div class="text-center">
-                              <h1 class="display-4 text-center">{profile.handle}</h1>
-                              {!isEmpty(profile.experience) ? <p class='lead text-center'>{profile.status} at {profile.experience[profile.experience.length - 1].company}</p>  : <p class='lead text-center'>Currently not employed</p>}
+                              <h1 class="display-4 text-center">{profile.user.name}</h1>
+                              {!isEmpty(profile.experience) ? <p class='lead text-center'>{profile.experience[profile.experience.length - 1].title} at {profile.experience[profile.experience.length - 1].company}</p>  : <p class='lead text-center'>Currently not employed</p>}
                               {!isEmpty(profile.location) ? <p>{profile.location}</p> : <p>Location unknown</p>}
                               
                               <p>

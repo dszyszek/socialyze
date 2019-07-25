@@ -39,13 +39,13 @@ class ProfileBio extends React.Component {
 
             body = (
                 <div class="card card-body bg-light mb-3">
-                        <h3 class="text-center" style={{color: '#297c6c'}}>{profile.handle}'s Bio</h3>
+                        <h3 class="text-center" style={{color: '#297c6c'}}>{profile.user.name}'s Bio</h3>
                         {profile.bio ? <p class='lead'>{profile.bio}</p> : <p class='lead text-center'>No content to show</p>}
                         <hr />
 
                         <h3 class="text-center" style={{color: '#297c6c'}}>Skill Set</h3>
 
-                            <div class='d-flex justify-content-around'>
+                            <div class='d-flex justify-content-around overflow-auto'>
                                 {this.fillSkillList(profile.skills)}
                             </div>
 

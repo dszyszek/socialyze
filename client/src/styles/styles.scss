@@ -1,4 +1,6 @@
 $main_color: #297c6c;
+$skills-list_height: 250px;
+$repos-list_height: 500px;
 
 @mixin outline_green {
   outline: none !important;
@@ -257,4 +259,16 @@ body {
   width: 30%;
   left: 35%;
   right: 35%;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.repos-list {
+  max-height: $repos-list_height;
+}
+
+.skills-list {
+  max-height: $skills-list_height;
 }
