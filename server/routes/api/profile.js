@@ -42,7 +42,7 @@ router.get('/handle/:handle', authenticate, (req, res) => {
 });
 
 
-router.get('/user/:id', authenticate, (req, res) => {
+router.get('/user/:id', (req, res) => {
         const errors = {};
 
         Profile.findOne({user: req.params.id}).populate({ model: 'User', path: 'user', select: ['name', 'avatar']})
