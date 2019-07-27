@@ -21,6 +21,31 @@ export const getCurrentProfile = () => dispatch => {
     });
 };
 
+export const getAllUsers = () => dispatch => {
+    axios.get('/api/profile/all')
+    .then(res => {
+        dispatch({
+            type: UPDATE_PROFILES_ARRAY,
+            payload: res.data
+        });
+    })
+    .catch(e => console.log(e))
+};
+
+
+export const getUserByID = (id) => dispatch => {
+    loadProfile();
+
+    axios.get(`/api/profile/user/${id}`)
+    .then(res => {
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        });
+    })
+    .catch(e => console.log(e))
+};
+
 export const loadProfile = () => dispatch => {
     dispatch({
         type: PROFILE_LOADING
@@ -96,13 +121,6 @@ export const updateExperienceArray = (expID, newExpArray, whichTable) => dispatc
 
 };
 
-export const getAllUsers = () => dispatch => {
-    axios.get('/api/profile/all')
-    .then(res => {
-        dispatch({
-            type: UPDATE_PROFILES_ARRAY,
-            payload: res.data
-        });
-    })
-    .catch(e => console.log(e))
-};
+
+////////
+// -- WHERE IS .get('/api/user/:id') and proper action? (this will simplify rendering Profile.js and allow unauthenticated access)

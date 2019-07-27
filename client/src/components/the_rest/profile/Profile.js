@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
-import {getAllUsers, getCurrentProfile} from '../../../actions/profileActions';
+import {getUserByID} from '../../../actions/profileActions';
 import ProfileBio from './ProfileBio';
 import ProfileBody from './ProfileBody';
 import GithubTab from './GithubTab';
@@ -24,30 +24,26 @@ class Profile extends React.Component {
     }
 
     componentWillMount() {
-      this.props.getAllUsers();
-      this.props.getCurrentProfile();
+      this.props.getUserByID(this.props.match.params.id);
     }
 
     componentWillReceiveProps(newProps) {
-      if (!isEmpty(newProps.profile.profiles)) {
-        newProps.profile.profiles.forEach(usr => {
-          if (usr.user._id === this.props.match.params.id){
+      if (!isEmpty(newProps.profile)) {
             this.setState({
-              visitedProfile: usr
+              visitedProfile: newProps.profile.profile
             });
-          }
-        });
       }
-
     }
 
     componentWillUnmount() {
-      setAuthToken(localStorage.jwt_token);
+      if (this.props.auth) {
+        setAuthToken(localStorage.jwt_token);
+      }
     }
 
     getContent() {
       const profile = this.state.visitedProfile;
-        
+
       return (
         <div class="profile mt-4">
           <div class="container">
@@ -132,7 +128,6 @@ class Profile extends React.Component {
         return (
             <div class='main_wrapper'>
                 <Navbar_secondary/>
-
                   {!isEmpty(this.state.visitedProfile.user) ? this.getContent() : <Loader />}
 
                 <Footer_main/>
@@ -142,7 +137,8 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, {getAllUsers, getCurrentProfile})(Profile);
+export default connect(mapStateToProps, {getUserByID})(Profile);
