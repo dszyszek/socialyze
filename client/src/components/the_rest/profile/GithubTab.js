@@ -16,6 +16,7 @@ class GithubTab extends React.Component {
         const userName = newProps.githubUsername;
         if (userName) {
             const link = `https://api.github.com/users/${userName}/repos`;
+            console.log('In userName');
 
             try {
                 delete axios.defaults.headers.common["x-auth"];
@@ -27,9 +28,11 @@ class GithubTab extends React.Component {
                             githubUsername: newProps.githubUsername,
                             data: res.data
                         }));
+                        console.log(res, 'response Github');
                 })
     
             } catch (e) {
+                console.log(e, userName, 'error');
                 this.setState(prev => ({
                     ...prev,
                     githubUsername: newProps.githubUsername,
@@ -41,6 +44,7 @@ class GithubTab extends React.Component {
 
     render () {
         let content;
+        console.log(this.state, 'state');
 
         if (this.state.data) {
             content = this.state.data.map(rep => {

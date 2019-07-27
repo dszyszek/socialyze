@@ -101,7 +101,7 @@ class Profile extends React.Component {
                   </div>
                 </div>
       
-                <ProfileBio profile={this.state.visitedProfile} />
+                <ProfileBio profile={profile} />
       
                 <div class="row">
 

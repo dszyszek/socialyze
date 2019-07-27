@@ -120,7 +120,3 @@ export const updateExperienceArray = (expID, newExpArray, whichTable) => dispatc
     .catch(e => console.log(e));
 
 };
-
-
-////////
-// -- WHERE IS .get('/api/user/:id') and proper action? (this will simplify rendering Profile.js and allow unauthenticated access)
