@@ -45,7 +45,7 @@ class ProfileBox extends React.Component {
                     </div>
                     <div class="col-md-4 d-none d-lg-block">
                         <h4>Skill Set</h4>
-                        <ul class="list-group">
+                        <ul class="list-group skills-list overflow-auto">
 
                             {this.fillSkillList(profile.skills)}
 
