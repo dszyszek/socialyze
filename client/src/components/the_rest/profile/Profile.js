@@ -11,6 +11,7 @@ import ProfileBody from './ProfileBody';
 import GithubTab from './GithubTab';
 import setAuthToken from '../../../utils/setAuthToken';
 import Loader from '../../common/Loader';
+import Navbar_logged_out from '../Navbar_logged_out';
 
 
 class Profile extends React.Component {
@@ -127,9 +128,9 @@ class Profile extends React.Component {
 
         return (
             <div class='main_wrapper'>
-                <Navbar_secondary/>
-                  {!isEmpty(this.state.visitedProfile.user) ? this.getContent() : <Loader />}
-
+                {this.props.auth.auth ? <Navbar_secondary/> : <Navbar_logged_out />}
+                {!isEmpty(this.state.visitedProfile.user) ? this.getContent() : <Loader />}
+                
                 <Footer_main/>
             </div>
         )
