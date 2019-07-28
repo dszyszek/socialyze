@@ -76,7 +76,7 @@ class Post extends React.Component {
                     <div class="card card-body mb-3">
                         <div class="row">
                         <div class="col-md-2">
-                            <Link to="Profile">
+                            <Link to={`/Profile/${postData.user}`} >
                             <img class="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=153&d=mm"
                                 alt="" />
                             </Link>

@@ -92,7 +92,7 @@ class Feed extends React.Component {
       e.preventDefault();
       const userInfo = {
         text: this.state.postTextarea,
-        name: this.props.profile.profile.handle,
+        name: this.props.profile.profile.user.name,
         avatar: this.props.profile.profile.user.avatar
       };
 
@@ -114,7 +114,7 @@ class Feed extends React.Component {
                 <div class="card card-body mb-3">
                     <div class="row">
                       <div class="col-md-2">
-                        <Link to="Profile">
+                        <Link to={`/Profile/${d.user}`}>
                           <img class="rounded-circle" src={d.avatar}
                             alt="Profile picture"
                             style={{width: '153px', height: '153px'}}
