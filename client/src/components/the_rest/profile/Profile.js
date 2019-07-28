@@ -37,7 +37,7 @@ class Profile extends React.Component {
     }
 
     componentWillUnmount() {
-      if (this.props.auth) {
+      if (this.props.auth.auth) {
         setAuthToken(localStorage.jwt_token);
       }
     }
@@ -50,14 +50,18 @@ class Profile extends React.Component {
           <div class="container">
             <div class="row">
               <div class="col-md-12">
-                <div class="row">
-                  <div class="col-6">
-                    <button onClick={this.props.history.goBack} class="btn btn-light mb-3 float-left">Back</button>
+
+                {this.props.auth.auth ? (
+                  <div class="row">
+                    <div class="col-6">
+                      <button onClick={this.props.history.goBack} class="btn btn-light mb-3 float-left">Back</button>
+                    </div>
+                    <div class="col-6"></div>
                   </div>
-                  <div class="col-6">
-      
-                  </div>
-                </div>
+              ) : (
+                  <div class="row" style={{padding: '2%'}}></div>
+              )}
+
       
                 <div class="row">
                   <div class="col-md-12">
