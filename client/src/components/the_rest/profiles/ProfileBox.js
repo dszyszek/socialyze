@@ -36,7 +36,7 @@ class ProfileBox extends React.Component {
                         <img class="rounded-circle" src="https://www.gravatar.com/avatar/anything?s=153&d=mm" alt="" />
                     </div>
                     <div class="col-lg-6 col-md-4 col-8">
-                        <h3>{profile.handle}</h3>
+                        <h3>{profile.user.name}</h3>
                         
                         {!isEmpty(profile.experience) ? <p>{profile.status} at {profile.experience[profile.experience.length - 1].company}</p>  : <p>Currently not employed</p>}
 

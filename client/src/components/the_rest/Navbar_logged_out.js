@@ -14,10 +14,10 @@ const Navbar_looged_out = () => {
     
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <Link class="nav-link" to="SignUp">Sign Up</Link>
+                <Link class="nav-link" to="/SignUp">Sign Up</Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="LogIn">Login</Link>
+                <Link class="nav-link" to="/LogIn">Login</Link>
               </li>
             </ul>
 
