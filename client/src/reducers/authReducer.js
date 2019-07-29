@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import {SET_CURRENT_USER} from '../actions/types';
+import {SET_CURRENT_USER, UPDATE_PHOTO} from '../actions/types';
 
 const initialState = {
     auth: false,
@@ -14,6 +14,14 @@ export default function(state = initialState, action) {
                 ...state,
                 auth: !isEmpty(action.payload),
                 user: action.payload
+            };
+            case UPDATE_PHOTO:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    avatar: action.payload
+                }
             }
         default: {
             return state;

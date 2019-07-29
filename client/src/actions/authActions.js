@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-import {GET_ERRORS, SET_CURRENT_USER} from './types';
+import {GET_ERRORS, SET_CURRENT_USER, UPDATE_PHOTO} from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 // Register user
@@ -56,4 +56,13 @@ export const logoutUser = () => dispatch => {
     setAuthToken(false);
 
     dispatch(setCurrentUser({}));
+};
+
+// Change photo
+
+export const updatePhoto = (link) => dispatch => {
+    dispatch({
+        type: UPDATE_PHOTO,
+        payload: link
+    });
 };

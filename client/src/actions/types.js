@@ -13,3 +13,4 @@ export const UPDATE_PROFILES_ARRAY = 'UPDATE_PROFILES_ARRAY';
 export const GET_POSTS = 'GET_POSTS';
 export const HANDLE_LIKE = 'HANDLE_LIKE';
 export const ADD_POST = 'ADD_POST';
+export const UPDATE_PHOTO = 'UPDATE_PHOTO';
