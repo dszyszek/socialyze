@@ -7,6 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main'
 import {getCurrentProfile, deleteProfile} from '../../../actions/profileActions';
+import {updatePhoto} from '../../../actions/authActions'
 import Loader from '../../common/Loader';
 import DashboardProfileButtons from './DashboardProfileButtons';
 import ExperienceTab from './ExperienceTab';
@@ -26,6 +27,23 @@ class Dashboard extends React.Component {
           this.props.deleteProfile(this.props.history);
         }
     }
+
+    uploadFile = async e => {
+      console.log('uploading file...');
+      const files = e.target.files;
+      const data = new FormData();
+      data.append('file', files[0]);
+      data.append('upload_preset', 'socialyze');
+  
+      const res = await fetch('https://api.cloudinary.com/v1_1/dszyszek/image/upload', {
+          method: 'POST',
+          body: data
+      });
+  
+      const file = await res.json();
+  
+      this.props.updatePhoto(file.secure_url);
+  }
 
     render(){
         const {user} = this.props.auth;
@@ -52,7 +70,7 @@ class Dashboard extends React.Component {
             <div>
                 <h1 class="display-4">Dashboard</h1>
                 <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
-                <DashboardProfileButtons currentProfile={profile.user._id} />
+                <DashboardProfileButtons currentProfile={profile.user._id} upload={this.uploadFile} />
 
                 <ExperienceTab whichTable='experience' rowArray={['company', 'title']} />
 
@@ -101,4 +119,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, {getCurrentProfile, deleteProfile})(withRouter(Dashboard));
+export default connect(mapStateToProps, {getCurrentProfile, deleteProfile, updatePhoto})(withRouter(Dashboard));
