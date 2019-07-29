@@ -127,17 +127,17 @@ class EditProfile extends React.Component {
                             Go Back
                         </Link>
                         <h1 class="display-4 text-center">{isEmpty(this.props.profile.profile) && !isEmpty(profile.profile) ? 'Create' : 'Edit'} Your Profile</h1>
-                        <p class="lead text-center">Ok, now tell something about yourself</p>
+                        <p class="lead text-center">{isEmpty(this.props.profile.profile) && !isEmpty(profile.profile) ? 'Ok, now tell something about yourself.' : 'It\'s important to keep information up to date!'}</p>
                         <small class="d-block pb-3">* = required field</small>
                         
                         <form onSubmit={this.submitProfile}>
 
                         <InputComponent
                              type='text'
-                             info="Nickname (This CAN'T be changed later)" 
+                             info="Your nickname." 
                              aria_describe='handleInfo' 
                              name='handle' 
-                             placeholder={!!profile.profile && !isEmpty(profile.profile) ? `Handle: ${profile.profile.handle} *` : 'Profile handle *'}
+                             placeholder={'Profile handle *'}
                              value={this.state.handle} 
                              onChange={this.changeValueOfInput}
                              error={errors.handle}
