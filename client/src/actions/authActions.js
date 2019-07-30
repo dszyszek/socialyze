@@ -60,9 +60,21 @@ export const logoutUser = () => dispatch => {
 
 // Change photo
 
-export const updatePhotoAuth = (link) => dispatch => {
-    dispatch({
-        type: UPDATE_PHOTO,
-        payload: link
-    });
+export const updatePhotoAuth = (data) => dispatch => {
+    axios
+    .post('/api/users/updatePicture', data)
+    .then(res => {
+        dispatch({
+            type: UPDATE_PHOTO,
+            payload: data.avatar
+        });
+    })
+    .catch(e => (
+        dispatch({
+            type: GET_ERRORS,
+            payload: e.response.data
+        })
+    ));
+
+
 };

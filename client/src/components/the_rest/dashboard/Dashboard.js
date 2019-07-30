@@ -41,9 +41,12 @@ class Dashboard extends React.Component {
       });
   
       const file = await res.json();
-  
-      this.props.updatePhotoAuth(file.secure_url);
-      this.props.updatePhotoProfile(file.secure_url);
+      const avatarData = {
+        avatar: file.secure_url
+      };
+
+      this.props.updatePhotoAuth(avatarData);
+      // this.props.updatePhotoProfile(file.secure_url);
   }
 
     render(){
