@@ -33,7 +33,7 @@ class ProfileBox extends React.Component {
             <div class="card card-body bg-light mb-3">
                 <div class="row">
                     <div class="col-2">
-                        <img class="rounded-circle photoSize" src={profile.user.avatar} alt="" />
+                        <img class="rounded-circle photoSize_posts" src={profile.user.avatar} alt="" />
                     </div>
                     <div class="col-lg-6 col-md-4 col-8">
                         <h3>{profile.user.name}</h3>

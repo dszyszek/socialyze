@@ -103,21 +103,20 @@ class Feed extends React.Component {
 
     render() {
         let content;
-        const postsState = this.props.posts;
+
 
         if (isEmpty(this.props.posts.data)){
           content = <Loader />
         } else {
-            const data = postsState.data;
+            const data = this.props.posts.data;
 
             content = data.map(d => (
                 <div class="card card-body mb-3">
                     <div class="row">
                       <div class="col-md-2">
                         <Link to={`/Profile/${d.user}`}>
-                          <img class="rounded-circle" src={d.avatar}
+                          <img class="rounded-circle photoSize_posts" src={d.avatar}
                             alt="Profile picture"
-                            style={{width: '153px', height: '153px'}}
                            />
                         </Link>
                         <br />

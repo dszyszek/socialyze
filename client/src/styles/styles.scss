@@ -1,5 +1,5 @@
 $main_color: #297c6c;
-$skills-list_height: 250px;
+$skills-list_height: 150px;
 $repos-list_height: 500px;
 
 @mixin outline_green {
@@ -273,7 +273,12 @@ body {
   max-height: $skills-list_height;
 }
 
-.photoSize {
+.photoSize_profile {
   width: 200px;
   height: 200px;
+}
+
+.photoSize_posts {
+  width: 150px;
+  height: 150px;
 }

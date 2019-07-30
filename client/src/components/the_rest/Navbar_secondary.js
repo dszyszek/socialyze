@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 
 import {logoutUser} from '../../actions/authActions';
 import {logoutProfile} from '../../actions/profileActions';
@@ -49,7 +50,7 @@ class Navbar_secondary extends React.Component {
                         </li>
                         <li class="nav-item">
                             <Link class="nav-link" to="/Login" onClick={this.logoutProfileFunction}>
-                            <img class="rounded-circle" style={{width: '25px', marginRight:'5px'}} src={this.props.profile.profile && this.props.profile.profile.user.avatar}
+                            <img class="rounded-circle" style={{width: '25px', marginRight:'5px'}} src={!isEmpty(this.props.profile.profile) ? this.props.profile.profile.user.avatar : 'https://www.gravatar.com/avatar/anything?s=200&d=mm' }
                                 alt="" title="You must have a Gravatar connected to your email to display an image" /> Logout
                             </Link>
                         </li>
