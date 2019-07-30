@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main'
-import {getCurrentProfile, deleteProfile, updatePhotoProfile} from '../../../actions/profileActions';
+import {getCurrentProfile, deleteProfile} from '../../../actions/profileActions';
 import {updatePhotoAuth} from '../../../actions/authActions'
 import Loader from '../../common/Loader';
 import DashboardProfileButtons from './DashboardProfileButtons';
@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
     }
 
     uploadFile = async e => {
-      console.log('uploading file...');
       const files = e.target.files;
       const data = new FormData();
       data.append('file', files[0]);
@@ -46,7 +45,6 @@ class Dashboard extends React.Component {
       };
 
       this.props.updatePhotoAuth(avatarData);
-      // this.props.updatePhotoProfile(file.secure_url);
   }
 
     render(){
@@ -123,4 +121,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, {getCurrentProfile, deleteProfile, updatePhotoAuth, updatePhotoProfile})(withRouter(Dashboard));
+export default connect(mapStateToProps, {getCurrentProfile, deleteProfile, updatePhotoAuth})(withRouter(Dashboard));
