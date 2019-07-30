@@ -77,27 +77,29 @@ class Profile extends React.Component {
                         {!isEmpty(profile.location) ? <p>{profile.location}</p> : <p>Location unknown</p>}
                         
                         <p>
-                        
-                          <Link class="text-white p-2" to="#">
-                            <i class="fas fa-globe fa-2x"></i>
-                          </Link>
+
+                          {profile.website &&
+                            <a class="text-white p-2" target="_blank" href={profile.website}>
+                              <i class="fas fa-globe fa-2x"></i>
+                            </a>
+                          }
 
                           {!isEmpty(profile.social) && profile.social.facebook && (
-                            <Link class="text-white p-2" to="#">
+                            <a class="text-white p-2" target="_blank" href={profile.social.facebook}>
                               <i class="fab fa-facebook fa-2x"></i>
-                            </Link>)
+                            </a>)
                           }
 
                           {!isEmpty(profile.social) && profile.social.linkedin && (
-                            <Link class="text-white p-2" to="#">
+                            <a class="text-white p-2" target="_blank" href={profile.social.linkedin}>
                               <i class="fab fa-linkedin fa-2x"></i>
-                            </Link>)
+                            </a>)
                           }
 
                           {!isEmpty(profile.social) && profile.social.instagram && (
-                            <Link class="text-white p-2" to="#">
+                            <a class="text-white p-2" target="_blank" href={profile.social.instagram}>
                               <i class="fab fa-instagram fa-2x"></i>
-                            </Link>)
+                            </a>)
                           }
             
                         </p>
