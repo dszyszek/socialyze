@@ -55,7 +55,7 @@ class Post extends React.Component {
         e.preventDefault();
         const commentInfo = {
           text: this.state.postTextarea,
-          name: this.props.profile.profile.handle,
+          name: this.props.profile.profile.user.name,
           avatar: this.props.profile.profile.user.avatar,
           user: this.props.profile.profile.user._id
         };
@@ -77,7 +77,7 @@ class Post extends React.Component {
                         <div class="row">
                         <div class="col-md-2">
                             <Link to={`/Profile/${postData.user}`} >
-                            <img class="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=153&d=mm"
+                            <img class="rounded-circle d-none d-md-block photoSize_posts" src={postData.avatar}
                                 alt="" />
                             </Link>
                             <br />
@@ -118,7 +118,7 @@ class Post extends React.Component {
                                 <div class="row">
                                     <div class="col-md-2">
                                     <Link to="Profile">
-                                        <img class="rounded-circle d-none d-md-block" src="https://www.gravatar.com/avatar/anything?s=153&d=mm" alt="" />
+                                        <img class="rounded-circle d-none d-md-block photoSize_posts" src={comment.avatar} alt="" />
                                     </Link>
                                     <br />
                                     <p class="text-center">{comment.name}</p>
