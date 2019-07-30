@@ -44,7 +44,7 @@ class GithubTab extends React.Component {
 
     getContent() {
         let content;
-        if (this.state.githubUsername) this.updateState()
+        if (this.state.githubUsername && (!this.state.data && !this.state.error)) this.updateState()
 
         if (this.state.data) {
             content = this.state.data.map(rep => {
