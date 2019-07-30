@@ -12,9 +12,24 @@ const validateInput = require('../../validation/validateInput');
 //console.log(User.findOne);
 const router = express.Router();
 
+
+// GET 
 router.get('/test', (req, res) => {
     return res.json({msg: 'Users works'});
 });
+
+router.get('/me',authenticate, (req, res) => {
+    let userData;
+    
+    jwt.verify(req.user.token, process.env.JWT_SECRET, (err, usr) => {
+        if (err) return console.log(err);
+        userData = usr;
+    });
+
+    res.json(userData);
+});
+
+//POST
 
 router.post('/register', (req, res) => {
 
@@ -90,15 +105,18 @@ router.post('/login', (req, res) => {
     })
 });
 
-router.get('/me',authenticate, (req, res) => {
-    let userData;
-    
-    jwt.verify(req.user.token, process.env.JWT_SECRET, (err, usr) => {
-        if (err) return console.log(err);
-        userData = usr;
-    });
 
-    res.json(userData);
+router.post('/updatePicture', authenticate, (req, res) => {
+
+    const userData = _.pick(req.body, ['avatar']);
+
+    User
+    .findOneAndUpdate({_id: req.user.id}, {avatar: userData.avatar}, {new: true})
+    .then(data => {
+        res.json(data);
+    })
+    .catch(e => res.status(400).json(e))
+
 });
 
 
