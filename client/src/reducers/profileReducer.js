@@ -1,4 +1,4 @@
-import {GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, SET_EDUCATION, UPDATE_EXPERIENCE_ARRAY, UPDATE_EDUCATION_ARRAY, UPDATE_PROFILES_ARRAY} from '../actions/types';
+import {UPDATE_PHOTO, GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, SET_EDUCATION, UPDATE_EXPERIENCE_ARRAY, UPDATE_EDUCATION_ARRAY, UPDATE_PROFILES_ARRAY} from '../actions/types';
 
 const initialState = {
     profile: null,
@@ -51,6 +51,17 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 profiles: action.payload
+            };
+        case UPDATE_PHOTO:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    user: {
+                        ...state.profile.user,
+                        avatar: action.payload
+                    }
+                }
             }
         default: 
             return state;

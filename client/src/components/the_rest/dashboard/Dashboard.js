@@ -6,8 +6,8 @@ import isEmpty from 'lodash/isEmpty';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main'
-import {getCurrentProfile, deleteProfile} from '../../../actions/profileActions';
-import {updatePhoto} from '../../../actions/authActions'
+import {getCurrentProfile, deleteProfile, updatePhotoProfile} from '../../../actions/profileActions';
+import {updatePhotoAuth} from '../../../actions/authActions'
 import Loader from '../../common/Loader';
 import DashboardProfileButtons from './DashboardProfileButtons';
 import ExperienceTab from './ExperienceTab';
@@ -42,7 +42,8 @@ class Dashboard extends React.Component {
   
       const file = await res.json();
   
-      this.props.updatePhoto(file.secure_url);
+      this.props.updatePhotoAuth(file.secure_url);
+      this.props.updatePhotoProfile(file.secure_url);
   }
 
     render(){
@@ -119,4 +120,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, {getCurrentProfile, deleteProfile, updatePhoto})(withRouter(Dashboard));
+export default connect(mapStateToProps, {getCurrentProfile, deleteProfile, updatePhotoAuth, updatePhotoProfile})(withRouter(Dashboard));

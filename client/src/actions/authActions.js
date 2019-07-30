@@ -60,7 +60,7 @@ export const logoutUser = () => dispatch => {
 
 // Change photo
 
-export const updatePhoto = (link) => dispatch => {
+export const updatePhotoAuth = (link) => dispatch => {
     dispatch({
         type: UPDATE_PHOTO,
         payload: link
