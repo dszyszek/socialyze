@@ -68,7 +68,7 @@ class Profile extends React.Component {
                     <div class="card card-body main_color text-white mb-3">
                       <div class="row">
                         <div class="col-4 col-md-3 m-auto text-center">
-                          <img class="rounded-circle" src="https://www.gravatar.com/avatar/anything?s=200&d=mm" alt="" />
+                          <img class="rounded-circle photoSize" src={this.props.profile.profile && this.props.profile.profile.user.avatar} alt="" />
                         </div>
                       </div>
                       <div class="text-center">

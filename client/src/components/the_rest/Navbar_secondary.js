@@ -49,7 +49,7 @@ class Navbar_secondary extends React.Component {
                         </li>
                         <li class="nav-item">
                             <Link class="nav-link" to="/Login" onClick={this.logoutProfileFunction}>
-                            <img class="rounded-circle" style={{width: '25px', marginRight:'5px'}} src="https://www.gravatar.com/avatar/anything?s=200&d=mm"
+                            <img class="rounded-circle" style={{width: '25px', marginRight:'5px'}} src={this.props.profile.profile && this.props.profile.profile.user.avatar}
                                 alt="" title="You must have a Gravatar connected to your email to display an image" /> Logout
                             </Link>
                         </li>
@@ -67,4 +67,9 @@ Navbar_secondary.propTypes = {
     logoutUser: PropTypes.func.isRequired
 };
 
-export default connect(null, {logoutUser, logoutProfile})(Navbar_secondary);
+const mapStateToProps = state => ({
+    auth: state.auth,
+    profile: state.profile
+});
+
+export default connect(mapStateToProps, {logoutUser, logoutProfile})(Navbar_secondary);
