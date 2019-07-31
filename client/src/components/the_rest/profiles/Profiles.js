@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
-import {getAllUsers} from '../../../actions/profileActions';
+import {getAllUsers, getCurrentProfile} from '../../../actions/profileActions';
 import ProfileBox from './ProfileBox';
 
 class AddEducation extends React.Component {
@@ -23,6 +23,7 @@ class AddEducation extends React.Component {
     }
 
     componentWillMount() {
+        this.props.getCurrentProfile();
         this.props.getAllUsers();
     }
 
@@ -56,4 +57,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {getAllUsers})(AddEducation);
+export default connect(mapStateToProps, {getAllUsers, getCurrentProfile})(AddEducation);
