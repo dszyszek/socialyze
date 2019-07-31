@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
       this.props.updatePhotoAuth(avatarData);
   }
 
-    render(){
+    render() {
         const {user} = this.props.auth;
         const  {profile, loading} = this.props.profile;
         let content;
@@ -70,9 +70,20 @@ class Dashboard extends React.Component {
         } else {
           content = (
             <div>
-                <h1 class="display-4">Dashboard</h1>
-                <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
-                <DashboardProfileButtons currentProfile={profile.user._id} upload={this.uploadFile} />
+                <div class='row' style={{marginLeft: 0, marginRight: 0}}>
+                  <div class='col-8' style={{padding: 0}}>
+                    <h1 class="display-4">Dashboard</h1>
+                    <p class="lead text-muted">Welcome <Link style={{textDecoration: 'none', color: '#6c757d'}} to={`/handle/${this.props.profile.profile.handle}`}> {this.props.auth.user.name} </Link></p>
+                    <DashboardProfileButtons currentProfile={profile.user._id} upload={this.uploadFile} />
+                  </div>
+                  <div class='col-4' style={{position: 'static'}}>
+                    <div style={{margin: '0 auto', width: '60%', position: 'relative', top: '8%' }}>
+                      <img class='rounded-circle' src={this.props.profile.profile.user.avatar} style={{width: '100%', height: '100%'}} />
+                    </div>
+                  </div>
+
+                </div>
+
 
                 <ExperienceTab whichTable='experience' rowArray={['company', 'title']} />
 
