@@ -1,6 +1,4 @@
 import React from 'react';
-import * as axios from 'axios';
-
 
 class GithubTab extends React.Component {
     constructor(props) {
@@ -20,16 +18,15 @@ class GithubTab extends React.Component {
         if (userName) {
             const link = `https://api.github.com/users/${userName}/repos`;
 
-            try {
-                delete axios.defaults.headers.common["x-auth"];
-               
-                axios.get(link)
-                    .then(res => {
-                        this.setState(prev => ({
-                            ...prev,
-                            githubUsername: userName,
-                            data: res.data
-                        }));
+            try {            
+                fetch(link)
+                .then(res => res.json())
+                .then(data => {
+                    this.setState(prev => ({
+                        ...prev,
+                        githubUsername: userName,
+                        data: data
+                    }));
                 })
     
             } catch (e) {

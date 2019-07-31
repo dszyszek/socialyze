@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import axios from 'axios';
 
 import Navbar_secondary from '../Navbar_secondary';
 import Footer_main from '../Footer_main';
@@ -9,7 +10,6 @@ import {getUserByID} from '../../../actions/profileActions';
 import ProfileBio from './ProfileBio';
 import ProfileBody from './ProfileBody';
 import GithubTab from './GithubTab';
-import setAuthToken from '../../../utils/setAuthToken';
 import Loader from '../../common/Loader';
 import Navbar_logged_out from '../Navbar_logged_out';
 
@@ -33,12 +33,6 @@ class Profile extends React.Component {
             this.setState({
               visitedProfile: newProps.profile.profile
             });
-      }
-    }
-
-    componentWillUnmount() {
-      if (this.props.auth.auth) {
-        setAuthToken(localStorage.jwt_token);
       }
     }
 
@@ -131,7 +125,6 @@ class Profile extends React.Component {
     }
 
     render() {
-
         return (
             <div class='main_wrapper'>
                 {this.props.auth.auth ? <Navbar_secondary/> : <Navbar_logged_out />}
