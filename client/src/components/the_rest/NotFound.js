@@ -4,9 +4,14 @@ import {connect} from 'react-redux';
 import Navbar_secondary from './Navbar_secondary';
 import Navbar_logged_out from './Navbar_logged_out';
 import Footer_main from './Footer_main';
+import {getCurrentProfile} from '../../actions/profileActions';
 
 
 class NotFound extends Component  {
+    componentWillMount() {
+        this.props.getCurrentProfile();
+    }
+
     render() {
         return (
             <div class='main_wrapper'>
@@ -31,8 +36,9 @@ class NotFound extends Component  {
 
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    profile: state.profile
 });
 
 
-export default connect(mapStateToProps)(NotFound);
+export default connect(mapStateToProps, {getCurrentProfile})(NotFound);
